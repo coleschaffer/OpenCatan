@@ -184,7 +184,7 @@ export const PlayerCard: React.FC<PlayerCardProps> = ({
               className={`${styles.achievementIcon} ${player.hasLargestArmy ? styles.achievementActive : ''}`}
               title={`Knights played: ${player.armySize}${player.hasLargestArmy ? ' (Largest Army!)' : ''}`}
             >
-              <img src="/assets/ui/icon_largest_army.svg" alt="Army" width="16" height="16" />
+              <img src="/assets/ui/icon_largest_army.svg" alt="Army" />
               <span className={styles.achievementCount}>{player.armySize}</span>
             </div>
 
@@ -193,7 +193,7 @@ export const PlayerCard: React.FC<PlayerCardProps> = ({
               className={`${styles.achievementIcon} ${player.hasLongestRoad ? styles.achievementActive : ''}`}
               title={`Road length: ${player.longestRoadLength}${player.hasLongestRoad ? ' (Longest Road!)' : ''}`}
             >
-              <img src="/assets/ui/icon_longest_road.svg" alt="Road" width="16" height="16" />
+              <img src="/assets/ui/icon_longest_road.svg" alt="Road" />
               <span className={styles.achievementCount}>{player.longestRoadLength}</span>
             </div>
           </div>
