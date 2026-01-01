@@ -1,6 +1,6 @@
-import React from 'react';
-import type { HexCoord, TerrainType } from '../../types';
-import { axialToPixel, getHexPolygonPoints } from '../../utils/hex';
+import React, { useMemo } from 'react';
+import type { HexCoord, TerrainType, HexTile as HexTileType } from '../../types';
+import { axialToPixel, getHexPolygonPoints, getHexNeighbors, hexToString } from '../../utils/hex';
 import NumberToken from './NumberToken';
 import styles from './HexTile.module.css';
 
@@ -12,6 +12,7 @@ interface HexTileProps {
   isValid?: boolean; // True if this is a valid placement location (e.g., for robber)
   onClick?: (hex: HexCoord) => void;
   size?: number;
+  allTiles?: HexTileType[]; // All tiles for neighbor checking (used for shore rendering)
 }
 
 /**
@@ -45,6 +46,145 @@ const TERRAIN_COLORS: Record<TerrainType, string> = {
 };
 
 /**
+ * Shore tile patterns and their SVG files.
+ * Pattern string uses 's' for shore (land neighbor) and 'w' for water (no land neighbor).
+ * Directions are: E, NE, NW, W, SW, SE (clockwise from East).
+ * The available SVG files and their patterns (with rotations needed):
+ */
+interface ShorePattern {
+  file: string;
+  rotation: number; // degrees to rotate the SVG
+}
+
+/**
+ * Get the shore SVG file and rotation for a given pattern.
+ * Pattern is 6 chars: s=shore/land neighbor, w=water neighbor
+ * Order: E, NE, NW, W, SW, SE (matching HEX_DIRECTIONS order)
+ */
+function getShorePattern(pattern: string): ShorePattern | null {
+  const shoreCount = (pattern.match(/s/g) || []).length;
+
+  if (shoreCount === 0) {
+    // Pure water, no shore
+    return null;
+  }
+
+  if (shoreCount === 6) {
+    return { file: '/assets/tiles/tile_shore_6.svg', rotation: 0 };
+  }
+
+  if (shoreCount === 5) {
+    // Find the single 'w' position and rotate accordingly
+    const wIndex = pattern.indexOf('w');
+    // tile_shore_5 has pattern "sssssw" (water at position 5 = SE)
+    // Each position needs 60 degrees rotation
+    const rotation = ((wIndex - 5 + 6) % 6) * 60;
+    return { file: '/assets/tiles/tile_shore_5.svg', rotation };
+  }
+
+  if (shoreCount === 4) {
+    // Available: ssssww, ssswsw, sswssw
+    // Normalize pattern to find matching variant
+    const normalized = normalizePattern(pattern);
+
+    if (normalized.pattern === 'ssssww') {
+      return { file: '/assets/tiles/tile_shore_4_ssssww.svg', rotation: normalized.rotation };
+    }
+    if (normalized.pattern === 'ssswsw') {
+      return { file: '/assets/tiles/tile_shore_4_ssswsw.svg', rotation: normalized.rotation };
+    }
+    if (normalized.pattern === 'sswssw') {
+      return { file: '/assets/tiles/tile_shore_4_sswssw.svg', rotation: normalized.rotation };
+    }
+  }
+
+  if (shoreCount === 3) {
+    // Available: ssswww, sswsww, sswwsw, swswsw
+    const normalized = normalizePattern(pattern);
+
+    if (normalized.pattern === 'ssswww') {
+      return { file: '/assets/tiles/tile_shore_3_ssswww.svg', rotation: normalized.rotation };
+    }
+    if (normalized.pattern === 'sswsww') {
+      return { file: '/assets/tiles/tile_shore_3_sswsww.svg', rotation: normalized.rotation };
+    }
+    if (normalized.pattern === 'sswwsw') {
+      return { file: '/assets/tiles/tile_shore_3_sswwsw.svg', rotation: normalized.rotation };
+    }
+    if (normalized.pattern === 'swswsw') {
+      return { file: '/assets/tiles/tile_shore_3_swswsw.svg', rotation: normalized.rotation };
+    }
+  }
+
+  if (shoreCount === 2) {
+    // Available: sswwww, swswww, swwsww
+    const normalized = normalizePattern(pattern);
+
+    if (normalized.pattern === 'sswwww') {
+      return { file: '/assets/tiles/tile_shore_2_sswwww.svg', rotation: normalized.rotation };
+    }
+    if (normalized.pattern === 'swswww') {
+      return { file: '/assets/tiles/tile_shore_2_swswww.svg', rotation: normalized.rotation };
+    }
+    if (normalized.pattern === 'swwsww') {
+      return { file: '/assets/tiles/tile_shore_2_swwsww.svg', rotation: normalized.rotation };
+    }
+  }
+
+  if (shoreCount === 1) {
+    // tile_shore_1 has pattern "swwwww" (shore at position 0 = E)
+    const sIndex = pattern.indexOf('s');
+    const rotation = sIndex * 60;
+    return { file: '/assets/tiles/tile_shore_1.svg', rotation };
+  }
+
+  return null;
+}
+
+/**
+ * Normalize a pattern by rotating to find the canonical form.
+ * Returns the canonical pattern and the rotation needed.
+ */
+function normalizePattern(pattern: string): { pattern: string; rotation: number } {
+  const shoreCount = (pattern.match(/s/g) || []).length;
+
+  // Define canonical patterns for each shore count
+  const canonicalPatterns: Record<number, string[]> = {
+    4: ['ssssww', 'ssswsw', 'sswssw'],
+    3: ['ssswww', 'sswsww', 'sswwsw', 'swswsw'],
+    2: ['sswwww', 'swswww', 'swwsww'],
+  };
+
+  const candidates = canonicalPatterns[shoreCount] || [];
+
+  // Try each rotation (0, 60, 120, 180, 240, 300 degrees = 0-5 positions)
+  for (let rot = 0; rot < 6; rot++) {
+    const rotated = rotatePattern(pattern, rot);
+    for (const canonical of candidates) {
+      if (rotated === canonical) {
+        return { pattern: canonical, rotation: rot * 60 };
+      }
+    }
+  }
+
+  // Fallback: return first canonical that matches shore count
+  return { pattern: candidates[0] || pattern, rotation: 0 };
+}
+
+/**
+ * Rotate a pattern string by n positions.
+ */
+function rotatePattern(pattern: string, n: number): string {
+  const arr = pattern.split('');
+  const len = arr.length;
+  const rotated = new Array(len);
+  for (let i = 0; i < len; i++) {
+    rotated[i] = arr[(i + n) % len];
+  }
+  return rotated.join('');
+}
+
+/**
  * HexTile - Renders a single hexagonal tile on the board.
  * Shows terrain, number token (if applicable), and robber overlay when present.
  */
@@ -56,17 +196,50 @@ export const HexTile: React.FC<HexTileProps> = ({
   isValid = false,
   onClick,
   size = 50,
+  allTiles,
 }) => {
   const center = axialToPixel(hex, size);
   const polygonPoints = getHexPolygonPoints(center, size);
   const fillColor = TERRAIN_COLORS[terrain];
-  const imagePath = TERRAIN_IMAGES[terrain];
   const showNumber = number !== undefined && terrain !== 'desert' && terrain !== 'water';
 
   // Calculate hex dimensions for image placement
   // For pointy-top hex: width = sqrt(3) * size, height = 2 * size
   const hexWidth = Math.sqrt(3) * size;
   const hexHeight = 2 * size;
+
+  // Calculate shore pattern for water tiles
+  const shoreInfo = useMemo(() => {
+    if (terrain !== 'water' || !allTiles) {
+      return null;
+    }
+
+    // Create a map for quick lookup
+    const tileMap = new Map<string, HexTileType>();
+    for (const tile of allTiles) {
+      tileMap.set(hexToString(tile.coord), tile);
+    }
+
+    // Get neighbors in order: E, NE, NW, W, SW, SE
+    const neighbors = getHexNeighbors(hex);
+    let pattern = '';
+
+    for (const neighbor of neighbors) {
+      const neighborTile = tileMap.get(hexToString(neighbor));
+      // 's' if neighbor is land (exists and not water), 'w' if water or doesn't exist
+      if (neighborTile && neighborTile.terrain !== 'water') {
+        pattern += 's';
+      } else {
+        pattern += 'w';
+      }
+    }
+
+    return getShorePattern(pattern);
+  }, [terrain, hex, allTiles]);
+
+  // Determine which image to use
+  const imagePath = shoreInfo ? shoreInfo.file : TERRAIN_IMAGES[terrain];
+  const imageRotation = shoreInfo ? shoreInfo.rotation : 0;
 
   const handleClick = () => {
     if (onClick) {
@@ -106,6 +279,7 @@ export const HexTile: React.FC<HexTileProps> = ({
         clipPath={`url(#hex-clip-${hex.q}-${hex.r})`}
         preserveAspectRatio="xMidYMid slice"
         className={styles.terrainImage}
+        transform={imageRotation !== 0 ? `rotate(${imageRotation}, ${center.x}, ${center.y})` : undefined}
       />
 
       {/* Hex border overlay - removed to eliminate black lines between tiles */}

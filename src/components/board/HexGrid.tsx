@@ -310,6 +310,7 @@ export const HexGrid: React.FC<HexGridProps> = ({
                 isValid={validHexSet.has(hexToString(tile.coord))}
                 onClick={validHexSet.has(hexToString(tile.coord)) ? onHexClick : undefined}
                 size={hexSize}
+                allTiles={tiles}
               />
             ))}
           </g>
