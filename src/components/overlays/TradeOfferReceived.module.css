@@ -1,0 +1,223 @@
+/* Trade Offer Received Container */
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* From Player Section */
+.fromSection {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.playerColorDot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.fromPlayer {
+  font-weight: 600;
+  font-size: 1.1rem;
+}
+
+.fromText {
+  color: #aaaaaa;
+  font-size: 0.95rem;
+}
+
+/* Timer */
+.timer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 8px 16px;
+  background-color: #333333;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: #dddddd;
+  margin: 0 auto;
+}
+
+.timerWarning {
+  background-color: #7f1d1d;
+  color: #fecaca;
+  animation: pulse 1s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
+
+/* Trade Details */
+.tradeDetails {
+  display: flex;
+  align-items: stretch;
+  gap: 16px;
+  background-color: #333333;
+  border-radius: 8px;
+  padding: 20px;
+}
+
+.tradeSection {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.sectionTitle {
+  margin: 0;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #888888;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.tradeDivider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #666666;
+  padding: 0 8px;
+}
+
+/* Resource Display */
+.resourceGrid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: center;
+}
+
+.resourceItem {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 6px 10px;
+  background-color: #2a2a2a;
+  border-radius: 6px;
+}
+
+.resourceIcon {
+  width: 28px;
+  height: 28px;
+  object-fit: contain;
+}
+
+.resourceCount {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+.noResources {
+  color: #666666;
+  font-style: italic;
+}
+
+/* Action Buttons */
+.actions {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  padding-top: 8px;
+}
+
+.declineButton,
+.counterButton,
+.acceptButton {
+  padding: 10px 24px;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  flex: 1;
+  max-width: 120px;
+}
+
+.declineButton {
+  border: 1px solid #dc2626;
+  background-color: transparent;
+  color: #ef4444;
+}
+
+.declineButton:hover:not(:disabled) {
+  background-color: rgba(220, 38, 38, 0.1);
+}
+
+.counterButton {
+  border: 1px solid #4a4a4a;
+  background-color: #3a3a3a;
+  color: #dddddd;
+}
+
+.counterButton:hover:not(:disabled) {
+  background-color: #4a4a4a;
+  color: #ffffff;
+}
+
+.acceptButton {
+  border: none;
+  background-color: #4caf50;
+  color: #ffffff;
+}
+
+.acceptButton:hover:not(:disabled) {
+  background-color: #45a049;
+}
+
+.declineButton:disabled,
+.counterButton:disabled,
+.acceptButton:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Expired Message */
+.expiredMessage {
+  text-align: center;
+  padding: 12px;
+  background-color: rgba(220, 38, 38, 0.1);
+  border: 1px solid #dc2626;
+  border-radius: 6px;
+  color: #ef4444;
+  font-weight: 500;
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+  .tradeDetails {
+    flex-direction: column;
+  }
+
+  .tradeDivider {
+    transform: rotate(90deg);
+    padding: 4px 0;
+  }
+
+  .actions {
+    flex-direction: column;
+  }
+
+  .declineButton,
+  .counterButton,
+  .acceptButton {
+    max-width: none;
+  }
+}

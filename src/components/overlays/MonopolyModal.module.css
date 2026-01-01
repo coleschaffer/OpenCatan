@@ -1,0 +1,273 @@
+/* Monopoly Modal Container */
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+/* Card Icon */
+.cardIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 80px;
+  height: 80px;
+  background-color: #3a3520;
+  border-radius: 50%;
+  border: 2px solid #fbbf24;
+}
+
+/* Instructions */
+.instructions {
+  text-align: center;
+}
+
+.mainText {
+  margin: 0 0 4px 0;
+  font-size: 1rem;
+  font-weight: 500;
+  color: #ffffff;
+}
+
+.subText {
+  margin: 0;
+  font-size: 0.85rem;
+  color: #888888;
+}
+
+/* Resource Grid */
+.resourceGrid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+  width: 100%;
+}
+
+.resourceButton {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  width: calc(33.33% - 8px);
+  min-width: 80px;
+  padding: 16px 12px;
+  border: 3px solid #3a3a3a;
+  border-radius: 12px;
+  background-color: #2a2a2a;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.resourceButton:hover {
+  background-color: #333333;
+  border-color: #4a4a4a;
+  transform: translateY(-2px);
+}
+
+.resourceButtonSelected {
+  background-color: #333333;
+  border-color: var(--resource-color) !important;
+  transform: scale(1.02);
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+}
+
+.resourceIcon {
+  width: 48px;
+  height: 48px;
+  object-fit: contain;
+  transition: transform 0.2s ease;
+}
+
+.resourceButton:hover .resourceIcon {
+  transform: scale(1.1);
+}
+
+.resourceName {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+/* Selected Check */
+.selectedCheck {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  background-color: var(--resource-color);
+  border-radius: 50%;
+  color: #ffffff;
+  animation: popIn 0.2s ease-out;
+}
+
+@keyframes popIn {
+  0% {
+    transform: scale(0);
+  }
+  70% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* Actions */
+.actions {
+  display: flex;
+  gap: 12px;
+  width: 100%;
+  padding-top: 8px;
+  border-top: 1px solid #3a3a3a;
+}
+
+.cancelButton,
+.submitButton {
+  flex: 1;
+  padding: 12px 20px;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.cancelButton {
+  border: 1px solid #4a4a4a;
+  background-color: transparent;
+  color: #aaaaaa;
+}
+
+.cancelButton:hover {
+  background-color: #3a3a3a;
+  color: #ffffff;
+}
+
+.submitButton {
+  border: none;
+  background-color: #fbbf24;
+  color: #1a1a1a;
+}
+
+.submitButton:hover:not(:disabled) {
+  background-color: #f59e0b;
+}
+
+.submitButton:disabled {
+  background-color: #4a4a4a;
+  color: #888888;
+  cursor: not-allowed;
+}
+
+/* Preview Count */
+.previewCount {
+  font-size: 0.7rem;
+  color: #4caf50;
+  margin-top: 4px;
+}
+
+/* Preview Info */
+.previewInfo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 14px;
+  background-color: rgba(76, 175, 80, 0.1);
+  border: 1px solid #4caf50;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  color: #4caf50;
+  animation: fadeIn 0.2s ease-out;
+}
+
+.previewInfo strong {
+  color: #ffffff;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Result Container */
+.resultContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  padding: 20px;
+  text-align: center;
+}
+
+.resultIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100px;
+  height: 100px;
+  background-color: rgba(76, 175, 80, 0.1);
+  border: 2px solid #4caf50;
+  border-radius: 50%;
+  animation: scaleIn 0.3s ease-out;
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.resultResourceIcon {
+  width: 64px;
+  height: 64px;
+  object-fit: contain;
+}
+
+.resultText {
+  margin: 0;
+  font-size: 1.1rem;
+  color: #dddddd;
+  line-height: 1.5;
+}
+
+.continueButton {
+  width: 100%;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 6px;
+  background-color: #4caf50;
+  color: #ffffff;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+}
+
+.continueButton:hover {
+  background-color: #45a049;
+}
+
+/* Responsive */
+@media (max-width: 360px) {
+  .resourceButton {
+    width: calc(50% - 6px);
+  }
+}

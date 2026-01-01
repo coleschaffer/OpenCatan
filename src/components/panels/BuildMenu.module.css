@@ -1,0 +1,220 @@
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  animation: fadeIn 0.15s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.buildMenu {
+  background: #1e1e1e;
+  border-radius: 12px;
+  min-width: 280px;
+  max-width: 360px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+  animation: slideUp 0.2s ease;
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 16px;
+  border-bottom: 1px solid #333;
+}
+
+.title {
+  font-size: 16px;
+  font-weight: 600;
+  color: #fff;
+  margin: 0;
+}
+
+.closeButton {
+  background: none;
+  border: none;
+  color: #888;
+  cursor: pointer;
+  padding: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+}
+
+.closeButton:hover {
+  background: #333;
+  color: #fff;
+}
+
+.options {
+  display: flex;
+  flex-direction: column;
+  padding: 8px;
+  gap: 4px;
+}
+
+.option {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 12px 14px;
+  background: #2a2a2a;
+  border: 2px solid transparent;
+  border-radius: 8px;
+  cursor: pointer;
+  text-align: left;
+  transition: all 0.2s ease;
+}
+
+.option:hover:not(:disabled) {
+  background: #333;
+  border-color: #555;
+}
+
+.option:focus {
+  outline: 2px solid #ffd700;
+  outline-offset: 2px;
+}
+
+.option.disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.optionMain {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.optionIcon {
+  font-size: 24px;
+  line-height: 1;
+}
+
+.optionLabel {
+  flex: 1;
+  font-size: 15px;
+  font-weight: 600;
+  color: #fff;
+}
+
+.shortcut {
+  font-size: 11px;
+  padding: 3px 6px;
+  background: #444;
+  border-radius: 4px;
+  font-family: 'Roboto Mono', monospace;
+  color: #aaa;
+}
+
+.optionCost {
+  display: flex;
+  gap: 8px;
+  padding-left: 34px;
+}
+
+.costItem {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  font-size: 12px;
+  color: #aaa;
+}
+
+.costIcon {
+  font-size: 14px;
+}
+
+.costAmount {
+  font-weight: 500;
+}
+
+.cantAfford {
+  font-size: 10px;
+  color: #f44336;
+  padding-left: 34px;
+  text-transform: uppercase;
+}
+
+.footer {
+  padding: 10px 16px;
+  border-top: 1px solid #333;
+  text-align: center;
+}
+
+.hint {
+  font-size: 11px;
+  color: #666;
+}
+
+/* Mobile styles */
+@media (max-width: 768px) {
+  .buildMenu {
+    min-width: unset;
+    max-width: unset;
+    width: calc(100% - 32px);
+    margin: 16px;
+    border-radius: 8px;
+  }
+
+  .header {
+    padding: 12px 14px;
+  }
+
+  .title {
+    font-size: 15px;
+  }
+
+  .options {
+    padding: 6px;
+  }
+
+  .option {
+    padding: 10px 12px;
+  }
+
+  .optionIcon {
+    font-size: 20px;
+  }
+
+  .optionLabel {
+    font-size: 14px;
+  }
+
+  .optionCost {
+    padding-left: 30px;
+  }
+
+  .footer {
+    padding: 8px 14px;
+  }
+}

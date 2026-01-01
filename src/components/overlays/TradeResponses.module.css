@@ -1,0 +1,304 @@
+/* TradeResponses Component Styles */
+
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 16px;
+  background-color: #2a2a2a;
+  border-radius: 12px;
+}
+
+/* Header */
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.title {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+.pendingBadge {
+  padding: 4px 10px;
+  background-color: #3a3a3a;
+  border-radius: 12px;
+  font-size: 0.8rem;
+  color: #fbbf24;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.6;
+  }
+}
+
+/* Offer Summary */
+.offerSummary {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 12px 16px;
+  background-color: #333333;
+  border-radius: 8px;
+}
+
+.forLabel {
+  font-size: 0.85rem;
+  color: #666666;
+  font-weight: 500;
+}
+
+/* Completed Message */
+.completedMessage {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 12px 16px;
+  background-color: #1a4a1a;
+  border: 1px solid #4caf50;
+  border-radius: 8px;
+  color: #4caf50;
+  font-size: 0.95rem;
+}
+
+.completedMessage svg {
+  flex-shrink: 0;
+}
+
+/* Responses List */
+.responsesList {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* Response Row */
+.responseRow {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 12px;
+  background-color: #333333;
+  border-radius: 8px;
+  border-left: 3px solid var(--player-color, #666666);
+  transition: all 0.15s ease;
+}
+
+.responseRow.accepted {
+  background-color: #1a4a1a;
+  border-left-color: #4caf50;
+}
+
+.responseRow.declined {
+  opacity: 0.6;
+}
+
+.responseRow > div:first-child {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.playerInfo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.playerDot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.playerName {
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: #ffffff;
+}
+
+/* Status Section */
+.statusSection {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.statusIcon {
+  width: 18px;
+  height: 18px;
+}
+
+.statusIcon.accepted {
+  color: #4caf50;
+}
+
+.statusIcon.declined {
+  color: #ef4444;
+}
+
+.statusIcon.countered {
+  color: #3b82f6;
+}
+
+.statusIcon.pending {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.pendingDot {
+  width: 8px;
+  height: 8px;
+  background-color: #fbbf24;
+  border-radius: 50%;
+  animation: pendingPulse 1.5s ease-in-out infinite;
+}
+
+@keyframes pendingPulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.3);
+    opacity: 0.5;
+  }
+}
+
+.statusText {
+  font-size: 0.85rem;
+  color: #888888;
+}
+
+.responseRow.accepted .statusText {
+  color: #4caf50;
+  font-weight: 500;
+}
+
+.responseRow.countered .statusText {
+  color: #3b82f6;
+}
+
+/* Counter Offer Details */
+.counterOfferDetails {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 12px;
+  background-color: #2a2a2a;
+  border-radius: 6px;
+  margin-top: 4px;
+}
+
+.counterOfferResources {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.counterLabel {
+  font-size: 0.8rem;
+  color: #888888;
+}
+
+.counterArrow {
+  font-size: 0.75rem;
+  color: #666666;
+}
+
+.counterActions {
+  display: flex;
+  gap: 8px;
+}
+
+.counterDeclineButton,
+.counterAcceptButton {
+  flex: 1;
+  padding: 8px 14px;
+  border-radius: 4px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.counterDeclineButton {
+  border: 1px solid #4a4a4a;
+  background-color: transparent;
+  color: #aaaaaa;
+}
+
+.counterDeclineButton:hover {
+  background-color: #3a3a3a;
+  color: #ffffff;
+}
+
+.counterAcceptButton {
+  border: none;
+  background-color: #3b82f6;
+  color: #ffffff;
+}
+
+.counterAcceptButton:hover {
+  background-color: #2563eb;
+}
+
+/* Actions */
+.actions {
+  display: flex;
+  justify-content: center;
+  padding-top: 8px;
+}
+
+.cancelButton {
+  padding: 10px 24px;
+  border: 1px solid #dc2626;
+  border-radius: 6px;
+  background-color: transparent;
+  color: #ef4444;
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.cancelButton:hover {
+  background-color: rgba(220, 38, 38, 0.1);
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+  .header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .offerSummary {
+    flex-wrap: wrap;
+  }
+
+  .counterOfferResources {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .counterActions {
+    flex-direction: column;
+  }
+}

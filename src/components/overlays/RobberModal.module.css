@@ -1,0 +1,119 @@
+/* Robber Modal Container */
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  text-align: center;
+}
+
+/* Robber Icon */
+.iconWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100px;
+  height: 100px;
+  background-color: #3a3a3a;
+  border-radius: 50%;
+  animation: bounce 2s ease-in-out infinite;
+}
+
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+}
+
+.robberIcon {
+  filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.3));
+}
+
+/* Instructions */
+.instructions {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.mainText {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 500;
+  color: #ffffff;
+  line-height: 1.5;
+}
+
+.subText {
+  margin: 0;
+  font-size: 0.85rem;
+  color: #888888;
+  line-height: 1.5;
+}
+
+/* Hex Count */
+.hexCount {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  padding: 12px 24px;
+  background-color: #333333;
+  border-radius: 8px;
+}
+
+.hexCountNumber {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #4caf50;
+}
+
+.hexCountLabel {
+  font-size: 0.85rem;
+  color: #888888;
+}
+
+/* Current Location */
+.currentLocation {
+  font-size: 0.8rem;
+  color: #666666;
+  font-style: italic;
+}
+
+/* Actions */
+.actions {
+  width: 100%;
+  padding-top: 8px;
+  border-top: 1px solid #3a3a3a;
+}
+
+.cancelButton {
+  width: 100%;
+  padding: 10px 20px;
+  border: 1px solid #4a4a4a;
+  border-radius: 6px;
+  background-color: transparent;
+  color: #aaaaaa;
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.cancelButton:hover {
+  background-color: #3a3a3a;
+  color: #ffffff;
+}
+
+/* Visual indicator that board is interactive */
+.container::after {
+  content: 'Board is highlighted';
+  display: block;
+  font-size: 0.75rem;
+  color: #646cff;
+  padding: 6px 12px;
+  background-color: rgba(100, 108, 255, 0.1);
+  border-radius: 4px;
+}

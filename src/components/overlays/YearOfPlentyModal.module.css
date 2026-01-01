@@ -1,0 +1,228 @@
+/* Year of Plenty Modal Container */
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+/* Card Icon */
+.cardIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 80px;
+  height: 80px;
+  background-color: #2a3a2a;
+  border-radius: 50%;
+  border: 2px solid #4caf50;
+}
+
+/* Instructions */
+.instructions {
+  text-align: center;
+}
+
+.mainText {
+  margin: 0 0 4px 0;
+  font-size: 1rem;
+  font-weight: 500;
+  color: #ffffff;
+}
+
+.subText {
+  margin: 0;
+  font-size: 0.85rem;
+  color: #888888;
+}
+
+/* Selection Display */
+.selection {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.selectionLabel {
+  font-size: 0.875rem;
+  color: #888888;
+}
+
+.selectedResources {
+  display: flex;
+  gap: 16px;
+}
+
+.selectedSlot {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 64px;
+  height: 64px;
+  background-color: #333333;
+  border: 2px dashed #4a4a4a;
+  border-radius: 8px;
+  cursor: default;
+  transition: all 0.15s ease;
+}
+
+.selectedSlotFilled {
+  border-style: solid;
+  border-color: #4caf50;
+  cursor: pointer;
+}
+
+.selectedSlotFilled:hover {
+  background-color: #3a3a3a;
+}
+
+.selectedSlotFilled:hover .removeHint {
+  opacity: 1;
+}
+
+.selectedIcon {
+  width: 48px;
+  height: 48px;
+  object-fit: contain;
+}
+
+.removeHint {
+  position: absolute;
+  bottom: -20px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 0.7rem;
+  color: #ef4444;
+  white-space: nowrap;
+  opacity: 0;
+  transition: opacity 0.15s;
+}
+
+.emptySlot {
+  font-size: 1.5rem;
+  color: #4a4a4a;
+  font-weight: 600;
+}
+
+/* Resource Grid */
+.resourceGrid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 8px;
+  width: 100%;
+}
+
+.resourceButton {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding: 12px 8px;
+  border: 2px solid #3a3a3a;
+  border-radius: 8px;
+  background-color: #2a2a2a;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.resourceButton:hover:not(:disabled) {
+  background-color: #333333;
+  border-color: #4caf50;
+  transform: translateY(-2px);
+}
+
+.resourceButton:disabled {
+  cursor: not-allowed;
+}
+
+.resourceButtonDepleted {
+  opacity: 0.4;
+}
+
+.resourceIcon {
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+}
+
+.resourceName {
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: #ffffff;
+}
+
+.bankCount {
+  font-size: 0.7rem;
+  color: #888888;
+}
+
+.bankCountDepleted {
+  color: #ef4444;
+}
+
+/* Actions */
+.actions {
+  display: flex;
+  gap: 12px;
+  width: 100%;
+  padding-top: 8px;
+  border-top: 1px solid #3a3a3a;
+}
+
+.cancelButton,
+.submitButton {
+  flex: 1;
+  padding: 10px 20px;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.cancelButton {
+  border: 1px solid #4a4a4a;
+  background-color: transparent;
+  color: #aaaaaa;
+}
+
+.cancelButton:hover {
+  background-color: #3a3a3a;
+  color: #ffffff;
+}
+
+.submitButton {
+  border: none;
+  background-color: #4caf50;
+  color: #ffffff;
+}
+
+.submitButton:hover:not(:disabled) {
+  background-color: #45a049;
+}
+
+.submitButton:disabled {
+  background-color: #4a4a4a;
+  color: #888888;
+  cursor: not-allowed;
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+  .resourceGrid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .selectedSlot {
+    width: 56px;
+    height: 56px;
+  }
+
+  .selectedIcon {
+    width: 40px;
+    height: 40px;
+  }
+}

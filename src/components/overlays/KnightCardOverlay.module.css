@@ -1,0 +1,246 @@
+/* Knight Card Overlay */
+.phaseContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* Card Header */
+.cardHeader {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 16px;
+  background-color: rgba(239, 68, 68, 0.1);
+  border: 1px solid #ef4444;
+  border-radius: 10px;
+}
+
+.knightIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 72px;
+  height: 72px;
+  background-color: rgba(239, 68, 68, 0.15);
+  border-radius: 50%;
+}
+
+.headerText {
+  flex: 1;
+}
+
+.cardTitle {
+  margin: 0 0 4px 0;
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+.cardSubtitle {
+  margin: 0;
+  font-size: 0.9rem;
+  color: #aaaaaa;
+}
+
+/* Knight Counter */
+.knightCounter {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 16px;
+  background-color: #333333;
+  border-radius: 8px;
+}
+
+.counterLabel {
+  font-size: 0.9rem;
+  color: #888888;
+}
+
+.counterValue {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #ef4444;
+}
+
+.armyBadge {
+  padding: 4px 10px;
+  background-color: #fbbf24;
+  color: #1a1a1a;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  animation: bounce 0.5s ease-out;
+}
+
+@keyframes bounce {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+}
+
+/* Progress Steps */
+.progressSteps {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  padding: 16px;
+  background-color: #333333;
+  border-radius: 8px;
+}
+
+.step {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+}
+
+.stepActive {
+  background-color: #4a4a4a;
+}
+
+.stepComplete {
+  color: #4caf50;
+}
+
+.stepNumber {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background-color: #4a4a4a;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #888888;
+}
+
+.stepActive .stepNumber {
+  background-color: #ef4444;
+  color: #ffffff;
+}
+
+.stepComplete .stepNumber {
+  background-color: #4caf50;
+  color: #ffffff;
+}
+
+.stepLabel {
+  font-size: 0.85rem;
+  color: #888888;
+}
+
+.stepActive .stepLabel {
+  color: #ffffff;
+  font-weight: 500;
+}
+
+.stepComplete .stepLabel {
+  color: #4caf50;
+}
+
+.stepConnector {
+  width: 32px;
+  height: 2px;
+  background-color: #4a4a4a;
+  margin: 0 8px;
+}
+
+.stepConnectorComplete {
+  background-color: #4caf50;
+}
+
+/* Complete Container */
+.completeContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  padding: 20px;
+  text-align: center;
+}
+
+.completeIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100px;
+  height: 100px;
+  background-color: rgba(76, 175, 80, 0.1);
+  border-radius: 50%;
+  animation: scaleIn 0.3s ease-out;
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.completeText {
+  margin: 0;
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: #ffffff;
+}
+
+.knightTotal {
+  margin: 0;
+  font-size: 0.9rem;
+  color: #888888;
+}
+
+.knightTotal strong {
+  color: #ef4444;
+}
+
+.continueButton {
+  width: 100%;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 6px;
+  background-color: #4caf50;
+  color: #ffffff;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+}
+
+.continueButton:hover {
+  background-color: #45a049;
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+  .cardHeader {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .progressSteps {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .stepConnector {
+    width: 2px;
+    height: 16px;
+    margin: 0;
+  }
+}

@@ -1,0 +1,453 @@
+/**
+ * Shared Overlay Styles
+ *
+ * Common CSS classes used across multiple overlay components.
+ * Import this file for consistent styling patterns.
+ */
+
+/* =============================================================================
+   Container Patterns
+   ============================================================================= */
+
+.overlayContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.overlayContainerCentered {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  text-align: center;
+}
+
+/* =============================================================================
+   Timer Styles
+   ============================================================================= */
+
+.timer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px 20px;
+  background-color: #333333;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #dddddd;
+  font-variant-numeric: tabular-nums;
+}
+
+.timerWarning {
+  background-color: #7f1d1d;
+  color: #fecaca;
+  animation: timerPulse 0.5s ease-in-out infinite;
+}
+
+@keyframes timerPulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
+
+/* =============================================================================
+   Icon Containers
+   ============================================================================= */
+
+.iconCircle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  border: 2px solid;
+}
+
+.iconCircleSmall {
+  width: 72px;
+  height: 72px;
+}
+
+.iconCircleLarge {
+  width: 100px;
+  height: 100px;
+}
+
+/* =============================================================================
+   Instructions Text
+   ============================================================================= */
+
+.instructionsContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  text-align: center;
+}
+
+.instructionsMain {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 500;
+  color: #ffffff;
+  line-height: 1.5;
+}
+
+.instructionsSub {
+  margin: 0;
+  font-size: 0.85rem;
+  color: #888888;
+  line-height: 1.5;
+}
+
+/* =============================================================================
+   Progress Indicators
+   ============================================================================= */
+
+.progressBar {
+  position: relative;
+  height: 8px;
+  background-color: #333333;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.progressFill {
+  height: 100%;
+  border-radius: 4px;
+  transition: width 0.3s ease;
+}
+
+.progressFillGreen {
+  background: linear-gradient(90deg, #4caf50 0%, #66bb6a 100%);
+}
+
+.progressFillBlue {
+  background: linear-gradient(90deg, #3b82f6 0%, #60a5fa 100%);
+}
+
+.progressFillRed {
+  background: linear-gradient(90deg, #ef4444 0%, #f87171 100%);
+}
+
+.progressText {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #ffffff;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+  z-index: 1;
+}
+
+/* =============================================================================
+   Button Styles
+   ============================================================================= */
+
+.buttonRow {
+  display: flex;
+  gap: 12px;
+  width: 100%;
+}
+
+.buttonPrimary {
+  flex: 1;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 6px;
+  background-color: #4caf50;
+  color: #ffffff;
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.buttonPrimary:hover:not(:disabled) {
+  background-color: #45a049;
+}
+
+.buttonPrimary:disabled {
+  background-color: #4a4a4a;
+  color: #888888;
+  cursor: not-allowed;
+}
+
+.buttonSecondary {
+  flex: 1;
+  padding: 12px 20px;
+  border: 1px solid #4a4a4a;
+  border-radius: 6px;
+  background-color: transparent;
+  color: #aaaaaa;
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.buttonSecondary:hover {
+  background-color: #3a3a3a;
+  color: #ffffff;
+}
+
+.buttonDanger {
+  background-color: #ef4444;
+}
+
+.buttonDanger:hover:not(:disabled) {
+  background-color: #dc2626;
+}
+
+/* =============================================================================
+   Card Grids
+   ============================================================================= */
+
+.cardGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+  gap: 8px;
+}
+
+.cardGridFixed3 {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.cardGridFixed5 {
+  grid-template-columns: repeat(5, 1fr);
+}
+
+/* =============================================================================
+   Player List Styles
+   ============================================================================= */
+
+.playerList {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.playerRow {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  background-color: #2a2a2a;
+  border: 1px solid #3a3a3a;
+  border-radius: 6px;
+  transition: all 0.15s ease;
+}
+
+.playerColorBadge {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.playerName {
+  flex: 1;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: #ffffff;
+}
+
+/* =============================================================================
+   Info Boxes
+   ============================================================================= */
+
+.infoBox {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 16px;
+  border-radius: 6px;
+  font-size: 0.85rem;
+}
+
+.infoBoxSuccess {
+  background-color: rgba(76, 175, 80, 0.1);
+  border: 1px solid #4caf50;
+  color: #4caf50;
+}
+
+.infoBoxWarning {
+  background-color: rgba(251, 191, 36, 0.1);
+  border: 1px solid #fbbf24;
+  color: #fbbf24;
+}
+
+.infoBoxError {
+  background-color: rgba(239, 68, 68, 0.1);
+  border: 1px solid #ef4444;
+  color: #ef4444;
+}
+
+.infoBoxInfo {
+  background-color: rgba(100, 108, 255, 0.1);
+  border: 1px solid #646cff;
+  color: #646cff;
+}
+
+/* =============================================================================
+   Board Interaction Hint
+   ============================================================================= */
+
+.boardHint {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  background-color: rgba(100, 108, 255, 0.1);
+  border-radius: 4px;
+  font-size: 0.75rem;
+  color: #646cff;
+}
+
+.boardHintDot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: #646cff;
+  animation: blink 1s ease-in-out infinite;
+}
+
+@keyframes blink {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.3;
+  }
+}
+
+/* =============================================================================
+   Animations
+   ============================================================================= */
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideInUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.05);
+    opacity: 0.8;
+  }
+}
+
+/* =============================================================================
+   Utility Classes
+   ============================================================================= */
+
+.animateFadeIn {
+  animation: fadeIn 0.2s ease-out;
+}
+
+.animateSlideUp {
+  animation: slideInUp 0.2s ease-out;
+}
+
+.animateSlideLeft {
+  animation: slideInLeft 0.2s ease-out;
+}
+
+.animateScaleIn {
+  animation: scaleIn 0.3s ease-out;
+}
+
+.animateBounce {
+  animation: bounce 2s ease-in-out infinite;
+}
+
+.animatePulse {
+  animation: pulse 2s ease-in-out infinite;
+}
+
+/* =============================================================================
+   Responsive Adjustments
+   ============================================================================= */
+
+@media (max-width: 480px) {
+  .overlayContainer {
+    gap: 12px;
+  }
+
+  .cardGridFixed5 {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .buttonRow {
+    flex-direction: column;
+  }
+
+  .iconCircle {
+    width: 72px;
+    height: 72px;
+  }
+
+  .iconCircleLarge {
+    width: 80px;
+    height: 80px;
+  }
+}

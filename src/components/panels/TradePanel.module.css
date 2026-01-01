@@ -1,0 +1,384 @@
+/**
+ * TradePanel Styles
+ *
+ * Styles for the trade panel component.
+ */
+
+/* Container */
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 12px;
+  background: rgba(30, 30, 30, 0.9);
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  min-width: 280px;
+}
+
+.container.compact {
+  padding: 8px;
+  gap: 8px;
+  min-width: 200px;
+}
+
+/* Trade Button Section */
+.tradeButtonSection {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  position: relative;
+}
+
+.tradeButton {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px;
+  background: linear-gradient(135deg, #3498db, #2980b9);
+  border: none;
+  border-radius: 6px;
+  color: white;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  flex: 1;
+  justify-content: center;
+}
+
+.tradeButton:hover:not(:disabled) {
+  background: linear-gradient(135deg, #2980b9, #21618c);
+  transform: translateY(-1px);
+}
+
+.tradeButton:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.tradeButton:disabled {
+  background: #555;
+  color: #888;
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.portIndicator {
+  padding: 4px 8px;
+  background: rgba(46, 204, 113, 0.2);
+  border: 1px solid rgba(46, 204, 113, 0.5);
+  border-radius: 4px;
+  color: #2ecc71;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.incomingBadge {
+  position: absolute;
+  top: -6px;
+  right: -6px;
+  width: 20px;
+  height: 20px;
+  background: #e74c3c;
+  border-radius: 50%;
+  color: white;
+  font-size: 11px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+}
+
+/* Section Titles */
+.sectionTitle {
+  font-size: 12px;
+  font-weight: 600;
+  color: #999;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.offerCount {
+  font-weight: 400;
+  color: #666;
+}
+
+/* Offers Lists */
+.offersList {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* Outgoing Section */
+.outgoingSection {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.outgoingOffer {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 10px;
+  background: rgba(52, 152, 219, 0.1);
+  border: 1px solid rgba(52, 152, 219, 0.3);
+  border-radius: 6px;
+}
+
+.offerContent {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex: 1;
+  flex-wrap: wrap;
+}
+
+.forLabel {
+  color: #666;
+  font-size: 11px;
+  font-style: italic;
+}
+
+.offerStatus {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 2px;
+  font-size: 10px;
+}
+
+.declineCount {
+  color: #e74c3c;
+}
+
+.counterCount {
+  color: #f39c12;
+}
+
+.cancelOfferButton {
+  padding: 4px;
+  background: transparent;
+  border: none;
+  border-radius: 4px;
+  color: #999;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cancelOfferButton:hover {
+  background: rgba(231, 76, 60, 0.2);
+  color: #e74c3c;
+}
+
+/* Incoming Section */
+.incomingSection {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.incomingOffer {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 12px;
+  background: rgba(46, 204, 113, 0.1);
+  border: 1px solid rgba(46, 204, 113, 0.3);
+  border-radius: 6px;
+  animation: slideIn 0.3s ease;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.offerHeader {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+}
+
+.senderName {
+  font-weight: 600;
+  color: #fff;
+}
+
+.offerLabel {
+  color: #888;
+  font-size: 12px;
+}
+
+.offerDetails {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 0;
+}
+
+.offerSide {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.offerDirection {
+  font-size: 10px;
+  color: #888;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+}
+
+.offerArrow {
+  color: #666;
+  display: flex;
+  align-items: center;
+}
+
+.offerActions {
+  display: flex;
+  gap: 6px;
+}
+
+.actionButton {
+  flex: 1;
+  padding: 8px 12px;
+  border: none;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.acceptButton {
+  background: #27ae60;
+  color: white;
+}
+
+.acceptButton:hover:not(:disabled) {
+  background: #219a52;
+}
+
+.acceptButton:disabled {
+  background: #555;
+  color: #888;
+  cursor: not-allowed;
+}
+
+.counterButton {
+  background: #f39c12;
+  color: white;
+}
+
+.counterButton:hover:not(:disabled) {
+  background: #d68910;
+}
+
+.declineButton {
+  background: #e74c3c;
+  color: white;
+}
+
+.declineButton:hover:not(:disabled) {
+  background: #c0392b;
+}
+
+/* Resource Display */
+.resourceList {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  flex-wrap: wrap;
+}
+
+.resourceBadge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  font-weight: 600;
+  color: white;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.resourceBadge.small {
+  min-width: 18px;
+  height: 18px;
+  font-size: 11px;
+  padding: 0 4px;
+}
+
+.resourceBadge.medium {
+  min-width: 24px;
+  height: 24px;
+  font-size: 13px;
+  padding: 0 6px;
+}
+
+.resourceSeparator {
+  color: #666;
+  font-size: 10px;
+  margin: 0 1px;
+}
+
+.noResources {
+  color: #666;
+  font-size: 11px;
+  font-style: italic;
+}
+
+/* Player Color Dot */
+.playerDot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  display: inline-block;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+/* Empty State */
+.emptyState {
+  text-align: center;
+  padding: 12px;
+  color: #666;
+}
+
+.emptyState p {
+  margin: 0;
+  font-size: 12px;
+}
+
+.hint {
+  color: #888;
+  font-size: 11px;
+  margin-top: 4px !important;
+}

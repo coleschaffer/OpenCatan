@@ -1,0 +1,51 @@
+/**
+ * KnightPiece - Board knight piece styles
+ */
+
+.knight {
+  cursor: default;
+  transition: transform 0.2s ease;
+}
+
+.clickable {
+  cursor: pointer;
+}
+
+.clickable:hover {
+  transform: scale(1.1);
+}
+
+.active .knightImage {
+  filter: drop-shadow(0 0 4px rgba(255, 215, 0, 0.5));
+}
+
+.inactive .knightImage {
+  opacity: 0.75;
+  filter: saturate(0.7);
+}
+
+.shadow {
+  opacity: 0.5;
+}
+
+.knightImage {
+  pointer-events: none;
+}
+
+.levelBadge {
+  pointer-events: none;
+}
+
+/* Animation for activated knight */
+.active {
+  animation: knightGlow 2s ease-in-out infinite;
+}
+
+@keyframes knightGlow {
+  0%, 100% {
+    filter: drop-shadow(0 0 2px rgba(255, 215, 0, 0.3));
+  }
+  50% {
+    filter: drop-shadow(0 0 8px rgba(255, 215, 0, 0.6));
+  }
+}

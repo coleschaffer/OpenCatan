@@ -1,0 +1,181 @@
+/* Circular timer styles */
+.timerCircular {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.circleSvg {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.circleBackground {
+  stroke: #333;
+}
+
+.circleProgress {
+  transition: stroke-dashoffset 0.3s ease, stroke 0.3s ease;
+}
+
+.circleTime {
+  font-weight: 700;
+  font-family: 'Roboto Mono', monospace;
+  color: #fff;
+  z-index: 1;
+}
+
+/* State styles for circular */
+.timerCircular.normal .circleProgress {
+  stroke: #4caf50;
+}
+
+.timerCircular.low .circleProgress {
+  stroke: #ff9800;
+}
+
+.timerCircular.critical .circleProgress {
+  stroke: #f44336;
+}
+
+.timerCircular.critical {
+  animation: pulse 0.5s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+}
+
+.timerCircular.critical .circleTime {
+  animation: flash 0.5s ease-in-out infinite;
+}
+
+@keyframes flash {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+.timerCircular.myTurn {
+  filter: drop-shadow(0 0 4px currentColor);
+}
+
+.timerCircular.myTurn.normal {
+  filter: drop-shadow(0 0 4px #4caf50);
+}
+
+.timerCircular.myTurn.low {
+  filter: drop-shadow(0 0 4px #ff9800);
+}
+
+.timerCircular.myTurn.critical {
+  filter: drop-shadow(0 0 6px #f44336);
+}
+
+/* Bar timer styles */
+.timerBar {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 100px;
+}
+
+.barLabel {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.barIcon {
+  display: flex;
+  align-items: center;
+  color: #888;
+}
+
+.barTime {
+  font-size: 14px;
+  font-weight: 700;
+  font-family: 'Roboto Mono', monospace;
+  color: #fff;
+}
+
+.barTrack {
+  height: 6px;
+  background: #333;
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.barProgress {
+  height: 100%;
+  border-radius: 3px;
+  transition: width 0.3s ease, background 0.3s ease;
+}
+
+/* State styles for bar */
+.timerBar.normal .barProgress {
+  background: linear-gradient(90deg, #4caf50, #66bb6a);
+}
+
+.timerBar.normal .barTime {
+  color: #4caf50;
+}
+
+.timerBar.low .barProgress {
+  background: linear-gradient(90deg, #ff9800, #ffb74d);
+}
+
+.timerBar.low .barTime {
+  color: #ff9800;
+}
+
+.timerBar.critical .barProgress {
+  background: linear-gradient(90deg, #f44336, #ef5350);
+}
+
+.timerBar.critical .barTime {
+  color: #f44336;
+}
+
+.timerBar.critical .barTime,
+.timerBar.critical .barProgress {
+  animation: barFlash 0.5s ease-in-out infinite;
+}
+
+@keyframes barFlash {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.6;
+  }
+}
+
+.timerBar.myTurn .barLabel {
+  color: #ffd700;
+}
+
+.timerBar.myTurn .barIcon {
+  color: #ffd700;
+}
+
+/* Mobile styles */
+@media (max-width: 768px) {
+  .barTime {
+    font-size: 12px;
+  }
+
+  .barTrack {
+    height: 5px;
+  }
+}

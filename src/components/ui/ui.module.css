@@ -1,0 +1,516 @@
+/**
+ * Shared UI Component Styles
+ *
+ * Common styles for reusable UI components like toggles, sliders, tabs, and modals.
+ */
+
+/* ==========================================================================
+   CSS Variables
+   ========================================================================== */
+
+:root {
+  --color-primary: #646cff;
+  --color-primary-hover: #535bf2;
+  --color-primary-active: #4349d4;
+  --color-surface-1: #2a2a2a;
+  --color-surface-2: #3a3a3a;
+  --color-surface-3: #4a4a4a;
+  --color-text-primary: #ffffff;
+  --color-text-secondary: #a0a0a0;
+  --color-text-muted: #666666;
+  --color-danger: #ef4444;
+  --color-danger-hover: #dc2626;
+  --color-success: #22c55e;
+  --color-warning: #f59e0b;
+  --toggle-width: 48px;
+  --toggle-height: 26px;
+  --toggle-thumb-size: 22px;
+  --toggle-thumb-offset: 2px;
+}
+
+/* ==========================================================================
+   Toggle Switch
+   ========================================================================== */
+
+.toggleContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.toggleLabel {
+  font-size: 0.9375rem;
+  color: var(--color-text-primary);
+  cursor: pointer;
+  user-select: none;
+}
+
+.toggle {
+  position: relative;
+  width: var(--toggle-width);
+  height: var(--toggle-height);
+  background-color: var(--color-surface-2);
+  border: none;
+  border-radius: var(--toggle-height);
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  padding: 0;
+  flex-shrink: 0;
+}
+
+.toggle:hover:not(.toggleDisabled) {
+  background-color: var(--color-surface-3);
+}
+
+.toggle:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+.toggleOn {
+  background-color: var(--color-primary);
+}
+
+.toggleOn:hover:not(.toggleDisabled) {
+  background-color: var(--color-primary-hover);
+}
+
+.toggleDisabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.toggleThumb {
+  position: absolute;
+  top: var(--toggle-thumb-offset);
+  left: var(--toggle-thumb-offset);
+  width: var(--toggle-thumb-size);
+  height: var(--toggle-thumb-size);
+  background-color: #ffffff;
+  border-radius: 50%;
+  transition: transform 0.2s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.toggleOn .toggleThumb {
+  transform: translateX(calc(var(--toggle-width) - var(--toggle-thumb-size) - var(--toggle-thumb-offset) * 2));
+}
+
+/* ==========================================================================
+   Slider
+   ========================================================================== */
+
+.sliderContainer {
+  width: 100%;
+}
+
+.sliderHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.sliderLabel {
+  font-size: 0.9375rem;
+  color: var(--color-text-primary);
+}
+
+.sliderValue {
+  font-size: 0.875rem;
+  color: var(--color-text-secondary);
+  font-variant-numeric: tabular-nums;
+  min-width: 3ch;
+  text-align: right;
+}
+
+.sliderWrapper {
+  position: relative;
+}
+
+.slider {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 6px;
+  border-radius: 3px;
+  background: var(--color-surface-2);
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.slider:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 4px;
+}
+
+/* Webkit slider thumb */
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #ffffff;
+  cursor: pointer;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.slider::-webkit-slider-thumb:hover {
+  transform: scale(1.1);
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.3);
+}
+
+.slider::-webkit-slider-thumb:active {
+  transform: scale(1.05);
+}
+
+/* Firefox slider thumb */
+.slider::-moz-range-thumb {
+  width: 18px;
+  height: 18px;
+  border: none;
+  border-radius: 50%;
+  background: #ffffff;
+  cursor: pointer;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.slider::-moz-range-thumb:hover {
+  transform: scale(1.1);
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.3);
+}
+
+.sliderDisabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.sliderDisabled::-webkit-slider-thumb {
+  cursor: not-allowed;
+}
+
+.sliderDisabled::-moz-range-thumb {
+  cursor: not-allowed;
+}
+
+/* ==========================================================================
+   Tabs
+   ========================================================================== */
+
+.tabsContainer {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.tabList {
+  display: flex;
+  gap: 4px;
+  border-bottom: 1px solid var(--color-surface-2);
+  padding-bottom: 0;
+  margin-bottom: 16px;
+}
+
+.tabListLeft {
+  justify-content: flex-start;
+}
+
+.tabListCenter {
+  justify-content: center;
+}
+
+.tabListStretch .tab {
+  flex: 1;
+}
+
+.tab {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 10px 16px;
+  background: transparent;
+  border: none;
+  border-bottom: 2px solid transparent;
+  color: var(--color-text-secondary);
+  font-size: 0.9375rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: color 0.15s ease, border-color 0.15s ease, background-color 0.15s ease;
+  margin-bottom: -1px;
+  white-space: nowrap;
+}
+
+.tab:hover:not(.tabDisabled) {
+  color: var(--color-text-primary);
+  background-color: rgba(255, 255, 255, 0.03);
+}
+
+.tab:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: -2px;
+  border-radius: 4px;
+}
+
+.tabActive {
+  color: var(--color-primary);
+  border-bottom-color: var(--color-primary);
+}
+
+.tabActive:hover {
+  color: var(--color-primary);
+}
+
+.tabDisabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.tabIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+}
+
+.tabIcon svg {
+  width: 100%;
+  height: 100%;
+}
+
+.tabPanel {
+  flex: 1;
+  overflow-y: auto;
+}
+
+/* ==========================================================================
+   Modal Base Styles
+   ========================================================================== */
+
+.modalBackdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  animation: fadeIn 0.2s ease-out;
+}
+
+.modal {
+  background-color: var(--color-surface-1);
+  border-radius: 12px;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+  max-height: 90vh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  animation: slideIn 0.25s ease-out;
+}
+
+.modalSmall {
+  width: 90%;
+  max-width: 360px;
+}
+
+.modalMedium {
+  width: 90%;
+  max-width: 520px;
+}
+
+.modalLarge {
+  width: 90%;
+  max-width: 720px;
+}
+
+.modalHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--color-surface-2);
+}
+
+.modalTitle {
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--color-text-primary);
+}
+
+.modalCloseButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border: none;
+  border-radius: 6px;
+  background-color: transparent;
+  color: var(--color-text-secondary);
+  cursor: pointer;
+  transition: background-color 0.15s, color 0.15s;
+}
+
+.modalCloseButton:hover {
+  background-color: var(--color-surface-2);
+  color: var(--color-text-primary);
+}
+
+.modalCloseButton:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+.modalContent {
+  padding: 20px;
+  overflow-y: auto;
+  flex: 1;
+}
+
+.modalFooter {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 12px;
+  padding: 16px 20px;
+  border-top: 1px solid var(--color-surface-2);
+}
+
+/* ==========================================================================
+   Buttons
+   ========================================================================== */
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 8px;
+  font-size: 0.9375rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.15s, transform 0.1s;
+}
+
+.button:active {
+  transform: scale(0.98);
+}
+
+.button:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+.buttonPrimary {
+  background-color: var(--color-primary);
+  color: #ffffff;
+}
+
+.buttonPrimary:hover {
+  background-color: var(--color-primary-hover);
+}
+
+.buttonSecondary {
+  background-color: var(--color-surface-2);
+  color: var(--color-text-primary);
+}
+
+.buttonSecondary:hover {
+  background-color: var(--color-surface-3);
+}
+
+.buttonDanger {
+  background-color: var(--color-danger);
+  color: #ffffff;
+}
+
+.buttonDanger:hover {
+  background-color: var(--color-danger-hover);
+}
+
+.buttonGhost {
+  background-color: transparent;
+  color: var(--color-text-secondary);
+}
+
+.buttonGhost:hover {
+  background-color: var(--color-surface-2);
+  color: var(--color-text-primary);
+}
+
+/* ==========================================================================
+   Animations
+   ========================================================================== */
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+/* ==========================================================================
+   Responsive
+   ========================================================================== */
+
+@media (max-width: 600px) {
+  .modal {
+    border-radius: 8px;
+  }
+
+  .modalHeader {
+    padding: 12px 16px;
+  }
+
+  .modalTitle {
+    font-size: 1.1rem;
+  }
+
+  .modalContent {
+    padding: 16px;
+  }
+
+  .modalFooter {
+    padding: 12px 16px;
+  }
+
+  .tab {
+    padding: 8px 12px;
+    font-size: 0.875rem;
+  }
+}

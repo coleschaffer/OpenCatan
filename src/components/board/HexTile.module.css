@@ -1,0 +1,102 @@
+/* HexTile.module.css - Styles for individual hex tiles */
+
+.hexTile {
+  transition: filter 0.15s ease;
+}
+
+.hexTile.clickable {
+  cursor: pointer;
+}
+
+.hexTile.clickable:hover .hexPolygon {
+  filter: brightness(1.1);
+}
+
+.hexPolygon {
+  transition: filter 0.15s ease, stroke-width 0.15s ease;
+}
+
+.hexTile.clickable:hover .hexPolygon {
+  stroke-width: 3px;
+  stroke: #fff;
+}
+
+/* Robber overlay effect */
+.robberOverlay {
+  pointer-events: none;
+}
+
+/* Hover highlight for valid hex placements */
+.hoverHighlight {
+  pointer-events: none;
+  transition: stroke 0.15s ease, fill 0.15s ease;
+}
+
+.hexTile.clickable:hover .hoverHighlight {
+  stroke: rgba(255, 255, 255, 0.6);
+  stroke-width: 4px;
+}
+
+/* Terrain-specific hover effects */
+.hexTile[data-terrain="hills"]:hover .hexPolygon {
+  filter: brightness(1.15) saturate(1.1);
+}
+
+.hexTile[data-terrain="forest"]:hover .hexPolygon {
+  filter: brightness(1.1) saturate(1.2);
+}
+
+.hexTile[data-terrain="mountains"]:hover .hexPolygon {
+  filter: brightness(1.2);
+}
+
+.hexTile[data-terrain="fields"]:hover .hexPolygon {
+  filter: brightness(1.1) saturate(1.15);
+}
+
+.hexTile[data-terrain="pasture"]:hover .hexPolygon {
+  filter: brightness(1.12) saturate(1.1);
+}
+
+.hexTile[data-terrain="desert"]:hover .hexPolygon {
+  filter: brightness(1.08);
+}
+
+/* Valid placement glow */
+.hexTile.clickable[data-valid="true"] .hexPolygon {
+  animation: validHexPulse 1.5s ease-in-out infinite;
+}
+
+@keyframes validHexPulse {
+  0%, 100% {
+    stroke: #fff;
+    stroke-width: 2px;
+  }
+  50% {
+    stroke: #4caf50;
+    stroke-width: 4px;
+  }
+}
+
+/* Valid placement indicator circle (for robber) */
+.validPlacement {
+  pointer-events: none;
+  animation: validPlacementPulse 1.2s ease-in-out infinite;
+}
+
+@keyframes validPlacementPulse {
+  0%, 100% {
+    opacity: 0.6;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.1);
+  }
+}
+
+/* Disabled state */
+.hexTile.disabled {
+  pointer-events: none;
+  opacity: 0.7;
+}

@@ -1,0 +1,312 @@
+/* Victory Screen Container */
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  max-height: 80vh;
+  overflow-y: auto;
+}
+
+/* Winner Section */
+.winnerSection {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 24px;
+  background: linear-gradient(180deg, #3a3520 0%, #2a2a2a 100%);
+  border-radius: 12px;
+  text-align: center;
+  animation: winnerReveal 0.6s ease-out;
+}
+
+@keyframes winnerReveal {
+  0% {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  50% {
+    transform: scale(1.02);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.trophy {
+  animation: bounce 2s ease-in-out infinite;
+}
+
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+.winnerName {
+  margin: 0;
+  font-size: 2rem;
+  font-weight: 700;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.winnerPoints {
+  margin: 0;
+  font-size: 1.1rem;
+  color: #aaaaaa;
+}
+
+/* Section */
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.sectionTitle {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #888888;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Rankings */
+.rankings {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.rankingRow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  background-color: #333333;
+  border-radius: 8px;
+  transition: background-color 0.15s;
+}
+
+.rankingRowWinner {
+  background-color: #3a3520;
+  border: 1px solid #fbbf24;
+}
+
+.rank {
+  width: 24px;
+  font-size: 1rem;
+  font-weight: 700;
+  color: #888888;
+}
+
+.playerColorDot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.playerName {
+  min-width: 80px;
+  font-weight: 500;
+  color: #ffffff;
+}
+
+.scoreBar {
+  flex: 1;
+  height: 8px;
+  background-color: #2a2a2a;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.scoreBarFill {
+  height: 100%;
+  border-radius: 4px;
+  transition: width 0.5s ease;
+}
+
+.score {
+  min-width: 50px;
+  text-align: right;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+/* Point Breakdown */
+.pointBreakdown {
+  background-color: #333333;
+  border-radius: 8px;
+  padding: 16px;
+}
+
+.pointRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 0;
+  border-bottom: 1px solid #3a3a3a;
+}
+
+.pointRow:last-child {
+  border-bottom: none;
+}
+
+.pointLabel {
+  color: #aaaaaa;
+}
+
+.pointValue {
+  font-weight: 600;
+  color: #4caf50;
+}
+
+/* Stats Grid */
+.statsGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+}
+
+.statCard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 16px;
+  background-color: #333333;
+  border-radius: 8px;
+  text-align: center;
+}
+
+.statValue {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+.statLabel {
+  font-size: 0.75rem;
+  color: #888888;
+  text-transform: uppercase;
+}
+
+/* Dice Distribution */
+.diceDistribution {
+  margin-top: 12px;
+}
+
+.diceTitle {
+  margin: 0 0 12px 0;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #888888;
+}
+
+.diceChart {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  height: 100px;
+  padding: 0 8px;
+  background-color: #333333;
+  border-radius: 8px;
+}
+
+.diceBar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  flex: 1;
+  height: 100%;
+  padding-top: 8px;
+}
+
+.diceBarFill {
+  width: 80%;
+  max-width: 24px;
+  background-color: #646cff;
+  border-radius: 4px 4px 0 0;
+  transition: height 0.5s ease;
+  margin-top: auto;
+}
+
+.diceBarSeven {
+  background-color: #ef4444;
+}
+
+.diceBarLabel {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+.diceBarCount {
+  font-size: 0.65rem;
+  color: #888888;
+}
+
+/* Action Buttons */
+.actions {
+  display: flex;
+  gap: 16px;
+  padding-top: 8px;
+}
+
+.lobbyButton,
+.newGameButton {
+  flex: 1;
+  padding: 14px 24px;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.lobbyButton {
+  border: 2px solid #4a4a4a;
+  background-color: transparent;
+  color: #dddddd;
+}
+
+.lobbyButton:hover {
+  background-color: #3a3a3a;
+  border-color: #5a5a5a;
+}
+
+.newGameButton {
+  border: none;
+  background-color: #4caf50;
+  color: #ffffff;
+}
+
+.newGameButton:hover {
+  background-color: #45a049;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .statsGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .winnerName {
+    font-size: 1.5rem;
+  }
+
+  .actions {
+    flex-direction: column;
+  }
+
+  .diceChart {
+    height: 80px;
+  }
+}

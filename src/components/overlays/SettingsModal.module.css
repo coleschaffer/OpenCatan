@@ -1,0 +1,497 @@
+/**
+ * Settings Modal Styles
+ *
+ * Styles for the in-game settings modal including tabs, form controls,
+ * keyboard shortcuts reference, game info, and danger zone.
+ */
+
+/* ==========================================================================
+   Settings Container
+   ========================================================================== */
+
+.settingsModal {
+  min-height: 400px;
+}
+
+.settingsContent {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* ==========================================================================
+   Section Styling
+   ========================================================================== */
+
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.sectionTitle {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #888888;
+  margin: 0 0 4px 0;
+}
+
+.sectionDivider {
+  height: 1px;
+  background-color: #3a3a3a;
+  margin: 8px 0;
+}
+
+/* ==========================================================================
+   Form Controls
+   ========================================================================== */
+
+.settingRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 8px 0;
+}
+
+.settingLabel {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.settingName {
+  font-size: 0.9375rem;
+  color: #ffffff;
+}
+
+.settingDescription {
+  font-size: 0.8125rem;
+  color: #888888;
+}
+
+.settingControl {
+  flex-shrink: 0;
+}
+
+/* Select dropdown */
+.select {
+  appearance: none;
+  padding: 8px 32px 8px 12px;
+  background-color: #3a3a3a;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12' fill='%23888888'%3E%3Cpath d='M2 4l4 4 4-4'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  border: 1px solid #4a4a4a;
+  border-radius: 6px;
+  color: #ffffff;
+  font-size: 0.875rem;
+  cursor: pointer;
+  min-width: 120px;
+}
+
+.select:hover {
+  background-color: #4a4a4a;
+}
+
+.select:focus {
+  outline: 2px solid #646cff;
+  outline-offset: 2px;
+}
+
+/* ==========================================================================
+   Keyboard Shortcuts
+   ========================================================================== */
+
+.shortcutsList {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px;
+}
+
+.shortcutItem {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 12px;
+  background-color: #333333;
+  border-radius: 6px;
+}
+
+.shortcutAction {
+  font-size: 0.875rem;
+  color: #ffffff;
+}
+
+.shortcutKey {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 28px;
+  height: 28px;
+  padding: 0 8px;
+  background-color: #4a4a4a;
+  border: 1px solid #5a5a5a;
+  border-radius: 4px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 0.8125rem;
+  color: #dddddd;
+  text-transform: uppercase;
+}
+
+/* ==========================================================================
+   Game Info Table
+   ========================================================================== */
+
+.infoTable {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.infoRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 0;
+  border-bottom: 1px solid #333333;
+}
+
+.infoRow:last-child {
+  border-bottom: none;
+}
+
+.infoLabel {
+  font-size: 0.9375rem;
+  color: #888888;
+}
+
+.infoValue {
+  font-size: 0.9375rem;
+  color: #ffffff;
+  font-weight: 500;
+}
+
+.infoValueClickable {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  padding: 4px 8px;
+  margin: -4px -8px;
+  border-radius: 4px;
+  transition: background-color 0.15s;
+}
+
+.infoValueClickable:hover {
+  background-color: #3a3a3a;
+}
+
+.copyIcon {
+  color: #888888;
+  transition: color 0.15s;
+}
+
+.infoValueClickable:hover .copyIcon {
+  color: #646cff;
+}
+
+.roomCode {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 1rem;
+  letter-spacing: 0.1em;
+}
+
+.copyFeedback {
+  font-size: 0.75rem;
+  color: #22c55e;
+}
+
+/* ==========================================================================
+   Players List
+   ========================================================================== */
+
+.playersList {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.playerRow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 12px;
+  background-color: #333333;
+  border-radius: 6px;
+}
+
+.playerColor {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.playerName {
+  flex: 1;
+  font-size: 0.9375rem;
+  color: #ffffff;
+}
+
+.playerBadge {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  text-transform: uppercase;
+}
+
+.hostBadge {
+  background-color: rgba(100, 108, 255, 0.2);
+  color: #646cff;
+}
+
+.youBadge {
+  background-color: rgba(34, 197, 94, 0.2);
+  color: #22c55e;
+}
+
+.playerStatus {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.8125rem;
+}
+
+.statusDot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+.statusConnected {
+  background-color: #22c55e;
+}
+
+.statusDisconnected {
+  background-color: #ef4444;
+}
+
+.statusText {
+  color: #888888;
+}
+
+/* ==========================================================================
+   Danger Zone
+   ========================================================================== */
+
+.dangerZone {
+  margin-top: 8px;
+  padding: 16px;
+  background-color: rgba(239, 68, 68, 0.1);
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  border-radius: 8px;
+}
+
+.dangerTitle {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #ef4444;
+  margin: 0 0 8px 0;
+}
+
+.dangerDescription {
+  font-size: 0.8125rem;
+  color: #888888;
+  margin: 0 0 12px 0;
+}
+
+.dangerButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 20px;
+  background-color: #ef4444;
+  border: none;
+  border-radius: 6px;
+  color: #ffffff;
+  font-size: 0.9375rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.15s;
+}
+
+.dangerButton:hover {
+  background-color: #dc2626;
+}
+
+.dangerButton:focus-visible {
+  outline: 2px solid #ef4444;
+  outline-offset: 2px;
+}
+
+/* ==========================================================================
+   Confirm Dialog
+   ========================================================================== */
+
+.confirmDialog {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 8px 0;
+}
+
+.confirmIcon {
+  color: #f59e0b;
+  margin-bottom: 16px;
+}
+
+.confirmMessage {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: #ffffff;
+  margin: 0 0 8px 0;
+}
+
+.confirmSubtext {
+  font-size: 0.9375rem;
+  color: #888888;
+  margin: 0 0 8px 0;
+}
+
+.confirmWarning {
+  font-size: 0.875rem;
+  color: #f59e0b;
+  margin: 8px 0 0 0;
+  padding: 8px 12px;
+  background-color: rgba(245, 158, 11, 0.1);
+  border-radius: 4px;
+}
+
+.confirmActions {
+  display: flex;
+  gap: 12px;
+  margin-top: 24px;
+}
+
+.cancelButton {
+  padding: 10px 24px;
+  background-color: #3a3a3a;
+  border: none;
+  border-radius: 6px;
+  color: #ffffff;
+  font-size: 0.9375rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.15s;
+}
+
+.cancelButton:hover {
+  background-color: #4a4a4a;
+}
+
+.cancelButton:focus-visible {
+  outline: 2px solid #646cff;
+  outline-offset: 2px;
+}
+
+/* ==========================================================================
+   Footer
+   ========================================================================== */
+
+.modalFooter {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding-top: 16px;
+  border-top: 1px solid #3a3a3a;
+  margin-top: auto;
+}
+
+.footerLeft {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.footerRight {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.closeButton {
+  padding: 10px 24px;
+  background-color: #646cff;
+  border: none;
+  border-radius: 6px;
+  color: #ffffff;
+  font-size: 0.9375rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.15s;
+}
+
+.closeButton:hover {
+  background-color: #535bf2;
+}
+
+.closeButton:focus-visible {
+  outline: 2px solid #646cff;
+  outline-offset: 2px;
+}
+
+/* ==========================================================================
+   Responsive
+   ========================================================================== */
+
+@media (max-width: 600px) {
+  .shortcutsList {
+    grid-template-columns: 1fr;
+  }
+
+  .settingRow {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .settingControl {
+    width: 100%;
+  }
+
+  .confirmActions {
+    flex-direction: column-reverse;
+    width: 100%;
+  }
+
+  .confirmActions button {
+    width: 100%;
+  }
+
+  .modalFooter {
+    flex-direction: column-reverse;
+    gap: 16px;
+  }
+
+  .footerLeft,
+  .footerRight {
+    width: 100%;
+  }
+
+  .footerRight {
+    justify-content: flex-end;
+  }
+
+  .dangerButton,
+  .closeButton {
+    width: 100%;
+  }
+}

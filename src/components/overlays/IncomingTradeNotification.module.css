@@ -1,0 +1,237 @@
+/**
+ * IncomingTradeNotification Styles
+ *
+ * Floating notification cards for incoming trade offers.
+ */
+
+/* Container positioning */
+.container {
+  position: fixed;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  pointer-events: none;
+}
+
+.container > * {
+  pointer-events: auto;
+}
+
+/* Position variants */
+.top-right {
+  top: 80px;
+  right: 20px;
+}
+
+.bottom-right {
+  bottom: 100px;
+  right: 20px;
+}
+
+.top-left {
+  top: 80px;
+  left: 20px;
+}
+
+.bottom-left {
+  bottom: 100px;
+  left: 20px;
+}
+
+/* Notification Card */
+.notificationCard {
+  width: 280px;
+  background: rgba(25, 25, 30, 0.95);
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+  overflow: hidden;
+  animation: slideIn 0.3s ease-out;
+  backdrop-filter: blur(10px);
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Progress bar */
+.progressBar {
+  height: 3px;
+  background: rgba(255, 255, 255, 0.1);
+  overflow: hidden;
+}
+
+.progressFill {
+  height: 100%;
+  background: linear-gradient(90deg, #27ae60, #2ecc71);
+  transition: width 1s linear;
+}
+
+/* Header */
+.header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 14px 8px;
+}
+
+.playerDot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  flex-shrink: 0;
+}
+
+.senderName {
+  font-weight: 600;
+  color: #fff;
+  font-size: 14px;
+}
+
+.wantsTrade {
+  color: #888;
+  font-size: 13px;
+}
+
+/* Trade Details */
+.tradeDetails {
+  padding: 8px 14px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.tradeRow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.tradeLabel {
+  font-size: 11px;
+  color: #888;
+  min-width: 60px;
+  flex-shrink: 0;
+}
+
+.resourcesRow {
+  display: flex;
+  gap: 4px;
+  flex-wrap: wrap;
+}
+
+.resourceChip {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  padding: 3px 6px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 600;
+  color: white;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.resourceIcon {
+  font-size: 10px;
+  opacity: 0.8;
+}
+
+.resourceAmount {
+  font-size: 12px;
+}
+
+.nothing {
+  color: #666;
+  font-size: 12px;
+  font-style: italic;
+}
+
+/* Actions */
+.actions {
+  display: flex;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.actionBtn {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  color: #fff;
+}
+
+.actionBtn:not(:last-child) {
+  border-right: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.acceptBtn {
+  color: #2ecc71;
+}
+
+.acceptBtn:hover:not(:disabled) {
+  background: rgba(46, 204, 113, 0.15);
+}
+
+.acceptBtn:disabled {
+  color: #555;
+  cursor: not-allowed;
+}
+
+.counterBtn {
+  color: #f39c12;
+}
+
+.counterBtn:hover {
+  background: rgba(243, 156, 18, 0.15);
+}
+
+.declineBtn {
+  color: #e74c3c;
+}
+
+.declineBtn:hover {
+  background: rgba(231, 76, 60, 0.15);
+}
+
+/* Overflow indicator */
+.overflowIndicator {
+  padding: 8px 14px;
+  background: rgba(30, 30, 35, 0.9);
+  border-radius: 6px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #888;
+  font-size: 12px;
+  text-align: center;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .notificationCard {
+    width: 260px;
+  }
+
+  .top-right,
+  .bottom-right {
+    right: 10px;
+  }
+
+  .top-left,
+  .bottom-left {
+    left: 10px;
+  }
+}

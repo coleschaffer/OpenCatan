@@ -1,0 +1,537 @@
+/**
+ * GamePage Layout Styles
+ *
+ * Full viewport layout for the game page with:
+ * - Header at top (fixed height)
+ * - Main area: GameBoard (center) + PlayerPanelList (right sidebar)
+ * - Bottom area: PlayerHand + ActionBar (left) + Chat/Log (right)
+ * - Overlay container for modals
+ */
+
+/* =============================================================================
+   Base Layout
+   ============================================================================= */
+
+.gamePage {
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  grid-template-areas:
+    "header"
+    "main"
+    "bottom";
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+  background: linear-gradient(135deg, #1a1a2e 0%, #0f3460 100%);
+  color: #ffffff;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+/* =============================================================================
+   Header Row
+   ============================================================================= */
+
+.header {
+  grid-area: header;
+  height: 56px;
+  min-height: 56px;
+  border-bottom: 1px solid rgba(255, 215, 0, 0.2);
+  z-index: 100;
+}
+
+/* =============================================================================
+   Main Content Area
+   ============================================================================= */
+
+.mainArea {
+  grid-area: main;
+  display: grid;
+  grid-template-columns: 1fr 360px;
+  gap: 0;
+  min-height: 0;
+  overflow: hidden;
+}
+
+/* Board container - centers the game board */
+.boardContainer {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(15, 52, 96, 0.3) 0%,
+    rgba(26, 26, 46, 0.6) 70%
+  );
+}
+
+/* Turn timer overlay */
+.turnTimerOverlay {
+  position: absolute;
+  top: 1rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 50;
+  pointer-events: none;
+}
+
+/* Dice display overlay - positioned next to zoom controls (bottom right) */
+.diceOverlay {
+  position: absolute;
+  bottom: 1rem;
+  right: 5rem;
+  z-index: 50;
+}
+
+/* Build menu overlay */
+.buildMenuOverlay {
+  position: absolute;
+  bottom: 1rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 50;
+}
+
+/* Right sidebar - player panels */
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  border-left: 1px solid rgba(255, 215, 0, 0.2);
+  background: rgba(26, 26, 46, 0.5);
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+/* =============================================================================
+   Bottom Area
+   ============================================================================= */
+
+.bottomArea {
+  grid-area: bottom;
+  display: grid;
+  grid-template-columns: 1fr 420px;
+  gap: 0;
+  height: 220px;
+  min-height: 220px;
+  max-height: 220px;
+  border-top: 1px solid rgba(255, 215, 0, 0.2);
+  background: rgba(26, 26, 46, 0.7);
+}
+
+/* Player hand + action bar area */
+.handArea {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 0.75rem 1rem;
+  overflow: hidden;
+}
+
+/* Players area - now in bottom section, fits 4 players comfortably */
+.playersArea {
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  gap: 0.75rem;
+  padding: 0.75rem;
+  border-left: 1px solid rgba(255, 215, 0, 0.2);
+  overflow-x: auto;
+  overflow-y: hidden;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 215, 0, 0.3) transparent;
+}
+
+/* Chat/Log area - legacy, keeping for reference */
+.chatArea {
+  display: flex;
+  flex-direction: column;
+  border-left: 1px solid rgba(255, 215, 0, 0.2);
+  overflow: hidden;
+}
+
+/* Chat tabs */
+.chatTabs {
+  display: flex;
+  flex-shrink: 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.chatTab {
+  flex: 1;
+  padding: 0.5rem 1rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.6);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.chatTab:hover {
+  color: rgba(255, 255, 255, 0.8);
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.activeTab {
+  color: #ffd700;
+  border-bottom: 2px solid #ffd700;
+}
+
+/* Chat content area */
+.chatContent {
+  flex: 1;
+  overflow: hidden;
+}
+
+/* Game log container */
+.logContainer {
+  height: 100%;
+  overflow-y: auto;
+  padding: 0.5rem;
+  font-size: 0.8125rem;
+}
+
+.logEntry {
+  display: flex;
+  gap: 0.5rem;
+  padding: 0.25rem 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.logTime {
+  color: rgba(255, 255, 255, 0.4);
+  font-size: 0.75rem;
+  flex-shrink: 0;
+}
+
+.logMessage {
+  color: rgba(255, 255, 255, 0.8);
+  line-height: 1.4;
+}
+
+/* =============================================================================
+   Error State
+   ============================================================================= */
+
+.errorContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 2rem;
+  background: linear-gradient(135deg, #1a1a2e 0%, #0f3460 100%);
+  color: #ffffff;
+  text-align: center;
+}
+
+.errorContainer h2 {
+  color: #ffd700;
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.errorContainer p {
+  color: rgba(255, 255, 255, 0.7);
+  margin-bottom: 1.5rem;
+}
+
+.homeButton {
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 500;
+  color: #1a1a2e;
+  background: #ffd700;
+  border: none;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.homeButton:hover {
+  background: #ffed4e;
+  transform: translateY(-2px);
+}
+
+/* =============================================================================
+   Overlay Container
+   ============================================================================= */
+
+.overlays {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 100;
+  pointer-events: none;
+}
+
+.overlays > * {
+  pointer-events: auto;
+}
+
+/* =============================================================================
+   Legacy Styles (kept for backwards compatibility)
+   ============================================================================= */
+
+.gameContainer {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #1a1a2e 0%, #0f3460 100%);
+  color: #ffffff;
+}
+
+.gameHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background: rgba(0, 0, 0, 0.3);
+  border-bottom: 1px solid rgba(255, 215, 0, 0.2);
+}
+
+.gameTitle {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #ffd700;
+  margin: 0;
+}
+
+.roomInfo {
+  font-size: 0.875rem;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.roomCode {
+  font-family: monospace;
+  font-weight: 600;
+  color: #ffd700;
+  letter-spacing: 0.1em;
+}
+
+.gameMain {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+}
+
+.gameFooter {
+  display: flex;
+  justify-content: center;
+  padding: 1rem 2rem;
+  background: rgba(0, 0, 0, 0.3);
+  border-top: 1px solid rgba(255, 215, 0, 0.2);
+}
+
+.leaveButton {
+  padding: 0.75rem 1.5rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #ffffff;
+  background: rgba(220, 53, 69, 0.8);
+  border: none;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.leaveButton:hover {
+  background: rgba(220, 53, 69, 1);
+}
+
+/* =============================================================================
+   Responsive Adjustments
+   ============================================================================= */
+
+/* Tablet - single column layout */
+@media (max-width: 1024px) {
+  .mainArea {
+    grid-template-columns: 1fr;
+  }
+
+  .sidebar {
+    position: fixed;
+    top: 56px;
+    right: 0;
+    width: 280px;
+    height: calc(100vh - 56px - 200px);
+    z-index: 90;
+    transform: translateX(100%);
+    transition: transform 0.3s ease;
+  }
+
+  .sidebar.open {
+    transform: translateX(0);
+  }
+
+  .bottomArea {
+    grid-template-columns: 1fr;
+    height: 180px;
+  }
+
+  .chatArea {
+    display: none;
+  }
+}
+
+/* Mobile - stacked layout */
+@media (max-width: 768px) {
+  .gamePage {
+    grid-template-rows: 48px 1fr 160px;
+  }
+
+  .header {
+    height: 48px;
+    min-height: 48px;
+  }
+
+  .bottomArea {
+    height: 160px;
+    min-height: 160px;
+    max-height: 160px;
+  }
+
+  .handArea {
+    padding: 0.5rem;
+  }
+
+  .boardContainer {
+    padding: 0.5rem;
+  }
+
+  .turnTimerOverlay {
+    top: 0.5rem;
+  }
+
+  .diceOverlay {
+    top: 0.5rem;
+    left: 0.5rem;
+  }
+}
+
+/* Small mobile - very compact */
+@media (max-width: 480px) {
+  .gamePage {
+    grid-template-rows: 44px 1fr 140px;
+  }
+
+  .header {
+    height: 44px;
+    min-height: 44px;
+  }
+
+  .bottomArea {
+    height: 140px;
+    min-height: 140px;
+    max-height: 140px;
+  }
+
+  .buildMenuOverlay {
+    bottom: 0.5rem;
+    left: 0;
+    right: 0;
+    transform: none;
+    padding: 0 0.5rem;
+  }
+}
+
+/* =============================================================================
+   Animation Classes
+   ============================================================================= */
+
+@keyframes slideInRight {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.6;
+  }
+}
+
+/* =============================================================================
+   Scrollbar Styling
+   ============================================================================= */
+
+.sidebar::-webkit-scrollbar,
+.logContainer::-webkit-scrollbar,
+.chatContent::-webkit-scrollbar {
+  width: 6px;
+}
+
+.sidebar::-webkit-scrollbar-track,
+.logContainer::-webkit-scrollbar-track,
+.chatContent::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.sidebar::-webkit-scrollbar-thumb,
+.logContainer::-webkit-scrollbar-thumb,
+.chatContent::-webkit-scrollbar-thumb {
+  background: rgba(255, 215, 0, 0.3);
+  border-radius: 3px;
+}
+
+.sidebar::-webkit-scrollbar-thumb:hover,
+.logContainer::-webkit-scrollbar-thumb:hover,
+.chatContent::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 215, 0, 0.5);
+}
+
+/* =============================================================================
+   Focus States for Accessibility
+   ============================================================================= */
+
+.chatTab:focus-visible,
+.homeButton:focus-visible {
+  outline: 2px solid #ffd700;
+  outline-offset: 2px;
+}
+
+/* =============================================================================
+   Print Styles
+   ============================================================================= */
+
+@media print {
+  .gamePage {
+    display: block;
+    height: auto;
+    overflow: visible;
+  }
+
+  .header,
+  .sidebar,
+  .bottomArea,
+  .overlays {
+    display: none;
+  }
+
+  .boardContainer {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+}

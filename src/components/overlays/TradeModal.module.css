@@ -1,0 +1,456 @@
+/* Trade Modal Styles */
+
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Tabs */
+.tabs {
+  display: flex;
+  gap: 4px;
+  background-color: #2a2a2a;
+  padding: 4px;
+  border-radius: 8px;
+}
+
+.tab {
+  flex: 1;
+  padding: 10px 16px;
+  border: none;
+  border-radius: 6px;
+  background-color: transparent;
+  color: #888888;
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.tab:hover {
+  color: #cccccc;
+  background-color: #333333;
+}
+
+.tabActive {
+  background-color: #404040;
+  color: #ffffff;
+}
+
+/* Tab Content */
+.tabContent {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Section Labels */
+.sectionLabel {
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: #888888;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Target Player Selection */
+.targetSection {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.targetOptions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.targetButton {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 12px;
+  border: 1px solid #4a4a4a;
+  border-radius: 6px;
+  background-color: #333333;
+  color: #dddddd;
+  font-size: 0.875rem;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.targetButton:hover {
+  background-color: #3a3a3a;
+  border-color: #5a5a5a;
+}
+
+.targetButtonActive {
+  background-color: #404040;
+  border-color: var(--player-color, #646cff);
+  color: #ffffff;
+}
+
+.playerColorDot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+/* Trade Columns Layout */
+.tradeColumns {
+  display: flex;
+  align-items: stretch;
+  gap: 16px;
+}
+
+.tradeColumn {
+  flex: 1;
+  background-color: #333333;
+  border-radius: 8px;
+  padding: 16px;
+}
+
+.columnTitle {
+  margin: 0 0 16px 0;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #ffffff;
+  text-align: center;
+}
+
+.divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #666666;
+  padding: 0 8px;
+}
+
+/* Bank Trade Sections */
+.bankTradeSection {
+  background-color: #333333;
+  border-radius: 8px;
+  padding: 16px;
+}
+
+.bankDivider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #666666;
+  padding: 8px 0;
+}
+
+/* Ports Section */
+.portsSection {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 12px 16px;
+  background-color: #2a2a2a;
+  border-radius: 8px;
+}
+
+/* Resource Button Grid */
+.resourceButtonGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.resourceButton {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding: 12px;
+  border: 1px solid #4a4a4a;
+  border-radius: 8px;
+  background-color: #2a2a2a;
+  color: #dddddd;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.resourceButton:hover:not(:disabled) {
+  background-color: #333333;
+  border-color: #5a5a5a;
+}
+
+.resourceButton:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.resourceButtonActive {
+  background-color: #404040;
+  border-color: #4caf50;
+  color: #ffffff;
+}
+
+.resourceButtonIcon {
+  width: 36px;
+  height: 36px;
+  object-fit: contain;
+}
+
+.resourceButtonLabel {
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+
+.resourceButtonRate {
+  font-size: 0.75rem;
+  color: #4caf50;
+  font-weight: 600;
+}
+
+.resourceButtonCount {
+  font-size: 0.75rem;
+  color: #888888;
+}
+
+/* Amount Section */
+.amountSection {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-top: 16px;
+  padding: 12px;
+  background-color: #2a2a2a;
+  border-radius: 6px;
+}
+
+.amountLabel {
+  font-size: 0.9rem;
+  color: #aaaaaa;
+}
+
+.amountControls {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.amountButton {
+  padding: 6px 12px;
+  border: 1px solid #4a4a4a;
+  border-radius: 4px;
+  background-color: #3a3a3a;
+  color: #ffffff;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.amountButton:hover:not(:disabled) {
+  background-color: #4a4a4a;
+}
+
+.amountButton:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.amountValue {
+  min-width: 40px;
+  text-align: center;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+.amountHint {
+  font-size: 0.9rem;
+  color: #4caf50;
+  font-weight: 500;
+}
+
+/* Trade Summary */
+.tradeSummary {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 12px 16px;
+  background-color: #2a4a2a;
+  border: 1px solid #4caf50;
+  border-radius: 8px;
+}
+
+.summaryLabel {
+  font-size: 0.9rem;
+  color: #aaaaaa;
+}
+
+.summaryArrow {
+  font-size: 0.85rem;
+  color: #666666;
+  font-weight: 500;
+}
+
+/* Submit Section */
+.submitSection {
+  display: flex;
+  justify-content: center;
+  padding-top: 8px;
+}
+
+.submitButton {
+  padding: 12px 32px;
+  border: none;
+  border-radius: 6px;
+  background-color: #4caf50;
+  color: #ffffff;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.submitButton:hover:not(:disabled) {
+  background-color: #45a049;
+}
+
+.submitButton:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Cancel Section */
+.cancelSection {
+  display: flex;
+  justify-content: center;
+  padding-top: 8px;
+  border-top: 1px solid #3a3a3a;
+}
+
+.cancelButton {
+  padding: 10px 24px;
+  border: 1px solid #4a4a4a;
+  border-radius: 6px;
+  background-color: transparent;
+  color: #aaaaaa;
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.cancelButton:hover {
+  background-color: #3a3a3a;
+  color: #ffffff;
+}
+
+/* Active Offers Section */
+.activeOffersSection {
+  margin-top: 16px;
+  padding: 16px;
+  background-color: #2a2a2a;
+  border-radius: 8px;
+}
+
+.activeOffersTitle {
+  margin: 0 0 12px 0;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #aaaaaa;
+}
+
+.activeOffersList {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.activeOfferItem {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 12px;
+  background-color: #333333;
+  border-radius: 6px;
+}
+
+.activeOfferArrow {
+  font-size: 0.85rem;
+  color: #666666;
+}
+
+.activeOfferStatus {
+  font-size: 0.8rem;
+  color: #888888;
+  margin-left: auto;
+}
+
+/* Error/Warning Messages */
+.errorMessage {
+  padding: 12px 16px;
+  background-color: rgba(220, 38, 38, 0.1);
+  border: 1px solid #dc2626;
+  border-radius: 6px;
+  color: #ef4444;
+  font-size: 0.9rem;
+  text-align: center;
+}
+
+.warningMessage {
+  padding: 12px 16px;
+  background-color: rgba(245, 158, 11, 0.1);
+  border: 1px solid #f59e0b;
+  border-radius: 6px;
+  color: #fbbf24;
+  font-size: 0.9rem;
+  text-align: center;
+}
+
+/* Counter-Offer Banner */
+.counterOfferBanner {
+  padding: 12px 16px;
+  background-color: rgba(100, 108, 255, 0.15);
+  border: 1px solid #646cff;
+  border-radius: 6px;
+  color: #a5aeff;
+  font-size: 0.9rem;
+  text-align: center;
+  font-weight: 500;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .tradeColumns {
+    flex-direction: column;
+  }
+
+  .divider {
+    transform: rotate(90deg);
+    padding: 8px 0;
+  }
+
+  .targetOptions {
+    flex-direction: column;
+  }
+
+  .targetButton {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .resourceButtonGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .amountSection {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .tradeSummary {
+    flex-wrap: wrap;
+  }
+}

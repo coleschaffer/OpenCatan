@@ -1,0 +1,172 @@
+/* ResourceSelector Component Styles */
+
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.label {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #888888;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 4px;
+}
+
+.resourceList {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+/* Individual Resource Row */
+.resourceRow {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 12px;
+  background-color: #2a2a2a;
+  border-radius: 6px;
+  border-left: 3px solid var(--resource-color, #666666);
+  transition: background-color 0.15s ease;
+}
+
+.resourceRow:hover {
+  background-color: #333333;
+}
+
+.resourceIcon {
+  width: 28px;
+  height: 28px;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+.resourceLabel {
+  flex: 1;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: #dddddd;
+}
+
+.available {
+  font-size: 0.8rem;
+  color: #888888;
+  margin-right: 8px;
+}
+
+/* Counter Controls */
+.controls {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.controlButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  border: 1px solid #4a4a4a;
+  border-radius: 4px;
+  background-color: #3a3a3a;
+  color: #ffffff;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  user-select: none;
+}
+
+.controlButton:hover:not(:disabled) {
+  background-color: #4a4a4a;
+  border-color: #5a5a5a;
+}
+
+.controlButton:active:not(:disabled) {
+  transform: scale(0.95);
+}
+
+.controlButton:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+.value {
+  min-width: 28px;
+  text-align: center;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #888888;
+  transition: color 0.15s ease;
+}
+
+.value.hasValue {
+  color: #ffffff;
+}
+
+/* Total Counter */
+.totalCounter {
+  text-align: center;
+  padding: 8px;
+  background-color: #333333;
+  border-radius: 4px;
+  font-size: 0.85rem;
+  color: #aaaaaa;
+}
+
+/* Compact Mode */
+.container.compact .resourceList {
+  gap: 4px;
+}
+
+.resourceRow.compact {
+  padding: 6px 10px;
+  gap: 8px;
+}
+
+.resourceRow.compact .resourceIcon {
+  width: 22px;
+  height: 22px;
+}
+
+.resourceRow.compact .resourceLabel {
+  font-size: 0.8rem;
+}
+
+.resourceRow.compact .controlButton {
+  width: 24px;
+  height: 24px;
+  font-size: 0.9rem;
+}
+
+.resourceRow.compact .value {
+  min-width: 22px;
+  font-size: 0.85rem;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 480px) {
+  .resourceRow {
+    padding: 6px 10px;
+    gap: 8px;
+  }
+
+  .resourceIcon {
+    width: 24px;
+    height: 24px;
+  }
+
+  .resourceLabel {
+    font-size: 0.85rem;
+  }
+
+  .controlButton {
+    width: 26px;
+    height: 26px;
+  }
+}

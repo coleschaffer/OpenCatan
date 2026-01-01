@@ -1,0 +1,82 @@
+/* Building.module.css - Styles for settlement and city pieces */
+
+.building {
+  filter: drop-shadow(1px 2px 2px rgba(0, 0, 0, 0.3));
+  transition: filter 0.15s ease;
+  pointer-events: none; /* Prevent hover issues - click handled by parent */
+}
+
+.buildingImage {
+  pointer-events: none;
+}
+
+.shadow {
+  pointer-events: none;
+}
+
+/* Settlement piece */
+.settlement {
+  /* No transform animations to avoid SVG conflicts */
+}
+
+/* City piece */
+.city {
+  /* No transform animations to avoid SVG conflicts */
+}
+
+/* Placement animation */
+@keyframes buildingPlace {
+  0% {
+    transform: scale(0) translateY(-20px);
+    opacity: 0;
+  }
+  50% {
+    transform: scale(1.2) translateY(0);
+  }
+  100% {
+    transform: scale(1) translateY(0);
+    opacity: 1;
+  }
+}
+
+.buildingNew {
+  animation: buildingPlace 0.4s ease-out forwards;
+}
+
+/* Upgrade animation (settlement to city) */
+@keyframes buildingUpgrade {
+  0% {
+    transform: scale(1);
+  }
+  25% {
+    transform: scale(0.8);
+  }
+  50% {
+    transform: scale(1.3);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.buildingUpgrade {
+  animation: buildingUpgrade 0.5s ease-in-out;
+}
+
+/* Metropolis indicator (C&K) */
+.metropolis {
+  /* Additional styling for metropolis indicator */
+}
+
+/* Wall indicator (C&K) */
+.wall {
+  /* Additional styling for city walls */
+}
+
+/* Selection highlight */
+.selected .settlement path,
+.selected .city path,
+.selected .city rect {
+  stroke: #ffd700;
+  stroke-width: 3px;
+}

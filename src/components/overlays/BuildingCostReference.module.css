@@ -1,0 +1,248 @@
+/* Toggle Button */
+.toggleButton {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  background-color: #3a3a3a;
+  color: #dddddd;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  transition: all 0.2s ease;
+  z-index: 100;
+}
+
+.toggleButton:hover {
+  background-color: #4a4a4a;
+  transform: scale(1.05);
+}
+
+.toggleButtonActive {
+  background-color: #646cff;
+  color: #ffffff;
+}
+
+/* Reference Card */
+.referenceCard {
+  position: fixed;
+  bottom: 80px;
+  right: 20px;
+  width: 320px;
+  max-height: 70vh;
+  background-color: #2a2a2a;
+  border-radius: 12px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+  overflow: hidden;
+  z-index: 100;
+  animation: slideUp 0.2s ease-out;
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Header */
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 16px;
+  background-color: #333333;
+  border-bottom: 1px solid #3a3a3a;
+}
+
+.title {
+  margin: 0;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+.closeButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  border: none;
+  border-radius: 4px;
+  background-color: transparent;
+  color: #888888;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.closeButton:hover {
+  background-color: #3a3a3a;
+  color: #ffffff;
+}
+
+/* Content */
+.content {
+  padding: 12px;
+  max-height: 50vh;
+  overflow-y: auto;
+}
+
+/* Section */
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* Divider */
+.divider {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 12px 0;
+  color: #666666;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.divider::before,
+.divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background-color: #3a3a3a;
+}
+
+/* Building Row */
+.buildingRow {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px;
+  background-color: #333333;
+  border-radius: 8px;
+  transition: background-color 0.15s;
+}
+
+.buildingRow:hover {
+  background-color: #3a3a3a;
+}
+
+.buildingIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  flex-shrink: 0;
+}
+
+.buildingInfo {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.buildingName {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #ffffff;
+}
+
+.buildingDescription {
+  font-size: 0.7rem;
+  color: #666666;
+}
+
+/* Cost List */
+.costList {
+  display: flex;
+  gap: 4px;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+.resourceBadge {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  padding: 4px 6px;
+  background-color: #2a2a2a;
+  border-radius: 4px;
+}
+
+.resourceIcon {
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
+}
+
+.resourceCount {
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+/* Legend */
+.legend {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px;
+  background-color: #252525;
+  border-top: 1px solid #3a3a3a;
+}
+
+.legendLabel {
+  font-size: 0.7rem;
+  color: #666666;
+  width: 100%;
+}
+
+.legendItem {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.legendIcon {
+  width: 16px;
+  height: 16px;
+  object-fit: contain;
+}
+
+.legendName {
+  font-size: 0.65rem;
+  color: #888888;
+}
+
+/* Responsive */
+@media (max-width: 400px) {
+  .referenceCard {
+    left: 20px;
+    right: 20px;
+    width: auto;
+    bottom: 70px;
+  }
+
+  .toggleButton {
+    width: 40px;
+    height: 40px;
+  }
+}

@@ -1,0 +1,270 @@
+/* Dev Card Modal Container */
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* Stats Header */
+.statsHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 14px;
+  background-color: #333333;
+  border-radius: 8px;
+}
+
+.totalCards {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: #dddddd;
+}
+
+.playedBadge {
+  font-size: 0.75rem;
+  padding: 4px 10px;
+  background-color: #7f1d1d;
+  color: #fecaca;
+  border-radius: 4px;
+}
+
+/* Empty State */
+.emptyState {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 40px 20px;
+  text-align: center;
+}
+
+.emptyState p {
+  margin: 0;
+  font-size: 1rem;
+  color: #888888;
+}
+
+.emptyHint {
+  font-size: 0.85rem !important;
+  color: #666666 !important;
+}
+
+/* Cards Grid */
+.cardsGrid {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.cardTypeGroup {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+/* Card Button */
+.cardButton {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  min-width: 100px;
+  padding: 16px 12px;
+  border: 2px solid #3a3a3a;
+  border-radius: 10px;
+  background-color: #2a2a2a;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  position: relative;
+}
+
+.cardButton:hover:not(.cardButtonDisabled) {
+  background-color: #333333;
+  border-color: var(--card-color);
+  transform: translateY(-2px);
+}
+
+.cardButtonSelected {
+  background-color: #333333;
+  border-color: var(--card-color) !important;
+  box-shadow: 0 0 16px rgba(0, 0, 0, 0.3);
+}
+
+.cardButtonDisabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.cardButtonNew {
+  animation: newCardPulse 2s ease-in-out infinite;
+}
+
+@keyframes newCardPulse {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(76, 175, 80, 0);
+  }
+  50% {
+    box-shadow: 0 0 12px 2px rgba(76, 175, 80, 0.3);
+  }
+}
+
+/* Card Icon */
+.cardIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 56px;
+  background-color: rgba(255, 255, 255, 0.05);
+  border-radius: 8px;
+}
+
+/* Card Info */
+.cardInfo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.cardName {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #ffffff;
+  text-align: center;
+}
+
+.newBadge {
+  font-size: 0.65rem;
+  font-weight: 700;
+  padding: 2px 6px;
+  background-color: #4caf50;
+  color: #ffffff;
+  border-radius: 4px;
+  animation: pulse 1s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
+
+.disabledReason {
+  position: absolute;
+  bottom: 4px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 0.65rem;
+  color: #888888;
+  white-space: nowrap;
+}
+
+/* Selected Detail */
+.selectedDetail {
+  padding: 16px;
+  background-color: #333333;
+  border-radius: 8px;
+  border-left: 4px solid var(--card-color);
+  animation: slideIn 0.2s ease-out;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.detailHeader {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.detailName {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+.detailDescription {
+  margin: 0;
+  font-size: 0.9rem;
+  color: #aaaaaa;
+  line-height: 1.5;
+}
+
+/* Actions */
+.actions {
+  display: flex;
+  gap: 12px;
+  padding-top: 8px;
+  border-top: 1px solid #3a3a3a;
+}
+
+.cancelButton,
+.playButton {
+  flex: 1;
+  padding: 12px 20px;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.cancelButton {
+  border: 1px solid #4a4a4a;
+  background-color: transparent;
+  color: #aaaaaa;
+}
+
+.cancelButton:hover {
+  background-color: #3a3a3a;
+  color: #ffffff;
+}
+
+.playButton {
+  border: none;
+  background-color: #4caf50;
+  color: #ffffff;
+}
+
+.playButton:hover:not(:disabled) {
+  background-color: #45a049;
+}
+
+.playButton:disabled {
+  background-color: #4a4a4a;
+  color: #888888;
+  cursor: not-allowed;
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+  .cardsGrid {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .cardTypeGroup {
+    justify-content: center;
+    width: 100%;
+  }
+
+  .cardButton {
+    min-width: calc(50% - 4px);
+    max-width: calc(50% - 4px);
+  }
+}

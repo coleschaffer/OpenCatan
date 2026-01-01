@@ -1,0 +1,220 @@
+/* Discard Waiting Container */
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* Timer */
+.timer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px 20px;
+  background-color: #333333;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #dddddd;
+}
+
+.timerWarning {
+  background-color: #7f1d1d;
+  color: #fecaca;
+  animation: pulse 0.5s ease-in-out infinite;
+}
+
+.timerWarnText {
+  font-size: 0.8rem;
+  font-weight: 500;
+  margin-left: 4px;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
+
+/* Instructions */
+.instructions {
+  text-align: center;
+}
+
+.mainText {
+  margin: 0 0 4px 0;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #ef4444;
+}
+
+.subText {
+  margin: 0;
+  font-size: 0.9rem;
+  color: #888888;
+}
+
+/* Progress */
+.progress {
+  position: relative;
+  height: 28px;
+  background-color: #333333;
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.progressBar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  background: linear-gradient(90deg, #4caf50 0%, #66bb6a 100%);
+  transition: width 0.3s ease;
+}
+
+.progressText {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #ffffff;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+  z-index: 1;
+}
+
+/* Players List */
+.playersList {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.playerRow {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  background-color: #2a2a2a;
+  border: 1px solid #3a3a3a;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+}
+
+.playerRowComplete {
+  background-color: #1a2a1a;
+  border-color: #4caf50;
+}
+
+.playerColorBadge {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.playerName {
+  flex: 1;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: #ffffff;
+}
+
+.discardInfo {
+  font-size: 0.8rem;
+}
+
+.discardPending {
+  color: #fbbf24;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.discardPending::before {
+  content: '';
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: #fbbf24;
+  animation: blink 1s ease-in-out infinite;
+}
+
+@keyframes blink {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.3;
+  }
+}
+
+.discardComplete {
+  color: #4caf50;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.cardCount {
+  font-size: 0.75rem;
+  color: #666666;
+  padding: 2px 8px;
+  background-color: #333333;
+  border-radius: 4px;
+}
+
+/* All Complete */
+.allComplete {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 16px;
+  background-color: #1a2a1a;
+  border: 1px solid #4caf50;
+  border-radius: 8px;
+  color: #4caf50;
+  font-weight: 600;
+  animation: fadeIn 0.3s ease-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Info Text */
+.infoText {
+  margin: 0;
+  font-size: 0.75rem;
+  color: #666666;
+  text-align: center;
+  font-style: italic;
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+  .playerRow {
+    flex-wrap: wrap;
+  }
+
+  .cardCount {
+    order: 3;
+    margin-left: 24px;
+    margin-top: 4px;
+  }
+}

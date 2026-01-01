@@ -1,0 +1,233 @@
+.diceDisplay {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 20px;
+  background: rgba(30, 30, 30, 0.95);
+  border-radius: 16px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+  animation: fadeIn 0.2s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.diceDisplay.animating {
+  animation: shake 0.1s ease-in-out infinite;
+}
+
+@keyframes shake {
+  0%, 100% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-2px) rotate(-1deg);
+  }
+  75% {
+    transform: translateX(2px) rotate(1deg);
+  }
+}
+
+.diceContainer {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.die {
+  position: relative;
+  width: 56px;
+  height: 56px;
+  background: linear-gradient(145deg, #fff, #e0e0e0);
+  border-radius: 10px;
+  box-shadow:
+    2px 2px 4px rgba(0, 0, 0, 0.3),
+    inset 1px 1px 2px rgba(255, 255, 255, 0.8);
+  transition: transform 0.15s ease;
+}
+
+.diceDisplay.animating .die {
+  animation: dieRoll 0.1s ease-in-out infinite;
+}
+
+@keyframes dieRoll {
+  0%, 100% {
+    transform: rotate(0deg);
+  }
+  25% {
+    transform: rotate(-5deg);
+  }
+  75% {
+    transform: rotate(5deg);
+  }
+}
+
+.die.dieRobber {
+  background: linear-gradient(145deg, #ffcdd2, #ef9a9a);
+}
+
+.diceFace {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  gap: 2px;
+  padding: 8px;
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+}
+
+.dotPosition {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.dotPosition.dot::after {
+  content: '';
+  width: 10px;
+  height: 10px;
+  background: #333;
+  border-radius: 50%;
+  box-shadow: inset 1px 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.dieValue {
+  position: absolute;
+  bottom: -20px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 12px;
+  font-weight: 600;
+  color: #888;
+  display: none;
+}
+
+.eventDie {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  width: 56px;
+  height: 56px;
+  background: #2a2a2a;
+  border: 3px solid var(--event-color, #666);
+  border-radius: 10px;
+}
+
+.eventIcon {
+  font-size: 24px;
+  line-height: 1;
+}
+
+.eventLabel {
+  font-size: 9px;
+  font-weight: 600;
+  color: var(--event-color, #888);
+  text-transform: uppercase;
+}
+
+.total {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.totalValue {
+  font-size: 36px;
+  font-weight: 800;
+  color: #fff;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.total.totalRobber .totalValue {
+  color: #f44336;
+  animation: robberPulse 0.5s ease-in-out infinite;
+}
+
+@keyframes robberPulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+}
+
+.robberLabel {
+  font-size: 14px;
+  font-weight: 700;
+  color: #f44336;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  animation: robberFlash 0.3s ease-in-out infinite;
+}
+
+@keyframes robberFlash {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+/* Mobile styles */
+@media (max-width: 768px) {
+  .diceDisplay {
+    padding: 16px;
+    border-radius: 12px;
+    gap: 10px;
+  }
+
+  .diceContainer {
+    gap: 12px;
+  }
+
+  .die {
+    width: 48px;
+    height: 48px;
+    border-radius: 8px;
+  }
+
+  .diceFace {
+    padding: 6px;
+  }
+
+  .dotPosition.dot::after {
+    width: 8px;
+    height: 8px;
+  }
+
+  .eventDie {
+    width: 48px;
+    height: 48px;
+  }
+
+  .eventIcon {
+    font-size: 20px;
+  }
+
+  .eventLabel {
+    font-size: 8px;
+  }
+
+  .totalValue {
+    font-size: 28px;
+  }
+
+  .robberLabel {
+    font-size: 12px;
+  }
+}

@@ -1,0 +1,228 @@
+.resourceHand {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 16px;
+  background: #1e1e1e;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.sectionHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.sectionTitle {
+  font-size: 12px;
+  font-weight: 600;
+  color: #888;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin: 0;
+}
+
+.totalCount {
+  font-size: 11px;
+  color: #666;
+}
+
+.resourceGrid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 8px;
+}
+
+.resourceCard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 12px 8px;
+  background: #2a2a2a;
+  border: 2px solid transparent;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.resourceCard:hover:not(:disabled) {
+  background: #333;
+  border-color: var(--resource-color, #666);
+  transform: translateY(-2px);
+}
+
+.resourceCard:focus {
+  outline: 2px solid var(--resource-color, #666);
+  outline-offset: 2px;
+}
+
+.resourceCard.empty {
+  opacity: 0.4;
+  cursor: default;
+}
+
+.resourceCard:disabled {
+  cursor: default;
+}
+
+.resourceIcon {
+  font-size: 24px;
+  line-height: 1;
+}
+
+.resourceCount {
+  font-size: 18px;
+  font-weight: 700;
+  color: #fff;
+}
+
+.resourceLabel {
+  font-size: 10px;
+  color: #888;
+  text-transform: uppercase;
+}
+
+.devCardList {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.devCard {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 10px 12px;
+  background: #2a2a2a;
+  border: 2px solid #444;
+  border-left: 4px solid var(--card-color, #666);
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-align: left;
+}
+
+.devCard:hover:not(:disabled) {
+  background: #333;
+  border-color: var(--card-color, #666);
+}
+
+.devCard:focus {
+  outline: 2px solid var(--card-color, #666);
+  outline-offset: 2px;
+}
+
+.devCard.playable {
+  border-color: var(--card-color, #666);
+  box-shadow: 0 0 8px rgba(255, 255, 255, 0.1);
+}
+
+.devCard.playable:hover {
+  transform: translateX(4px);
+}
+
+.devCard.newCard {
+  animation: cardPulse 2s ease-in-out infinite;
+}
+
+@keyframes cardPulse {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(255, 215, 0, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 8px 4px rgba(255, 215, 0, 0.3);
+  }
+}
+
+.devCard:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
+.devCardContent {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.devCardName {
+  font-size: 13px;
+  font-weight: 600;
+  color: #fff;
+}
+
+.newBadge {
+  font-size: 9px;
+  padding: 2px 6px;
+  background: #ffd700;
+  color: #000;
+  border-radius: 3px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.playHint {
+  font-size: 10px;
+  color: var(--card-color, #888);
+  margin-top: 2px;
+}
+
+.emptyMessage {
+  font-size: 12px;
+  color: #666;
+  font-style: italic;
+  margin: 0;
+  padding: 8px 0;
+}
+
+/* Mobile styles */
+@media (max-width: 768px) {
+  .resourceHand {
+    padding: 12px;
+    gap: 12px;
+    border-radius: 8px;
+  }
+
+  .resourceGrid {
+    gap: 6px;
+  }
+
+  .resourceCard {
+    padding: 10px 6px;
+  }
+
+  .resourceIcon {
+    font-size: 20px;
+  }
+
+  .resourceCount {
+    font-size: 16px;
+  }
+
+  .resourceLabel {
+    font-size: 9px;
+  }
+
+  .devCard {
+    padding: 8px 10px;
+  }
+
+  .devCardName {
+    font-size: 12px;
+  }
+}
+
+/* Very small screens - stack resources in 3 columns */
+@media (max-width: 480px) {
+  .resourceGrid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}

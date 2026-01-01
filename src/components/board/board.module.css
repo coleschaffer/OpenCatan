@@ -1,0 +1,491 @@
+/**
+ * Board Component Styles for OpenCatan
+ *
+ * This stylesheet contains all styles for the game board components:
+ * - GameBoard container
+ * - HexTile terrain colors
+ * - Vertex/Edge placement indicators
+ * - Build mode states
+ * - Animations and hover effects
+ */
+
+/* ============================================================
+   Game Board Container
+   ============================================================ */
+
+.gameBoardContainer {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-height: 500px;
+  display: flex;
+  flex-direction: column;
+  background: linear-gradient(135deg, #0d47a1 0%, #1565c0 50%, #1976d2 100%);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow:
+    0 4px 20px rgba(0, 0, 0, 0.3),
+    inset 0 0 100px rgba(0, 0, 0, 0.2);
+}
+
+.gameBoardContainer.disabled {
+  pointer-events: none;
+  opacity: 0.7;
+}
+
+/* Build mode data attribute styling */
+.gameBoardContainer[data-build-mode="settlement"],
+.gameBoardContainer[data-build-mode="city"],
+.gameBoardContainer[data-build-mode="road"],
+.gameBoardContainer[data-build-mode="ship"] {
+  cursor: pointer;
+}
+
+.gameBoardContainer[data-build-mode="robber"],
+.gameBoardContainer[data-build-mode="pirate"] {
+  cursor: crosshair;
+}
+
+/* ============================================================
+   Build Mode Indicator
+   ============================================================ */
+
+.buildModeIndicator {
+  position: absolute;
+  top: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 20px;
+  background: rgba(0, 0, 0, 0.8);
+  border-radius: 25px;
+  color: white;
+  font-size: 14px;
+  font-weight: 500;
+  z-index: 100;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  animation: slideDown 0.3s ease-out;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+}
+
+.buildModeIcon {
+  font-size: 20px;
+}
+
+.buildModeText {
+  white-space: nowrap;
+}
+
+/* ============================================================
+   Board Legend
+   ============================================================ */
+
+.boardLegend {
+  position: absolute;
+  bottom: 16px;
+  left: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 12px;
+  background: rgba(0, 0, 0, 0.7);
+  border-radius: 8px;
+  color: white;
+  font-size: 11px;
+  z-index: 50;
+  opacity: 0.8;
+  transition: opacity 0.2s ease;
+}
+
+.boardLegend:hover {
+  opacity: 1;
+}
+
+.legendItem {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.legendColor {
+  width: 16px;
+  height: 16px;
+  border-radius: 3px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+/* ============================================================
+   Terrain Colors
+   ============================================================ */
+
+.terrainHills {
+  fill: #c67c4e;
+}
+
+.terrainForest {
+  fill: #2e7d32;
+}
+
+.terrainMountains {
+  fill: #78909c;
+}
+
+.terrainFields {
+  fill: #fdd835;
+}
+
+.terrainPasture {
+  fill: #8bc34a;
+}
+
+.terrainDesert {
+  fill: #e8d4a8;
+}
+
+.terrainWater {
+  fill: #1565c0;
+}
+
+.terrainGold {
+  fill: #ffc107;
+}
+
+.terrainFog {
+  fill: #90a4ae;
+}
+
+/* ============================================================
+   Hex Tile Styles
+   ============================================================ */
+
+.hexTile {
+  transition: filter 0.15s ease;
+}
+
+.hexTile.clickable {
+  cursor: pointer;
+}
+
+.hexTile.clickable:hover .hexPolygon {
+  filter: brightness(1.1);
+  stroke-width: 3px;
+  stroke: #fff;
+}
+
+.hexPolygon {
+  transition: filter 0.15s ease, stroke-width 0.15s ease;
+}
+
+/* Valid placement glow for hexes */
+.hexTile.validPlacement .hexPolygon {
+  animation: validHexPulse 1.5s ease-in-out infinite;
+}
+
+@keyframes validHexPulse {
+  0%, 100% {
+    stroke: #fff;
+    stroke-width: 2px;
+    filter: brightness(1);
+  }
+  50% {
+    stroke: #4caf50;
+    stroke-width: 4px;
+    filter: brightness(1.15);
+  }
+}
+
+/* ============================================================
+   Vertex Styles
+   ============================================================ */
+
+.vertex {
+  cursor: default;
+}
+
+.vertex.clickable {
+  cursor: pointer;
+}
+
+.vertexDot {
+  fill: rgba(0, 0, 0, 0.1);
+  transition: fill 0.15s ease, r 0.15s ease;
+}
+
+.vertexDot:hover {
+  fill: rgba(0, 0, 0, 0.3);
+}
+
+.validPlacementIndicator {
+  animation: vertexPulse 1s ease-in-out infinite;
+}
+
+@keyframes vertexPulse {
+  0%, 100% {
+    r: 6;
+    opacity: 0.6;
+  }
+  50% {
+    r: 8;
+    opacity: 0.9;
+  }
+}
+
+/* ============================================================
+   Edge Styles
+   ============================================================ */
+
+.edge {
+  cursor: default;
+}
+
+.edge.clickable {
+  cursor: pointer;
+}
+
+.edgeLine {
+  stroke: rgba(0, 0, 0, 0.1);
+  stroke-width: 1;
+  transition: stroke 0.15s ease, stroke-width 0.15s ease;
+}
+
+.edge.clickable:hover .edgeLine {
+  stroke: rgba(0, 0, 0, 0.3);
+  stroke-width: 2;
+}
+
+.validEdgeIndicator {
+  animation: edgePulse 1s ease-in-out infinite;
+}
+
+@keyframes edgePulse {
+  0%, 100% {
+    fill-opacity: 0.3;
+  }
+  50% {
+    fill-opacity: 0.6;
+  }
+}
+
+/* ============================================================
+   Building Styles
+   ============================================================ */
+
+.building {
+  filter: drop-shadow(1px 2px 2px rgba(0, 0, 0, 0.3));
+  transition: transform 0.15s ease;
+}
+
+.building:hover {
+  transform: scale(1.1);
+}
+
+.settlement {
+  /* Settlement-specific styles */
+}
+
+.city {
+  /* City-specific styles */
+}
+
+/* ============================================================
+   Road Styles
+   ============================================================ */
+
+.roadPiece {
+  filter: drop-shadow(1px 1px 1px rgba(0, 0, 0, 0.3));
+}
+
+/* ============================================================
+   Robber Styles
+   ============================================================ */
+
+.robber {
+  filter: drop-shadow(2px 3px 3px rgba(0, 0, 0, 0.4));
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.robber:hover {
+  transform: scale(1.1);
+}
+
+.robberGlow {
+  animation: robberGlow 2s ease-in-out infinite;
+}
+
+@keyframes robberGlow {
+  0%, 100% {
+    opacity: 0.3;
+  }
+  50% {
+    opacity: 0.6;
+  }
+}
+
+/* ============================================================
+   Number Token Styles
+   ============================================================ */
+
+.numberToken {
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.2));
+}
+
+.numberToken.redNumber text {
+  fill: #c62828;
+}
+
+/* ============================================================
+   Player Colors
+   ============================================================ */
+
+.playerRed {
+  fill: #e53935;
+}
+
+.playerBlue {
+  fill: #1e88e5;
+}
+
+.playerOrange {
+  fill: #fb8c00;
+}
+
+.playerWhite {
+  fill: #f5f5f5;
+}
+
+.playerGreen {
+  fill: #43a047;
+}
+
+.playerPurple {
+  fill: #8e24aa;
+}
+
+.playerBlack {
+  fill: #424242;
+}
+
+.playerBronze {
+  fill: #cd7f32;
+}
+
+.playerGold {
+  fill: #ffd700;
+}
+
+.playerSilver {
+  fill: #c0c0c0;
+}
+
+.playerPink {
+  fill: #f48fb1;
+}
+
+.playerMysticblue {
+  fill: #4fc3f7;
+}
+
+/* ============================================================
+   Hover States
+   ============================================================ */
+
+.hoverHighlight {
+  pointer-events: none;
+}
+
+/* ============================================================
+   Animations
+   ============================================================ */
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    transform: scale(0);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+}
+
+/* Building placement animation */
+.buildingPlaced {
+  animation: scaleIn 0.3s ease-out, bounce 0.4s ease-in-out 0.3s;
+}
+
+/* Road placement animation */
+.roadPlaced {
+  animation: fadeIn 0.2s ease-out;
+}
+
+/* ============================================================
+   Responsive Styles
+   ============================================================ */
+
+@media (max-width: 768px) {
+  .buildModeIndicator {
+    padding: 8px 16px;
+    font-size: 12px;
+    top: 10px;
+  }
+
+  .buildModeIcon {
+    font-size: 16px;
+  }
+
+  .boardLegend {
+    display: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .gameBoardContainer {
+    min-height: 350px;
+  }
+
+  .buildModeIndicator {
+    font-size: 11px;
+    padding: 6px 12px;
+  }
+}
+
+/* ============================================================
+   Print Styles
+   ============================================================ */
+
+@media print {
+  .buildModeIndicator,
+  .boardLegend,
+  .zoomControls {
+    display: none;
+  }
+}

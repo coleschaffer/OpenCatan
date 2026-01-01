@@ -1,0 +1,230 @@
+/* Discard Modal Container */
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* Timer */
+.timer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px 20px;
+  background-color: #333333;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #dddddd;
+}
+
+.timerWarning {
+  background-color: #7f1d1d;
+  color: #fecaca;
+  animation: pulse 0.5s ease-in-out infinite;
+}
+
+.timerWarnText {
+  font-size: 0.8rem;
+  font-weight: 500;
+  margin-left: 4px;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
+
+/* Instructions */
+.instructions {
+  text-align: center;
+}
+
+.mainText {
+  margin: 0;
+  font-size: 1rem;
+  color: #dddddd;
+}
+
+.mainText strong {
+  color: #ef4444;
+  font-weight: 700;
+}
+
+/* Progress */
+.progress {
+  position: relative;
+  height: 32px;
+  background-color: #333333;
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.progressBar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  background: linear-gradient(90deg, #4caf50 0%, #66bb6a 100%);
+  transition: width 0.2s ease;
+}
+
+.progressText {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #ffffff;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+  z-index: 1;
+}
+
+/* Resource List */
+.resourceList {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* Resource Row */
+.resourceRow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 12px;
+  background-color: #2a2a2a;
+  border: 2px solid transparent;
+  border-radius: 8px;
+  transition: all 0.15s ease;
+}
+
+.resourceRowSelected {
+  background-color: #3a2a2a;
+  border-color: #ef4444;
+}
+
+.resourceIcon {
+  width: 36px;
+  height: 36px;
+  object-fit: contain;
+}
+
+.resourceLabel {
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: #ffffff;
+  min-width: 70px;
+}
+
+.inHand {
+  flex: 1;
+  font-size: 0.8rem;
+  color: #666666;
+}
+
+/* Selector */
+.selector {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.selectorButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border: 1px solid #4a4a4a;
+  border-radius: 6px;
+  background-color: #3a3a3a;
+  color: #ffffff;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.selectorButton:hover:not(:disabled) {
+  background-color: #4a4a4a;
+  border-color: #5a5a5a;
+}
+
+.selectorButton:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.selectorValue {
+  min-width: 32px;
+  text-align: center;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #888888;
+}
+
+.selectorValueActive {
+  color: #ef4444;
+}
+
+/* Empty Hand */
+.emptyHand {
+  text-align: center;
+  padding: 24px;
+  background-color: #333333;
+  border-radius: 8px;
+  color: #888888;
+}
+
+/* Actions */
+.actions {
+  padding-top: 8px;
+}
+
+.submitButton {
+  width: 100%;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 6px;
+  background-color: #4caf50;
+  color: #ffffff;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.submitButton:hover:not(:disabled) {
+  background-color: #45a049;
+}
+
+.submitButton:disabled {
+  background-color: #4a4a4a;
+  color: #888888;
+  cursor: not-allowed;
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+  .resourceRow {
+    flex-wrap: wrap;
+  }
+
+  .inHand {
+    order: 3;
+    width: 100%;
+    margin-top: 4px;
+  }
+
+  .selector {
+    margin-left: auto;
+  }
+}

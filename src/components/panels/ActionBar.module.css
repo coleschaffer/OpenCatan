@@ -1,0 +1,227 @@
+.actionBar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 12px 20px;
+  background: #1e1e1e;
+  border-radius: 12px;
+  box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.phaseSection {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.phaseLabel {
+  font-size: 14px;
+  font-weight: 600;
+  color: #888;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.phaseLabel.myTurn {
+  color: #ffd700;
+}
+
+.timer {
+  font-size: 16px;
+  font-weight: 700;
+  color: #fff;
+  padding: 4px 10px;
+  background: #333;
+  border-radius: 6px;
+  font-family: 'Roboto Mono', monospace;
+  min-width: 50px;
+  text-align: center;
+}
+
+.timer.timerLow {
+  color: #ff9800;
+  background: rgba(255, 152, 0, 0.2);
+}
+
+.timer.timerCritical {
+  color: #f44336;
+  background: rgba(244, 67, 54, 0.2);
+  animation: timerFlash 0.5s ease-in-out infinite;
+}
+
+@keyframes timerFlash {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.6;
+  }
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex: 1;
+  justify-content: flex-end;
+}
+
+.actionButton {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px;
+  background: #2a2a2a;
+  border: 2px solid #444;
+  border-radius: 8px;
+  color: #fff;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.actionButton:hover:not(:disabled) {
+  background: #333;
+  border-color: #666;
+  transform: translateY(-1px);
+}
+
+.actionButton:focus {
+  outline: 2px solid #ffd700;
+  outline-offset: 2px;
+}
+
+.actionButton:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.actionButton.primary {
+  background: #1565c0;
+  border-color: #1976d2;
+}
+
+.actionButton.primary:hover:not(:disabled) {
+  background: #1976d2;
+  border-color: #2196f3;
+}
+
+.actionButton.endTurn {
+  background: #2e7d32;
+  border-color: #388e3c;
+}
+
+.actionButton.endTurn:hover:not(:disabled) {
+  background: #388e3c;
+  border-color: #43a047;
+}
+
+.actionButton.cancel {
+  background: #c62828;
+  border-color: #d32f2f;
+}
+
+.actionButton.cancel:hover:not(:disabled) {
+  background: #d32f2f;
+  border-color: #e53935;
+}
+
+.actionButton.disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.actionButton svg {
+  flex-shrink: 0;
+}
+
+.shortcut {
+  font-size: 10px;
+  padding: 2px 5px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 3px;
+  font-family: 'Roboto Mono', monospace;
+  color: #888;
+  margin-left: 4px;
+}
+
+.waitingIndicator {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 16px;
+  color: #888;
+  font-size: 13px;
+}
+
+.spinner {
+  width: 16px;
+  height: 16px;
+  border: 2px solid #444;
+  border-top-color: #888;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Mobile styles */
+@media (max-width: 768px) {
+  .actionBar {
+    flex-direction: column;
+    gap: 12px;
+    padding: 12px 16px;
+    border-radius: 8px;
+  }
+
+  .phaseSection {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .actions {
+    width: 100%;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .actionButton {
+    padding: 8px 12px;
+    font-size: 12px;
+    flex: 1;
+    min-width: 80px;
+    max-width: 120px;
+    justify-content: center;
+  }
+
+  .actionButton span {
+    display: none;
+  }
+
+  .actionButton svg {
+    width: 20px;
+    height: 20px;
+  }
+
+  .shortcut {
+    display: none;
+  }
+
+  .waitingIndicator {
+    padding: 8px 12px;
+    font-size: 12px;
+  }
+}
+
+/* Very small screens */
+@media (max-width: 480px) {
+  .actionButton {
+    min-width: 60px;
+    padding: 8px 10px;
+  }
+}

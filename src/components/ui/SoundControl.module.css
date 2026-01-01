@@ -1,0 +1,334 @@
+/**
+ * SoundControl Styles
+ *
+ * Styles for the sound control component including mute button and volume slider.
+ */
+
+/* ==========================================================================
+   Container
+   ========================================================================== */
+
+.container {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  position: relative;
+}
+
+/* ==========================================================================
+   Size Variants
+   ========================================================================== */
+
+.sizeSmall .muteButton {
+  width: 28px;
+  height: 28px;
+}
+
+.sizeSmall .icon {
+  width: 16px;
+  height: 16px;
+}
+
+.sizeSmall .slider {
+  width: 80px;
+  height: 4px;
+}
+
+.sizeSmall .volumeLabel {
+  font-size: 0.75rem;
+}
+
+.sizeMedium .muteButton {
+  width: 36px;
+  height: 36px;
+}
+
+.sizeMedium .icon {
+  width: 20px;
+  height: 20px;
+}
+
+.sizeMedium .slider {
+  width: 100px;
+  height: 5px;
+}
+
+.sizeMedium .volumeLabel {
+  font-size: 0.8125rem;
+}
+
+.sizeLarge .muteButton {
+  width: 44px;
+  height: 44px;
+}
+
+.sizeLarge .icon {
+  width: 24px;
+  height: 24px;
+}
+
+.sizeLarge .slider {
+  width: 120px;
+  height: 6px;
+}
+
+.sizeLarge .volumeLabel {
+  font-size: 0.875rem;
+}
+
+/* ==========================================================================
+   Direction Variants
+   ========================================================================== */
+
+.horizontal {
+  flex-direction: row;
+}
+
+.vertical {
+  flex-direction: column;
+}
+
+.vertical .sliderContainer {
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  flex-direction: column;
+  padding: 12px 8px;
+  margin-bottom: 8px;
+}
+
+.vertical .slider {
+  writing-mode: vertical-lr;
+  direction: rtl;
+  width: 5px;
+  height: 100px;
+}
+
+/* ==========================================================================
+   Mute Button
+   ========================================================================== */
+
+.muteButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  border: none;
+  border-radius: 8px;
+  background-color: transparent;
+  color: var(--color-text-secondary, #a0a0a0);
+  cursor: pointer;
+  transition: background-color 0.15s ease, color 0.15s ease, transform 0.1s ease;
+  flex-shrink: 0;
+}
+
+.muteButton:hover {
+  background-color: var(--color-surface-2, #3a3a3a);
+  color: var(--color-text-primary, #ffffff);
+}
+
+.muteButton:focus-visible {
+  outline: 2px solid var(--color-primary, #646cff);
+  outline-offset: 2px;
+}
+
+.muteButton:active {
+  transform: scale(0.95);
+}
+
+.muteButton.muted {
+  color: var(--color-danger, #ef4444);
+}
+
+.muteButton.muted:hover {
+  color: var(--color-danger-hover, #dc2626);
+}
+
+/* ==========================================================================
+   Icon
+   ========================================================================== */
+
+.icon {
+  flex-shrink: 0;
+}
+
+/* ==========================================================================
+   Slider Container
+   ========================================================================== */
+
+.sliderContainer {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  background-color: var(--color-surface-1, #2a2a2a);
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateX(-8px);
+  transition: opacity 0.2s ease, visibility 0.2s ease, transform 0.2s ease;
+}
+
+.sliderContainer.visible {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(0);
+}
+
+.vertical .sliderContainer {
+  transform: translateY(8px) translateX(-50%);
+}
+
+.vertical .sliderContainer.visible {
+  transform: translateY(0) translateX(-50%);
+}
+
+/* ==========================================================================
+   Volume Slider
+   ========================================================================== */
+
+.slider {
+  -webkit-appearance: none;
+  appearance: none;
+  background: var(--color-surface-3, #4a4a4a);
+  border-radius: 3px;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.slider:focus-visible {
+  outline: 2px solid var(--color-primary, #646cff);
+  outline-offset: 2px;
+}
+
+/* Track - WebKit */
+.slider::-webkit-slider-runnable-track {
+  height: 100%;
+  border-radius: 3px;
+}
+
+/* Thumb - WebKit */
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: #ffffff;
+  cursor: pointer;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  transition: transform 0.1s ease, box-shadow 0.1s ease;
+  margin-top: -4px;
+}
+
+.slider::-webkit-slider-thumb:hover {
+  transform: scale(1.15);
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.4);
+}
+
+.slider::-webkit-slider-thumb:active {
+  transform: scale(1.1);
+}
+
+/* Thumb - Firefox */
+.slider::-moz-range-thumb {
+  width: 14px;
+  height: 14px;
+  border: none;
+  border-radius: 50%;
+  background: #ffffff;
+  cursor: pointer;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  transition: transform 0.1s ease, box-shadow 0.1s ease;
+}
+
+.slider::-moz-range-thumb:hover {
+  transform: scale(1.15);
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.4);
+}
+
+/* Track - Firefox */
+.slider::-moz-range-track {
+  height: 5px;
+  border-radius: 3px;
+  background: var(--color-surface-3, #4a4a4a);
+}
+
+/* Progress - Firefox */
+.slider::-moz-range-progress {
+  height: 5px;
+  border-radius: 3px;
+  background: var(--color-primary, #646cff);
+}
+
+/* ==========================================================================
+   Volume Label
+   ========================================================================== */
+
+.volumeLabel {
+  color: var(--color-text-secondary, #a0a0a0);
+  font-variant-numeric: tabular-nums;
+  min-width: 4ch;
+  text-align: right;
+  white-space: nowrap;
+}
+
+/* ==========================================================================
+   Toggle Mute Button (for click-to-toggle mode)
+   ========================================================================== */
+
+.toggleMuteButton {
+  padding: 4px 8px;
+  border: none;
+  border-radius: 4px;
+  background-color: var(--color-surface-2, #3a3a3a);
+  color: var(--color-text-secondary, #a0a0a0);
+  font-size: 0.75rem;
+  cursor: pointer;
+  transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+.toggleMuteButton:hover {
+  background-color: var(--color-surface-3, #4a4a4a);
+  color: var(--color-text-primary, #ffffff);
+}
+
+.toggleMuteButton:focus-visible {
+  outline: 2px solid var(--color-primary, #646cff);
+  outline-offset: 2px;
+}
+
+/* ==========================================================================
+   Animations
+   ========================================================================== */
+
+@keyframes fadeInSlide {
+  from {
+    opacity: 0;
+    transform: translateX(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* ==========================================================================
+   Responsive
+   ========================================================================== */
+
+@media (max-width: 600px) {
+  .sizeMedium .slider {
+    width: 80px;
+  }
+
+  .sizeLarge .slider {
+    width: 100px;
+  }
+
+  .sliderContainer {
+    padding: 6px 10px;
+  }
+}

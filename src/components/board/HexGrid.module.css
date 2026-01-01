@@ -1,0 +1,135 @@
+/* HexGrid.module.css - Styles for the main hex board container */
+
+.hexGridContainer {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-height: 400px;
+  background: linear-gradient(135deg, #1a237e 0%, #0d47a1 50%, #01579b 100%);
+  overflow: hidden;
+  border-radius: 8px;
+  box-shadow: inset 0 0 50px rgba(0, 0, 0, 0.3);
+}
+
+.hexGrid {
+  width: 100%;
+  height: 100%;
+  cursor: grab;
+  user-select: none;
+}
+
+.hexGrid:active {
+  cursor: grabbing;
+}
+
+.boardContent {
+  transition: transform 0.1s ease-out;
+}
+
+/* Layer organization */
+.tilesLayer {
+  /* Base layer for hex tiles */
+}
+
+.edgesLayer {
+  /* Roads and edges layer */
+}
+
+.verticesLayer {
+  /* Buildings and vertices layer */
+}
+
+.portsLayer {
+  /* Ports layer - rendered between vertices and robber */
+  pointer-events: none;
+}
+
+.robberLayer {
+  /* Robber piece layer - always on top */
+}
+
+/* Zoom controls */
+.zoomControls {
+  position: absolute;
+  bottom: 16px;
+  right: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  z-index: 100;
+}
+
+.zoomButton {
+  width: 36px;
+  height: 36px;
+  border: none;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.9);
+  color: #333;
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  transition: all 0.15s ease;
+}
+
+.zoomButton:hover {
+  background: #fff;
+  transform: scale(1.05);
+}
+
+.zoomButton:active {
+  transform: scale(0.95);
+}
+
+/* Hover effects for interactive elements */
+.hexGridContainer :global(.valid-placement) {
+  cursor: pointer;
+}
+
+.hexGridContainer :global(.road-piece),
+.hexGridContainer :global(.building),
+.hexGridContainer :global(.robber) {
+  filter: drop-shadow(1px 2px 2px rgba(0, 0, 0, 0.3));
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .zoomControls {
+    bottom: 8px;
+    right: 8px;
+  }
+
+  .zoomButton {
+    width: 32px;
+    height: 32px;
+    font-size: 16px;
+  }
+}
+
+/* Ocean water animation */
+.hexGridContainer::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background:
+    radial-gradient(ellipse at 20% 80%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 20%, rgba(255, 255, 255, 0.08) 0%, transparent 40%);
+  pointer-events: none;
+  animation: oceanWave 8s ease-in-out infinite;
+}
+
+@keyframes oceanWave {
+  0%, 100% {
+    opacity: 0.5;
+  }
+  50% {
+    opacity: 0.8;
+  }
+}

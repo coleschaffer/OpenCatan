@@ -1,0 +1,211 @@
+/* ResourceDisplay Component Styles */
+
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.container.horizontal {
+  flex-direction: row;
+  align-items: center;
+}
+
+.container.vertical {
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.container.compact {
+  gap: 4px;
+}
+
+.container.empty {
+  justify-content: center;
+}
+
+.emptyMessage {
+  color: #666666;
+  font-style: italic;
+  font-size: 0.9rem;
+}
+
+/* Resource Item */
+.resourceItem {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 8px;
+  background-color: #2a2a2a;
+  border-radius: 6px;
+  transition: background-color 0.15s ease;
+}
+
+.resourceItem.colored {
+  background-color: color-mix(in srgb, var(--resource-color) 15%, #2a2a2a);
+  border: 1px solid color-mix(in srgb, var(--resource-color) 30%, transparent);
+}
+
+.icon {
+  object-fit: contain;
+}
+
+.label {
+  color: #aaaaaa;
+  font-size: 0.85rem;
+}
+
+.count {
+  font-weight: 600;
+  color: #ffffff;
+}
+
+/* Size Variants */
+.container.small .resourceItem {
+  padding: 2px 6px;
+  gap: 3px;
+}
+
+.container.small .icon {
+  width: 18px;
+  height: 18px;
+}
+
+.container.small .label {
+  font-size: 0.75rem;
+}
+
+.container.small .count {
+  font-size: 0.8rem;
+}
+
+.container.medium .icon {
+  width: 24px;
+  height: 24px;
+}
+
+.container.medium .label {
+  font-size: 0.85rem;
+}
+
+.container.medium .count {
+  font-size: 0.9rem;
+}
+
+.container.large .resourceItem {
+  padding: 6px 12px;
+  gap: 6px;
+}
+
+.container.large .icon {
+  width: 32px;
+  height: 32px;
+}
+
+.container.large .label {
+  font-size: 0.95rem;
+}
+
+.container.large .count {
+  font-size: 1rem;
+}
+
+/* Resource Badge */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 8px;
+  background-color: color-mix(in srgb, var(--resource-color) 20%, #2a2a2a);
+  border: 1px solid color-mix(in srgb, var(--resource-color) 40%, transparent);
+  border-radius: 12px;
+}
+
+.badgeIcon {
+  object-fit: contain;
+}
+
+.badgeLabel {
+  color: #aaaaaa;
+  font-size: 0.8rem;
+}
+
+.badgeCount {
+  font-weight: 600;
+  color: #ffffff;
+  min-width: 16px;
+  text-align: center;
+}
+
+.badge.small .badgeIcon {
+  width: 16px;
+  height: 16px;
+}
+
+.badge.small .badgeCount {
+  font-size: 0.75rem;
+}
+
+.badge.medium .badgeIcon {
+  width: 20px;
+  height: 20px;
+}
+
+.badge.medium .badgeCount {
+  font-size: 0.85rem;
+}
+
+.badge.large .badgeIcon {
+  width: 26px;
+  height: 26px;
+}
+
+.badge.large .badgeCount {
+  font-size: 0.95rem;
+}
+
+/* Trade Arrow Display */
+.tradeArrow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.arrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #666666;
+  flex-shrink: 0;
+}
+
+.tradeArrow.small .arrow svg {
+  width: 20px;
+  height: 20px;
+}
+
+.tradeArrow.medium .arrow svg {
+  width: 24px;
+  height: 24px;
+}
+
+.tradeArrow.large .arrow svg {
+  width: 32px;
+  height: 32px;
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+  .container {
+    gap: 4px;
+  }
+
+  .resourceItem {
+    padding: 3px 6px;
+  }
+
+  .container.medium .icon {
+    width: 20px;
+    height: 20px;
+  }
+}

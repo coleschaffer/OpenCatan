@@ -1,0 +1,165 @@
+/* Steal Selector Container */
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* Timer */
+.timer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px 20px;
+  background-color: #333333;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #dddddd;
+  font-variant-numeric: tabular-nums;
+}
+
+.timerWarning {
+  background-color: #7f1d1d;
+  color: #fecaca;
+  animation: timerPulse 0.5s ease-in-out infinite;
+}
+
+@keyframes timerPulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
+
+/* Instructions */
+.instructions {
+  margin: 0;
+  font-size: 0.95rem;
+  color: #dddddd;
+  text-align: center;
+}
+
+/* No Victims */
+.noVictims {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  padding: 20px;
+  background-color: #333333;
+  border-radius: 8px;
+  text-align: center;
+}
+
+.noVictims p {
+  margin: 0;
+  color: #888888;
+}
+
+.skipButton {
+  padding: 10px 24px;
+  border: none;
+  border-radius: 6px;
+  background-color: #4a4a4a;
+  color: #ffffff;
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.15s;
+}
+
+.skipButton:hover {
+  background-color: #5a5a5a;
+}
+
+/* Victims List */
+.victimsList {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.victimButton {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  padding: 14px 16px;
+  border: 2px solid #3a3a3a;
+  border-radius: 8px;
+  background-color: #2a2a2a;
+  color: #ffffff;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  text-align: left;
+}
+
+.victimButton:hover,
+.victimButtonHovered {
+  background-color: #333333;
+  border-color: var(--player-color);
+  transform: translateX(4px);
+}
+
+.victimButton:focus-visible {
+  outline: 2px solid #646cff;
+  outline-offset: 2px;
+}
+
+/* Player Color Badge */
+.playerColorBadge {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+/* Player Name */
+.playerName {
+  flex: 1;
+  font-weight: 500;
+}
+
+/* Card Count */
+.cardCount {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.85rem;
+  color: #888888;
+  padding: 4px 10px;
+  background-color: #3a3a3a;
+  border-radius: 12px;
+}
+
+/* Hint */
+.hint {
+  margin: 0;
+  font-size: 0.8rem;
+  color: #666666;
+  text-align: center;
+  font-style: italic;
+}
+
+/* Hover Animation */
+@keyframes cardShuffle {
+  0%, 100% {
+    transform: rotate(0deg);
+  }
+  25% {
+    transform: rotate(-3deg);
+  }
+  75% {
+    transform: rotate(3deg);
+  }
+}
+
+.victimButton:hover .cardCount svg {
+  animation: cardShuffle 0.3s ease-in-out;
+}

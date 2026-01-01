@@ -1,0 +1,1844 @@
+/**
+ * Comprehensive styles for all game UI panels
+ * Dark theme consistent with lobby styling
+ */
+
+/* ============================================================================
+   CSS Variables
+   ============================================================================ */
+
+:root {
+  --panel-bg: #1e1e1e;
+  --panel-bg-secondary: #252525;
+  --panel-border: #333;
+  --panel-border-hover: #444;
+  --panel-text: #fff;
+  --panel-text-secondary: #888;
+  --panel-text-muted: #666;
+  --panel-accent: #ffd700;
+  --panel-success: #4caf50;
+  --panel-warning: #ff9800;
+  --panel-error: #f44336;
+  --panel-info: #2196f3;
+  --panel-radius: 12px;
+  --panel-radius-sm: 8px;
+  --panel-radius-xs: 4px;
+  --panel-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  --panel-transition: all 0.2s ease;
+}
+
+/* ============================================================================
+   GameHeader Styles
+   ============================================================================ */
+
+.gameHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 16px;
+  background: var(--panel-bg);
+  border-bottom: 1px solid var(--panel-border);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  z-index: 100;
+}
+
+.headerLeft {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.logoIcon {
+  color: var(--panel-accent);
+}
+
+.logoText {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--panel-text);
+  letter-spacing: 0.5px;
+}
+
+.gameModeBadge {
+  padding: 4px 8px;
+  background: rgba(255, 215, 0, 0.15);
+  color: var(--panel-accent);
+  font-size: 11px;
+  font-weight: 600;
+  border-radius: var(--panel-radius-xs);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.headerCenter {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.roomCodeButton {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  background: var(--panel-bg-secondary);
+  border: 1px solid var(--panel-border);
+  border-radius: var(--panel-radius-sm);
+  color: var(--panel-text);
+  font-size: 13px;
+  cursor: pointer;
+  transition: var(--panel-transition);
+}
+
+.roomCodeButton:hover {
+  border-color: var(--panel-border-hover);
+  background: #2a2a2a;
+}
+
+.roomCodeLabel {
+  color: var(--panel-text-secondary);
+}
+
+.roomCodeValue {
+  font-weight: 700;
+  font-family: 'Roboto Mono', monospace;
+  color: var(--panel-accent);
+}
+
+.connectionStatus {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+}
+
+.connectionDot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--panel-text-muted);
+}
+
+.connectionText {
+  color: var(--panel-text-secondary);
+}
+
+.connectionConnected .connectionDot {
+  background: var(--panel-success);
+  box-shadow: 0 0 6px rgba(76, 175, 80, 0.5);
+}
+
+.connectionConnected .connectionText {
+  color: var(--panel-success);
+}
+
+.connectionConnecting .connectionDot {
+  background: var(--panel-warning);
+  animation: pulse 1s ease-in-out infinite;
+}
+
+.connectionDisconnected .connectionDot {
+  background: var(--panel-error);
+}
+
+.connectionDisconnected .connectionText {
+  color: var(--panel-error);
+}
+
+.headerRight {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.headerButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  background: transparent;
+  border: none;
+  border-radius: var(--panel-radius-sm);
+  color: var(--panel-text-secondary);
+  cursor: pointer;
+  transition: var(--panel-transition);
+}
+
+.headerButton:hover {
+  background: var(--panel-bg-secondary);
+  color: var(--panel-text);
+}
+
+.volumeControl {
+  position: relative;
+}
+
+.volumeSliderContainer {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  margin-top: 8px;
+  padding: 8px 12px;
+  background: var(--panel-bg);
+  border: 1px solid var(--panel-border);
+  border-radius: var(--panel-radius-sm);
+  box-shadow: var(--panel-shadow);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  z-index: 110;
+}
+
+.volumeSlider {
+  width: 80px;
+  height: 4px;
+  appearance: none;
+  background: #444;
+  border-radius: 2px;
+  outline: none;
+}
+
+.volumeSlider::-webkit-slider-thumb {
+  appearance: none;
+  width: 12px;
+  height: 12px;
+  background: var(--panel-accent);
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.volumeValue {
+  font-size: 11px;
+  color: var(--panel-text-secondary);
+  min-width: 32px;
+  text-align: right;
+}
+
+/* ============================================================================
+   PlayerPanelList Styles
+   ============================================================================ */
+
+/* Vertical layout for left panel */
+.playerPanelListVertical {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 8px;
+  height: 100%;
+}
+
+/* Scrollable container for other players */
+.otherPlayersScroll {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  flex: 1;
+  overflow-y: auto;
+  min-height: 0;
+}
+
+.otherPlayersScroll::-webkit-scrollbar {
+  width: 4px;
+}
+
+.otherPlayersScroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.otherPlayersScroll::-webkit-scrollbar-thumb {
+  background: rgba(255, 215, 0, 0.3);
+  border-radius: 2px;
+}
+
+/* Local player container - slightly larger */
+.localPlayerContainer {
+  flex-shrink: 0;
+  border-top: 1px solid var(--panel-border);
+  padding-top: 8px;
+  margin-top: auto;
+}
+
+/* Legacy horizontal layout for bottom panel */
+.playerPanelListHorizontal {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 4px;
+  height: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+.playerPanelListHorizontal::-webkit-scrollbar {
+  height: 4px;
+}
+
+.playerPanelListHorizontal::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.playerPanelListHorizontal::-webkit-scrollbar-thumb {
+  background: rgba(255, 215, 0, 0.3);
+  border-radius: 2px;
+}
+
+/* Legacy vertical layout */
+.playerPanelList {
+  display: flex;
+  flex-direction: column;
+  background: var(--panel-bg);
+  border-radius: var(--panel-radius);
+  overflow: hidden;
+  min-width: 240px;
+  max-width: 300px;
+  box-shadow: var(--panel-shadow);
+}
+
+.playerListHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 16px;
+  background: var(--panel-bg-secondary);
+  border-bottom: 1px solid var(--panel-border);
+}
+
+.playerListTitle {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--panel-text);
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.playerListCount {
+  font-size: 12px;
+  color: var(--panel-text-secondary);
+}
+
+.playerListContent {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 12px;
+  max-height: 55vh;
+  overflow-y: auto;
+}
+
+.playerListContent::-webkit-scrollbar {
+  width: 6px;
+}
+
+.playerListContent::-webkit-scrollbar-track {
+  background: var(--panel-bg);
+}
+
+.playerListContent::-webkit-scrollbar-thumb {
+  background: #444;
+  border-radius: 3px;
+}
+
+.achievementSummary {
+  padding: 8px 12px;
+  border-top: 1px solid var(--panel-border);
+  background: var(--panel-bg-secondary);
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.achievementBadgeMini {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 8px;
+  background: rgba(255, 215, 0, 0.1);
+  border-radius: var(--panel-radius-xs);
+  font-size: 11px;
+  color: var(--panel-accent);
+}
+
+.achievementIcon {
+  display: flex;
+  align-items: center;
+}
+
+.achievementLabel {
+  font-weight: 600;
+}
+
+/* ============================================================================
+   PlayerHand Styles - Stacking Card Design
+   ============================================================================ */
+
+.playerHand {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 24px;
+  padding: 8px 16px;
+  background: transparent;
+}
+
+/* Resource stacks container */
+.resourceStacks {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+/* No cards message */
+.noCardsMessage {
+  color: var(--panel-text-muted);
+  font-size: 13px;
+  font-style: italic;
+  padding: 8px 16px;
+}
+
+/* Single resource stack (contains multiple cards) */
+.resourceStack {
+  position: relative;
+  height: 60px;
+  min-width: 44px;
+}
+
+/* Individual stacked card */
+.stackedCard {
+  position: absolute;
+  top: 0;
+  width: 48px;
+  height: 64px;
+  border-radius: 6px;
+  box-shadow:
+    1px 2px 4px rgba(0, 0, 0, 0.3);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+  overflow: hidden;
+}
+
+/* Card image inside stacked card */
+.cardImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+.resourceStack:hover .stackedCard:last-child {
+  transform: translateY(-4px);
+  box-shadow:
+    2px 4px 8px rgba(0, 0, 0, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+
+/* Card label (single letter on top card) */
+.cardLabel {
+  font-size: 18px;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.95);
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.4);
+}
+
+/* Overflow indicator for 5+ cards */
+.cardOverflow {
+  position: absolute;
+  bottom: 4px;
+  right: 4px;
+  font-size: 10px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+/* Count badge floating above the stack */
+.stackCount {
+  position: absolute;
+  top: -6px;
+  right: -6px;
+  min-width: 20px;
+  height: 20px;
+  padding: 0 5px;
+  background: var(--panel-bg);
+  border: 2px solid var(--panel-accent);
+  border-radius: 10px;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--panel-accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+}
+
+/* Development card stacks - compact inline display */
+.devCardStacks {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 8px;
+  margin-left: auto;
+  padding-left: 16px;
+  border-left: 1px solid var(--panel-border);
+}
+
+.devCardStack {
+  position: relative;
+  width: 44px;
+  height: 60px;
+  background: #1a1a1a;
+  border: 2px solid #444;
+  border-radius: 6px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  cursor: default;
+  transition: var(--panel-transition);
+  overflow: hidden;
+}
+
+.devCardStack:disabled {
+  opacity: 0.6;
+}
+
+.devCardStackPlayable {
+  cursor: pointer;
+  border-color: var(--panel-success);
+  box-shadow: 0 0 8px rgba(76, 175, 80, 0.4);
+}
+
+.devCardStackPlayable:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 4px 12px rgba(76, 175, 80, 0.5);
+}
+
+/* Dev card image */
+.devCardImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.devStackIcon {
+  font-size: 16px;
+}
+
+.devStackCount {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--panel-text);
+}
+
+.devStackPlayable {
+  position: absolute;
+  top: -4px;
+  right: -4px;
+  width: 14px;
+  height: 14px;
+  background: var(--panel-success);
+  border-radius: 50%;
+  font-size: 10px;
+  font-weight: 700;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Legacy styles kept for backwards compatibility */
+.handSection {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.handSectionHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.handSectionTitle {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--panel-text);
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.handTotalCount {
+  font-size: 12px;
+  color: var(--panel-text-secondary);
+}
+
+.resourceGrid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 8px;
+}
+
+.resourceCard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10px 6px;
+  background: var(--resource-bg, #2a2a2a);
+  border: 2px solid var(--resource-color, #444);
+  border-radius: var(--panel-radius-sm);
+  transition: var(--panel-transition);
+}
+
+.resourceCard.resourceEmpty {
+  opacity: 0.4;
+  border-color: #333;
+}
+
+.resourceIcon {
+  font-size: 20px;
+  line-height: 1;
+}
+
+.resourceCount {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--panel-text);
+  margin: 4px 0 2px;
+}
+
+.resourceLabel {
+  font-size: 10px;
+  color: var(--panel-text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.handEmptyMessage {
+  color: var(--panel-text-muted);
+  font-size: 13px;
+  font-style: italic;
+  text-align: center;
+  padding: 12px;
+}
+
+.devCardList {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.devCardGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 8px;
+  background: rgba(255, 255, 255, 0.03);
+  border-left: 3px solid var(--card-color, #666);
+  border-radius: var(--panel-radius-xs);
+}
+
+.devCardGroupHeader {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.devCardIcon {
+  font-size: 16px;
+}
+
+.devCardName {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--panel-text);
+}
+
+.devCardCount {
+  font-size: 11px;
+  color: var(--panel-text-secondary);
+  margin-left: auto;
+}
+
+.devCardButton {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 6px 8px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid transparent;
+  border-radius: var(--panel-radius-xs);
+  color: var(--panel-text-secondary);
+  font-size: 11px;
+  cursor: default;
+  transition: var(--panel-transition);
+}
+
+.devCardButton.devCardPlayable {
+  cursor: pointer;
+  border-color: var(--card-color, #666);
+}
+
+.devCardButton.devCardPlayable:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.devCardButton.devCardNew {
+  border-style: dashed;
+}
+
+.devCardNewBadge {
+  padding: 2px 6px;
+  background: var(--panel-warning);
+  color: #000;
+  font-size: 9px;
+  font-weight: 700;
+  border-radius: 3px;
+  text-transform: uppercase;
+}
+
+.devCardPlayHint {
+  color: var(--panel-success);
+  font-size: 10px;
+}
+
+.devCardVPHint {
+  color: var(--panel-accent);
+  font-weight: 600;
+}
+
+.handHelperText {
+  font-size: 11px;
+  color: var(--panel-text-muted);
+  text-align: center;
+  margin-top: 8px;
+}
+
+/* ============================================================================
+   BuildModeSelector Styles
+   ============================================================================ */
+
+.buildModeSelectorOverlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 200;
+}
+
+.buildModeSelector {
+  background: var(--panel-bg);
+  border-radius: var(--panel-radius);
+  box-shadow: var(--panel-shadow);
+  min-width: 320px;
+  max-width: 400px;
+  overflow: hidden;
+}
+
+.buildSelectorHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 16px;
+  background: var(--panel-bg-secondary);
+  border-bottom: 1px solid var(--panel-border);
+}
+
+.buildSelectorTitle {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--panel-text);
+  margin: 0;
+}
+
+.buildSelectorClose {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  background: transparent;
+  border: none;
+  border-radius: var(--panel-radius-xs);
+  color: var(--panel-text-secondary);
+  cursor: pointer;
+  transition: var(--panel-transition);
+}
+
+.buildSelectorClose:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--panel-text);
+}
+
+.buildOptions {
+  display: flex;
+  flex-direction: column;
+  padding: 12px;
+  gap: 8px;
+}
+
+.buildOption {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 12px;
+  background: var(--panel-bg-secondary);
+  border: 2px solid var(--panel-border);
+  border-radius: var(--panel-radius-sm);
+  cursor: pointer;
+  transition: var(--panel-transition);
+  text-align: left;
+}
+
+.buildOption:hover:not(.buildOptionDisabled) {
+  border-color: var(--panel-accent);
+  background: #2a2a2a;
+}
+
+.buildOptionDisabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.buildOptionMain {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.buildOptionIcon {
+  font-size: 24px;
+  width: 32px;
+  text-align: center;
+}
+
+.buildOptionInfo {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.buildOptionLabel {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--panel-text);
+}
+
+.buildOptionDesc {
+  font-size: 11px;
+  color: var(--panel-text-secondary);
+}
+
+.buildShortcut {
+  padding: 3px 6px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 3px;
+  font-size: 11px;
+  font-family: 'Roboto Mono', monospace;
+  color: var(--panel-text-secondary);
+}
+
+.buildOptionCost {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding-left: 42px;
+}
+
+.buildCostLabel {
+  font-size: 11px;
+  color: var(--panel-text-muted);
+}
+
+.buildCostItem {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.buildCostIcon {
+  font-size: 14px;
+}
+
+.buildCostAmount {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--panel-text);
+}
+
+.buildCantAfford {
+  font-size: 11px;
+  color: var(--panel-error);
+  padding-left: 42px;
+}
+
+.buildSelectorFooter {
+  padding: 8px 16px;
+  border-top: 1px solid var(--panel-border);
+  background: var(--panel-bg-secondary);
+}
+
+.buildSelectorHint {
+  font-size: 11px;
+  color: var(--panel-text-muted);
+}
+
+/* ============================================================================
+   Chat Styles
+   ============================================================================ */
+
+.chatPanel {
+  display: flex;
+  flex-direction: column;
+  background: var(--panel-bg);
+  border-radius: var(--panel-radius);
+  box-shadow: var(--panel-shadow);
+  height: 300px;
+  min-width: 280px;
+  overflow: hidden;
+}
+
+.chatTabs {
+  display: flex;
+  border-bottom: 1px solid var(--panel-border);
+  background: var(--panel-bg-secondary);
+}
+
+.chatTab {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 10px 12px;
+  background: transparent;
+  border: none;
+  border-bottom: 2px solid transparent;
+  color: var(--panel-text-secondary);
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: var(--panel-transition);
+}
+
+.chatTab:hover {
+  color: var(--panel-text);
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.chatTabActive {
+  color: var(--panel-accent);
+  border-bottom-color: var(--panel-accent);
+}
+
+.chatTabCount {
+  padding: 2px 6px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  font-size: 10px;
+  font-weight: 600;
+}
+
+.chatTabActive .chatTabCount {
+  background: rgba(255, 215, 0, 0.2);
+}
+
+.chatMessages {
+  flex: 1;
+  overflow-y: auto;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.chatMessages::-webkit-scrollbar {
+  width: 6px;
+}
+
+.chatMessages::-webkit-scrollbar-track {
+  background: var(--panel-bg);
+}
+
+.chatMessages::-webkit-scrollbar-thumb {
+  background: #444;
+  border-radius: 3px;
+}
+
+.chatEmpty {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--panel-text-muted);
+  font-size: 13px;
+  font-style: italic;
+}
+
+.chatMessage {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.chatMessageMe {
+  background: rgba(255, 255, 255, 0.03);
+  padding: 6px 8px;
+  margin: -6px -8px;
+  border-radius: var(--panel-radius-xs);
+}
+
+.chatTimestamp {
+  font-size: 10px;
+  color: var(--panel-text-muted);
+}
+
+.chatContent {
+  font-size: 13px;
+}
+
+.chatPlayerName {
+  font-weight: 600;
+}
+
+.chatYouTag {
+  font-weight: 400;
+  color: var(--panel-text-secondary);
+}
+
+.chatText {
+  color: var(--panel-text);
+  word-break: break-word;
+}
+
+.chatInputArea {
+  display: flex;
+  gap: 8px;
+  padding: 10px 12px;
+  border-top: 1px solid var(--panel-border);
+  background: var(--panel-bg-secondary);
+}
+
+.chatInput {
+  flex: 1;
+  padding: 8px 12px;
+  background: var(--panel-bg);
+  border: 1px solid var(--panel-border);
+  border-radius: var(--panel-radius-sm);
+  color: var(--panel-text);
+  font-size: 13px;
+  outline: none;
+  transition: var(--panel-transition);
+}
+
+.chatInput:focus {
+  border-color: var(--panel-accent);
+}
+
+.chatInput::placeholder {
+  color: var(--panel-text-muted);
+}
+
+.chatInput:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.chatSendButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  background: var(--panel-info);
+  border: none;
+  border-radius: var(--panel-radius-sm);
+  color: #fff;
+  cursor: pointer;
+  transition: var(--panel-transition);
+}
+
+.chatSendButton:hover:not(:disabled) {
+  background: #1e88e5;
+}
+
+.chatSendButton:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.chatLogContainer {
+  flex: 1;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ============================================================================
+   Stacked Chat/Log Panel (Log on top, Chat below)
+   ============================================================================ */
+
+.chatLogStackedPanel {
+  display: flex;
+  flex-direction: column;
+  background: var(--panel-bg);
+  border-radius: 0;
+  box-shadow: none;
+  height: 100%;
+  min-width: 280px;
+  overflow: hidden;
+}
+
+.logSection {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 120px;
+  border-bottom: 1px solid var(--panel-border);
+  transition: flex 0.2s ease;
+}
+
+.logSectionCompressed {
+  flex: 0.6;
+}
+
+.chatSection {
+  display: flex;
+  flex-direction: column;
+  transition: all 0.2s ease;
+}
+
+.chatSectionCollapsed {
+  flex: 0;
+  min-height: auto;
+}
+
+.chatSectionExpanded {
+  flex: 1;
+  min-height: 150px;
+}
+
+.chatHeader {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 12px;
+  background: var(--panel-bg-secondary);
+  border-bottom: 1px solid var(--panel-border);
+  color: var(--panel-text-secondary);
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  user-select: none;
+  transition: background 0.15s ease;
+}
+
+.chatHeader:hover {
+  background: #2a2a2a;
+}
+
+.chatHeader svg {
+  opacity: 0.7;
+}
+
+.chatExpandIcon {
+  margin-left: auto;
+  transition: transform 0.2s ease;
+}
+
+.chatExpandIconRotated {
+  transform: rotate(180deg);
+}
+
+.sectionHeader {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 12px;
+  background: var(--panel-bg-secondary);
+  border-bottom: 1px solid var(--panel-border);
+  color: var(--panel-text-secondary);
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.sectionHeader svg {
+  opacity: 0.7;
+}
+
+.sectionCount {
+  padding: 2px 6px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  font-size: 10px;
+  font-weight: 600;
+}
+
+.logContent {
+  flex: 1;
+  overflow-y: auto;
+  padding: 4px;
+}
+
+.logContent::-webkit-scrollbar {
+  width: 6px;
+}
+
+.logContent::-webkit-scrollbar-track {
+  background: var(--panel-bg);
+}
+
+.logContent::-webkit-scrollbar-thumb {
+  background: #444;
+  border-radius: 3px;
+}
+
+/* ============================================================================
+   TurnTimer Styles
+   ============================================================================ */
+
+.timerCompact {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 8px;
+  background: var(--panel-bg-secondary);
+  border-radius: var(--panel-radius-xs);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--panel-text);
+  font-family: 'Roboto Mono', monospace;
+}
+
+.timerCompactTime {
+  min-width: 36px;
+  text-align: center;
+}
+
+.timerBar {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 8px 12px;
+  background: var(--panel-bg-secondary);
+  border-radius: var(--panel-radius-sm);
+}
+
+.timerBarHeader {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.timerBarIcon {
+  display: flex;
+  align-items: center;
+  color: var(--panel-text-secondary);
+}
+
+.timerBarTime {
+  font-size: 14px;
+  font-weight: 600;
+  font-family: 'Roboto Mono', monospace;
+  color: var(--panel-text);
+}
+
+.timerBarTrack {
+  height: 4px;
+  background: #333;
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.timerBarProgress {
+  height: 100%;
+  background: var(--panel-success);
+  border-radius: 2px;
+  transition: width 1s linear;
+}
+
+.timerCircular {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.timerCircleSvg {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.timerCircleBackground {
+  stroke: #333;
+}
+
+.timerCircleProgress {
+  stroke: var(--panel-success);
+  transition: stroke-dashoffset 1s linear;
+}
+
+.timerCircleTime {
+  font-weight: 600;
+  font-family: 'Roboto Mono', monospace;
+  color: var(--panel-text);
+  z-index: 1;
+}
+
+/* Timer states */
+.timerNormal .timerBarProgress,
+.timerNormal .timerCircleProgress {
+  stroke: var(--panel-success);
+  background: var(--panel-success);
+}
+
+.timerLow .timerBarProgress,
+.timerLow .timerCircleProgress {
+  stroke: var(--panel-warning);
+  background: var(--panel-warning);
+}
+
+.timerLow .timerCompact,
+.timerLow .timerBarTime,
+.timerLow .timerCircleTime {
+  color: var(--panel-warning);
+}
+
+.timerCritical .timerBarProgress,
+.timerCritical .timerCircleProgress {
+  stroke: var(--panel-error);
+  background: var(--panel-error);
+}
+
+.timerCritical .timerCompact,
+.timerCritical .timerBarTime,
+.timerCritical .timerCircleTime {
+  color: var(--panel-error);
+}
+
+.timerUrgent {
+  animation: timerPulse 0.5s ease-in-out infinite;
+}
+
+.timerMyTurn {
+  border: 1px solid var(--panel-accent);
+}
+
+@keyframes timerPulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.6;
+  }
+}
+
+/* ============================================================================
+   Animations
+   ============================================================================ */
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.7;
+    transform: scale(1.1);
+  }
+}
+
+/* ============================================================================
+   Responsive Styles
+   ============================================================================ */
+
+@media (max-width: 1024px) {
+  .playerPanelList {
+    min-width: 200px;
+    max-width: 240px;
+  }
+
+  .resourceGrid {
+    grid-template-columns: repeat(5, 1fr);
+    gap: 6px;
+  }
+
+  .resourceCard {
+    padding: 8px 4px;
+  }
+
+  .resourceIcon {
+    font-size: 16px;
+  }
+
+  .resourceCount {
+    font-size: 14px;
+  }
+
+  .resourceLabel {
+    font-size: 9px;
+  }
+}
+
+@media (max-width: 768px) {
+  .gameHeader {
+    padding: 6px 12px;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .logoText {
+    font-size: 16px;
+  }
+
+  .headerCenter {
+    flex: 1;
+    justify-content: center;
+  }
+
+  .roomCodeButton {
+    padding: 4px 8px;
+    font-size: 12px;
+  }
+
+  .playerPanelList {
+    min-width: unset;
+    max-width: unset;
+    width: 100%;
+  }
+
+  .playerListContent {
+    max-height: 200px;
+  }
+
+  .playerHand {
+    padding: 12px;
+    gap: 12px;
+  }
+
+  .chatPanel {
+    height: 250px;
+    min-width: unset;
+  }
+
+  .buildModeSelector {
+    min-width: 280px;
+    margin: 16px;
+  }
+}
+
+/* ============================================================================
+   Bank Component Styles
+   ============================================================================ */
+
+.bank {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  background: var(--panel-bg);
+  border-radius: 0;
+  border: 1px solid var(--panel-border);
+}
+
+.bankCompact {
+  padding: 6px 8px;
+}
+
+.bankIcon {
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0;
+}
+
+.bankHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 4px;
+}
+
+.bankTitle {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--panel-text);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.bankTotal {
+  font-size: 11px;
+  color: var(--panel-text-secondary);
+}
+
+.bankResources {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.bankResourceStack {
+  position: relative;
+  width: 36px;
+  height: 56px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.bankCard {
+  position: absolute;
+  width: 36px;
+  height: 48px;
+  border-radius: 4px;
+  box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+  overflow: hidden;
+}
+
+.bankCardImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.bankCardEmpty {
+  width: 36px;
+  height: 48px;
+  border: 2px dashed var(--panel-border);
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--panel-text-muted);
+  font-size: 12px;
+}
+
+.bankCount {
+  position: absolute;
+  bottom: -4px;
+  left: 50%;
+  transform: translateX(-50%);
+  min-width: 18px;
+  height: 18px;
+  padding: 0 4px;
+  background: var(--panel-bg);
+  border: 1px solid var(--panel-border);
+  border-radius: 9px;
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--panel-text);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+}
+
+.bankDevDeck {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding-top: 8px;
+  border-top: 1px solid var(--panel-border);
+  margin-top: 4px;
+}
+
+.bankDevStack {
+  position: relative;
+  width: 36px;
+  height: 56px;
+}
+
+.bankDevLabel {
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--panel-text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* ============================================================================
+   ChatLogPanel - Vertically Stacked Chat and Log
+   ============================================================================ */
+
+.chatLogPanel {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background: var(--panel-bg);
+  border-radius: var(--panel-radius);
+  border: 1px solid var(--panel-border);
+  overflow: hidden;
+}
+
+.logSection {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 120px;
+  border-bottom: 1px solid var(--panel-border);
+}
+
+.chatSection {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 150px;
+}
+
+.sectionHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 12px;
+  background: var(--panel-bg-secondary);
+  border-bottom: 1px solid var(--panel-border);
+}
+
+.sectionTitle {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--panel-text);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.sectionTitle svg {
+  opacity: 0.7;
+}
+
+.sectionCount {
+  font-size: 11px;
+  color: var(--panel-text-muted);
+  background: var(--panel-bg);
+  padding: 2px 6px;
+  border-radius: 8px;
+}
+
+.logEntries {
+  flex: 1;
+  overflow-y: auto;
+  padding: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.logEntry {
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
+  padding: 4px 6px;
+  font-size: 12px;
+  border-radius: var(--panel-radius-xs);
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.logEntry:hover {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.logTime {
+  color: var(--panel-text-muted);
+  font-size: 10px;
+  min-width: 40px;
+  flex-shrink: 0;
+}
+
+.logIcon {
+  font-size: 12px;
+  min-width: 18px;
+  text-align: center;
+}
+
+.logContent {
+  flex: 1;
+  line-height: 1.4;
+}
+
+.logPlayer {
+  font-weight: 600;
+}
+
+.logMessage {
+  color: var(--panel-text-secondary);
+}
+
+.emptyMessage {
+  text-align: center;
+  color: var(--panel-text-muted);
+  font-size: 12px;
+  padding: 16px;
+  font-style: italic;
+}
+
+.chatMessages {
+  flex: 1;
+  overflow-y: auto;
+  padding: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.chatMessage {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 8px 10px;
+  font-size: 13px;
+  border-radius: var(--panel-radius-xs);
+  background: rgba(255, 255, 255, 0.03);
+  margin-bottom: 4px;
+}
+
+.chatMessage:hover {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.chatMessageMe {
+  background: rgba(255, 215, 0, 0.08);
+}
+
+.chatTime {
+  color: var(--panel-text-muted);
+  font-size: 10px;
+  width: 100%;
+  margin-bottom: 2px;
+}
+
+.chatPlayerName {
+  font-weight: 600;
+}
+
+.youTag {
+  font-weight: 400;
+  color: var(--panel-text-muted);
+  font-size: 11px;
+}
+
+.chatText {
+  color: var(--panel-text);
+}
+
+.chatInputArea {
+  display: flex;
+  gap: 8px;
+  padding: 8px;
+  background: var(--panel-bg-secondary);
+  border-top: 1px solid var(--panel-border);
+}
+
+.chatInput {
+  flex: 1;
+  padding: 8px 12px;
+  background: var(--panel-bg);
+  border: 1px solid var(--panel-border);
+  border-radius: var(--panel-radius-sm);
+  color: var(--panel-text);
+  font-size: 13px;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.chatInput:focus {
+  border-color: var(--panel-accent);
+}
+
+.chatInput::placeholder {
+  color: var(--panel-text-muted);
+}
+
+.chatInput:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.chatSendBtn {
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--panel-accent);
+  border: none;
+  border-radius: var(--panel-radius-sm);
+  color: #000;
+  cursor: pointer;
+  transition: transform 0.15s, opacity 0.15s;
+}
+
+.chatSendBtn:hover:not(:disabled) {
+  transform: scale(1.05);
+}
+
+.chatSendBtn:active:not(:disabled) {
+  transform: scale(0.95);
+}
+
+.chatSendBtn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+@media (max-width: 480px) {
+  .resourceGrid {
+    grid-template-columns: repeat(5, 1fr);
+    gap: 4px;
+  }
+
+  .resourceCard {
+    padding: 6px 2px;
+  }
+
+  .resourceIcon {
+    font-size: 14px;
+  }
+
+  .resourceCount {
+    font-size: 12px;
+  }
+
+  .resourceLabel {
+    display: none;
+  }
+
+  .achievementBadgesCompact {
+    flex-direction: column;
+  }
+
+  .headerButton {
+    width: 32px;
+    height: 32px;
+  }
+
+  .headerButton svg {
+    width: 18px;
+    height: 18px;
+  }
+}

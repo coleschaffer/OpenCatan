@@ -1,0 +1,858 @@
+/**
+ * Setup Overlay Styles
+ *
+ * Styles for the setup phase UI components including:
+ * - SetupOverlay - main container
+ * - SetupInstructions - instruction panel
+ * - SetupTurnOrder - turn order visualization
+ * - Timer and progress elements
+ */
+
+/* ============================================================================
+   SETUP OVERLAY CONTAINER - MINIMAL VERSION
+   ============================================================================ */
+
+.setupOverlayMinimal {
+  position: absolute;
+  top: 1rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.5rem 1rem;
+  background: rgba(0, 0, 0, 0.8);
+  border-radius: 2rem;
+  z-index: 100;
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  pointer-events: none; /* Don't intercept clicks on the board */
+}
+
+.turnInfo {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.playerBadge {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.25rem 0.75rem;
+  border-radius: 1rem;
+  border: 2px solid;
+}
+
+.playerDotSmall {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+
+.turnText {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #fff;
+}
+
+.actionText {
+  font-size: 0.875rem;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.timerMinimal {
+  font-family: 'SF Mono', 'Menlo', monospace;
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: #fff;
+  padding: 0.25rem 0.75rem;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 0.5rem;
+  min-width: 3.5rem;
+  text-align: center;
+}
+
+.resourceHintMinimal {
+  font-size: 0.75rem;
+  color: #6ee7b7;
+  padding: 0.25rem 0.5rem;
+  background: rgba(16, 185, 129, 0.2);
+  border-radius: 0.25rem;
+}
+
+/* ============================================================================
+   LEGACY SETUP OVERLAY CONTAINER (kept for backwards compatibility)
+   ============================================================================ */
+
+.setupOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  padding: 1rem 1.5rem;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.6) 50%, transparent 100%);
+  z-index: 100;
+  pointer-events: none;
+}
+
+.setupOverlay > * {
+  pointer-events: auto;
+}
+
+/* ============================================================================
+   HEADER SECTION
+   ============================================================================ */
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.phaseIndicator {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.phaseLabel {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #fff;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.roundBadge {
+  padding: 0.25rem 0.75rem;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 1rem;
+  font-size: 0.875rem;
+  color: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(4px);
+}
+
+/* ============================================================================
+   TIMER
+   ============================================================================ */
+
+.timer {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 0.5rem;
+  color: #fff;
+  font-family: 'SF Mono', 'Menlo', monospace;
+  font-size: 1.25rem;
+  font-weight: 600;
+  backdrop-filter: blur(4px);
+  transition: all 0.3s ease;
+}
+
+.timerIcon {
+  opacity: 0.8;
+}
+
+.timerValue {
+  min-width: 3.5rem;
+  text-align: center;
+}
+
+.timerLow {
+  background: rgba(239, 68, 68, 0.3);
+  animation: timerPulse 1s ease-in-out infinite;
+}
+
+.timerLow .timerIcon {
+  color: #ef4444;
+}
+
+.timerLow .timerValue {
+  color: #fca5a5;
+}
+
+@keyframes timerPulse {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.4);
+  }
+  50% {
+    transform: scale(1.02);
+    box-shadow: 0 0 0 8px rgba(239, 68, 68, 0);
+  }
+}
+
+/* ============================================================================
+   PROGRESS BAR
+   ============================================================================ */
+
+.progressContainer {
+  margin-bottom: 1rem;
+}
+
+.progressBar {
+  height: 6px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 3px;
+  overflow: hidden;
+  margin-bottom: 0.5rem;
+}
+
+.progressFill {
+  height: 100%;
+  background: linear-gradient(90deg, #10b981, #34d399);
+  border-radius: 3px;
+  transition: width 0.5s ease;
+}
+
+.progressText {
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.7);
+  text-align: right;
+}
+
+/* ============================================================================
+   TURN INDICATOR
+   ============================================================================ */
+
+.turnIndicator {
+  margin-bottom: 1rem;
+}
+
+.playerIndicator {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.5rem 1rem;
+  background: rgba(255, 255, 255, 0.1);
+  border-left: 4px solid;
+  border-radius: 0.5rem;
+  backdrop-filter: blur(4px);
+}
+
+.playerColorDot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  box-shadow: 0 0 8px currentColor;
+}
+
+.playerName {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #fff;
+}
+
+/* ============================================================================
+   ACTION HINT
+   ============================================================================ */
+
+.actionHint {
+  margin-top: 1rem;
+  padding: 0.75rem 1rem;
+  background: rgba(59, 130, 246, 0.2);
+  border-radius: 0.5rem;
+  border: 1px solid rgba(59, 130, 246, 0.3);
+}
+
+.actionHint p {
+  margin: 0;
+  font-size: 0.875rem;
+  color: #93c5fd;
+  text-align: center;
+}
+
+/* ============================================================================
+   RESOURCE BONUS
+   ============================================================================ */
+
+.resourceBonus {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 0.75rem;
+  padding: 0.5rem 0.75rem;
+  background: rgba(16, 185, 129, 0.2);
+  border-radius: 0.5rem;
+  border: 1px solid rgba(16, 185, 129, 0.3);
+}
+
+.bonusIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  background: rgba(16, 185, 129, 0.3);
+  border-radius: 50%;
+  font-size: 1rem;
+  font-weight: bold;
+  color: #10b981;
+}
+
+.bonusText {
+  font-size: 0.8rem;
+  color: #6ee7b7;
+}
+
+/* ============================================================================
+   INSTRUCTIONS PANEL
+   ============================================================================ */
+
+.instructionsPanel {
+  background: rgba(0, 0, 0, 0.4);
+  border-radius: 0.75rem;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.instructionsHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.75rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.instructionsTitle {
+  margin: 0;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.9);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.waitingIndicator {
+  font-size: 0.75rem;
+  font-style: italic;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+/* ============================================================================
+   STEP LIST
+   ============================================================================ */
+
+.stepList {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.stepItem {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.5rem 0.75rem;
+  border-radius: 0.5rem;
+  border-left: 3px solid transparent;
+  transition: all 0.3s ease;
+}
+
+.stepItem.completed {
+  opacity: 0.5;
+}
+
+.stepItem.current {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.stepItem.pending {
+  opacity: 0.4;
+}
+
+.stepIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.1);
+  flex-shrink: 0;
+  transition: background 0.3s ease;
+}
+
+.stepIcon svg {
+  width: 20px;
+  height: 20px;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.stepItem.completed .stepIcon {
+  background: rgba(16, 185, 129, 0.2);
+}
+
+.stepItem.completed .stepIcon svg {
+  color: #10b981;
+}
+
+.checkmark {
+  color: #10b981;
+}
+
+.stepContent {
+  display: flex;
+  flex-direction: column;
+  gap: 0.125rem;
+  flex: 1;
+  min-width: 0;
+}
+
+.stepLabel {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.stepDescription {
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.6);
+  line-height: 1.3;
+}
+
+.activeIndicator {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  animation: pulseIndicator 2s ease-in-out infinite;
+}
+
+@keyframes pulseIndicator {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.1);
+    opacity: 0.8;
+  }
+}
+
+/* ============================================================================
+   CURRENT ACTION CALLOUT
+   ============================================================================ */
+
+.currentAction {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  margin-top: 0.75rem;
+  padding: 0.75rem;
+  border-radius: 0.5rem;
+  border: 1px solid;
+}
+
+.currentActionIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0;
+}
+
+.currentActionIcon svg {
+  width: 28px;
+  height: 28px;
+}
+
+.currentActionText {
+  flex: 1;
+}
+
+.currentActionText strong {
+  display: block;
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.95);
+  margin-bottom: 0.25rem;
+}
+
+.currentActionText p {
+  margin: 0;
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.7);
+  line-height: 1.4;
+}
+
+.resourceHint {
+  display: block;
+  margin-top: 0.5rem;
+  padding: 0.25rem 0.5rem;
+  background: rgba(16, 185, 129, 0.2);
+  border-radius: 0.25rem;
+  font-size: 0.75rem;
+  color: #6ee7b7;
+}
+
+/* ============================================================================
+   TURN ORDER CONTAINER
+   ============================================================================ */
+
+.turnOrderContainer {
+  background: rgba(0, 0, 0, 0.4);
+  border-radius: 0.75rem;
+  padding: 1rem;
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.turnOrderTitle {
+  margin: 0 0 0.5rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.9);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.snakeDescription {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+  padding: 0.5rem;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 0.375rem;
+}
+
+.snakeLabel {
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.snakePattern {
+  font-size: 0.7rem;
+  font-family: 'SF Mono', 'Menlo', monospace;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+/* ============================================================================
+   ROUND SECTIONS
+   ============================================================================ */
+
+.roundSection {
+  margin-bottom: 0.75rem;
+}
+
+.roundHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.roundLabel {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.roundArrow {
+  font-size: 0.65rem;
+  color: rgba(255, 255, 255, 0.5);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.turnRow {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+/* ============================================================================
+   TURN SLOTS
+   ============================================================================ */
+
+.turnSlot {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.5rem;
+  min-width: 70px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  border-radius: 0.5rem;
+  transition: all 0.3s ease;
+}
+
+.turnSlot.current {
+  border-width: 2px;
+  box-shadow: 0 0 12px rgba(255, 255, 255, 0.2);
+}
+
+.turnSlot.complete {
+  opacity: 0.6;
+}
+
+.turnSlot.pending {
+  opacity: 0.4;
+}
+
+.playerDot {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+}
+
+.slotPlayerName {
+  font-size: 0.65rem;
+  color: rgba(255, 255, 255, 0.8);
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 60px;
+}
+
+.completionIndicators {
+  display: flex;
+  gap: 0.25rem;
+}
+
+.indicator {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0.3);
+  transition: all 0.3s ease;
+}
+
+.indicator.done {
+  background: rgba(16, 185, 129, 0.3);
+  color: #10b981;
+}
+
+.currentIndicator {
+  position: absolute;
+  bottom: -4px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  animation: currentPulse 1.5s ease-in-out infinite;
+}
+
+@keyframes currentPulse {
+  0%, 100% {
+    box-shadow: 0 0 0 0 currentColor;
+  }
+  50% {
+    box-shadow: 0 0 8px 4px transparent;
+  }
+}
+
+/* ============================================================================
+   DIRECTION ARROWS
+   ============================================================================ */
+
+.directionArrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(255, 255, 255, 0.3);
+}
+
+.directionArrow svg {
+  width: 20px;
+  height: 20px;
+}
+
+/* ============================================================================
+   SNAKE TURN INDICATOR
+   ============================================================================ */
+
+.snakeTurn {
+  display: flex;
+  justify-content: center;
+  margin: 0.5rem 0;
+  color: rgba(255, 255, 255, 0.3);
+}
+
+.snakeTurn svg {
+  width: 24px;
+  height: 24px;
+}
+
+/* ============================================================================
+   LEGEND
+   ============================================================================ */
+
+.legend {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 0.75rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.legendItem {
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+  font-size: 0.65rem;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.legendItem .indicator {
+  width: 14px;
+  height: 14px;
+}
+
+/* ============================================================================
+   SETUP HIGHLIGHTS (Board Overlay)
+   ============================================================================ */
+
+.setupHighlights {
+  pointer-events: none;
+}
+
+.setupHighlightVertex,
+.setupHighlightEdge {
+  pointer-events: auto;
+  cursor: pointer;
+}
+
+.highlightCircle {
+  transition: all 0.2s ease;
+}
+
+.highlightCircle:hover {
+  transform: scale(1.2);
+  filter: brightness(1.2);
+}
+
+.pulseRing {
+  animation: pulseRingAnim 2s ease-out infinite;
+}
+
+@keyframes pulseRingAnim {
+  0% {
+    r: 10;
+    opacity: 0.8;
+  }
+  100% {
+    r: 20;
+    opacity: 0;
+  }
+}
+
+.highlightDot {
+  animation: dotPulse 1.5s ease-in-out infinite;
+}
+
+@keyframes dotPulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.6;
+  }
+}
+
+.highlightLine {
+  transition: all 0.2s ease;
+}
+
+.highlightLine:hover {
+  stroke-width: 8;
+  filter: brightness(1.2);
+}
+
+.pulseEdge {
+  animation: pulseEdgeAnim 2s ease-out infinite;
+}
+
+@keyframes pulseEdgeAnim {
+  0% {
+    stroke-width: 6;
+    opacity: 0.6;
+  }
+  100% {
+    stroke-width: 14;
+    opacity: 0;
+  }
+}
+
+.highlightEdgeDot {
+  animation: dotPulse 1.5s ease-in-out infinite;
+}
+
+/* ============================================================================
+   RESPONSIVE ADJUSTMENTS
+   ============================================================================ */
+
+@media (max-width: 768px) {
+  .setupOverlay {
+    padding: 0.75rem 1rem;
+  }
+
+  .phaseLabel {
+    font-size: 1rem;
+  }
+
+  .timer {
+    font-size: 1rem;
+    padding: 0.375rem 0.75rem;
+  }
+
+  .turnSlot {
+    min-width: 55px;
+    padding: 0.375rem;
+  }
+
+  .slotPlayerName {
+    font-size: 0.6rem;
+    max-width: 50px;
+  }
+
+  .instructionsPanel,
+  .turnOrderContainer {
+    padding: 0.75rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .header {
+    flex-direction: column;
+    gap: 0.5rem;
+    align-items: flex-start;
+  }
+
+  .turnRow {
+    justify-content: center;
+  }
+
+  .snakeDescription {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.25rem;
+  }
+}

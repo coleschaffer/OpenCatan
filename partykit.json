@@ -1,0 +1,9 @@
+{
+  "$schema": "https://www.partykit.io/schema.json",
+  "name": "open-catan",
+  "main": "party/index.ts",
+  "compatibilityDate": "2024-12-01",
+  "parties": {
+    "game": "party/index.ts"
+  }
+}

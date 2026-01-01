@@ -1,0 +1,207 @@
+/* PortIndicator Component Styles */
+
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.container.horizontal {
+  flex-direction: row;
+  align-items: center;
+}
+
+.container.vertical {
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.container.compact {
+  gap: 4px;
+}
+
+.container.empty {
+  justify-content: center;
+}
+
+.emptyMessage {
+  color: #666666;
+  font-style: italic;
+  font-size: 0.85rem;
+}
+
+/* Rate Item */
+.rateItem {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 10px;
+  background-color: #2a2a2a;
+  border-radius: 6px;
+  border: 1px solid #3a3a3a;
+  transition: all 0.15s ease;
+}
+
+.rateItem.hasPort {
+  background-color: color-mix(in srgb, var(--resource-color) 15%, #2a2a2a);
+  border-color: color-mix(in srgb, var(--resource-color) 40%, transparent);
+}
+
+.icon {
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+}
+
+.rate {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #888888;
+}
+
+.rateItem.hasPort .rate {
+  color: #ffffff;
+}
+
+/* Compact Mode */
+.container.compact .rateItem {
+  padding: 4px 8px;
+  gap: 4px;
+}
+
+.container.compact .icon {
+  width: 18px;
+  height: 18px;
+}
+
+.container.compact .rate {
+  font-size: 0.8rem;
+}
+
+/* Port Badge */
+.portBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 10px;
+  background-color: color-mix(in srgb, var(--resource-color, #4a90a4) 20%, #2a2a2a);
+  border: 1px solid color-mix(in srgb, var(--resource-color, #4a90a4) 50%, transparent);
+  border-radius: 12px;
+}
+
+.portBadge.generic {
+  --resource-color: #4a90a4;
+}
+
+.badgeIcon {
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
+}
+
+.genericIcon {
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  color: #4a90a4;
+  font-size: 1rem;
+}
+
+.badgeRate {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+/* Port Badge Sizes */
+.portBadge.small {
+  padding: 2px 6px;
+  gap: 3px;
+}
+
+.portBadge.small .badgeIcon,
+.portBadge.small .genericIcon {
+  width: 16px;
+  height: 16px;
+  font-size: 0.85rem;
+}
+
+.portBadge.small .badgeRate {
+  font-size: 0.75rem;
+}
+
+.portBadge.large {
+  padding: 6px 14px;
+  gap: 6px;
+}
+
+.portBadge.large .badgeIcon,
+.portBadge.large .genericIcon {
+  width: 26px;
+  height: 26px;
+  font-size: 1.1rem;
+}
+
+.portBadge.large .badgeRate {
+  font-size: 0.95rem;
+}
+
+/* Trade Rate Summary */
+.summary {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: center;
+}
+
+.summaryText {
+  color: #888888;
+  font-size: 0.85rem;
+}
+
+.summaryGroup {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  background-color: #2a2a2a;
+  border-radius: 6px;
+}
+
+.summaryRate {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #4caf50;
+  min-width: 28px;
+}
+
+.summaryIcons {
+  display: flex;
+  gap: 4px;
+}
+
+.summaryIcon {
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+  .rateItem {
+    padding: 4px 8px;
+    gap: 4px;
+  }
+
+  .icon {
+    width: 20px;
+    height: 20px;
+  }
+
+  .rate {
+    font-size: 0.8rem;
+  }
+}
