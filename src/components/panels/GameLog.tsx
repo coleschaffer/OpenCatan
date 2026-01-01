@@ -121,6 +121,69 @@ const stripPlayerName = (message: string, playerName?: string): string => {
 };
 
 /**
+ * Replace text with inline SVG icons in messages
+ */
+const replaceTextWithIcons = (message: string, playerColor?: PlayerColor): React.ReactNode => {
+  const color = playerColor || 'red';
+
+  // Define replacements with their corresponding icon paths
+  const replacements: Array<{pattern: RegExp, iconPath: string, alt: string}> = [
+    // Building replacements
+    { pattern: /\b(a )?settlement(s)?\b/gi, iconPath: `/assets/buildings/settlement_${color}.svg`, alt: 'settlement' },
+    { pattern: /\b(a )?city\b/gi, iconPath: `/assets/buildings/city_${color}.svg`, alt: 'city' },
+    { pattern: /\b(a )?cities\b/gi, iconPath: `/assets/buildings/city_${color}.svg`, alt: 'cities' },
+    { pattern: /\b(a )?road(s)?\b/gi, iconPath: `/assets/buildings/road_${color}.svg`, alt: 'road' },
+
+    // Robber/Knight replacements
+    { pattern: /\brobber\b/gi, iconPath: '/assets/icons/icon_robber.svg', alt: 'robber' },
+    { pattern: /\bknight(s)?\b/gi, iconPath: `/assets/pieces/knight_level1_active_${color}.svg`, alt: 'knight' },
+
+    // Trading replacements
+    { pattern: /\btrade(d)?\b/gi, iconPath: '/assets/icons/icon_trade.svg', alt: 'trade' },
+
+    // Dev card replacements
+    { pattern: /\bdevelopment card(s)?\b/gi, iconPath: '/assets/icons/icon_buy_dev_card.svg', alt: 'development card' },
+    { pattern: /\bdev card(s)?\b/gi, iconPath: '/assets/icons/icon_buy_dev_card.svg', alt: 'dev card' },
+  ];
+
+  // Split message into parts and replace with icons
+  let parts: Array<string | React.ReactElement> = [message];
+
+  replacements.forEach(({ pattern, iconPath, alt }) => {
+    const newParts: Array<string | React.ReactElement> = [];
+
+    parts.forEach((part) => {
+      if (typeof part === 'string') {
+        const segments = part.split(pattern);
+        const matches = part.match(pattern) || [];
+
+        segments.forEach((segment, index) => {
+          if (segment) newParts.push(segment);
+
+          if (index < segments.length - 1 && matches[index]) {
+            newParts.push(
+              <img
+                key={`${alt}-${index}-${Date.now()}`}
+                src={iconPath}
+                alt={alt}
+                className={styles.inlineIcon}
+                style={{ verticalAlign: 'middle' }}
+              />
+            );
+          }
+        });
+      } else {
+        newParts.push(part);
+      }
+    });
+
+    parts = newParts;
+  });
+
+  return <>{parts}</>;
+};
+
+/**
  * GameLog - Event log panel
  *
  * Displays game events with filtering based on visibility.
@@ -195,7 +258,9 @@ export const GameLog: React.FC<GameLogProps> = ({ entries, myPlayerId }) => {
                     </span>{' '}
                   </>
                 )}
-                <span className={styles.message}>{cleanMessage}</span>
+                <span className={styles.message}>
+                  {replaceTextWithIcons(cleanMessage, entry.playerColor)}
+                </span>
               </span>
             </div>
           );

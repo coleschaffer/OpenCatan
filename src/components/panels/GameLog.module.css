@@ -96,6 +96,15 @@
   color: #aaa;
 }
 
+.inlineIcon {
+  display: inline-block;
+  width: 14px !important;
+  height: 14px !important;
+  margin: 0 2px;
+  vertical-align: middle;
+  object-fit: contain;
+}
+
 /* Mobile styles */
 @media (max-width: 768px) {
   .gameLog {
@@ -115,5 +124,11 @@
   .icon {
     width: 14px;
     height: 14px;
+  }
+
+  .inlineIcon {
+    width: 12px;
+    height: 12px;
+    margin: 0 1px;
   }
 }
