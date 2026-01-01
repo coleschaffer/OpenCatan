@@ -1686,17 +1686,16 @@
   min-width: 22px;
   height: 22px;
   padding: 0 5px;
-  background: rgba(0, 0, 0, 0.95);
-  border: 1px solid rgba(255, 255, 255, 0.4);
+  background: rgba(30, 30, 30, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.15);
   border-radius: 11px;
   font-size: 12px;
-  font-weight: 700;
-  color: #fff;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.7);
   display: flex;
   align-items: center;
   justify-content: center;
   z-index: 10;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
 }
 
 .bankDevDeck {
