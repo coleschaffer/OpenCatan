@@ -288,10 +288,7 @@ export const PlayerHand: React.FC<PlayerHandProps> = ({
 
       {/* Resource cards section - stacking card design with SVG images */}
       <div className={styles.resourceStacks}>
-        {totalResources === 0 ? (
-          <div className={styles.noCardsMessage}>No resource cards</div>
-        ) : (
-          activeResources.map((type) => {
+        {activeResources.map((type) => {
             const config = RESOURCE_CONFIG[type];
             const count = player.resources[type];
             // Limit visual stack to 5 cards max for performance
@@ -328,8 +325,7 @@ export const PlayerHand: React.FC<PlayerHandProps> = ({
                 <div className={styles.stackCount}>{count}</div>
               </div>
             );
-          })
-        )}
+          })}
       </div>
 
       {/* Development cards section - compact inline with SVG images */}
