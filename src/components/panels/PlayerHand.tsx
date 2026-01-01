@@ -231,6 +231,48 @@ export const PlayerHand: React.FC<PlayerHandProps> = ({
 
   return (
     <div className={`${styles.playerHand} ${className || ''}`}>
+      {/* Resource cards section - stacking card design with SVG images */}
+      <div className={styles.resourceStacks}>
+        {activeResources.map((type) => {
+            const config = RESOURCE_CONFIG[type];
+            const count = player.resources[type];
+            // Limit visual stack to 5 cards max for performance
+            const visualCount = Math.min(count, 5);
+            const cardOffset = 8; // pixels between stacked cards
+
+            return (
+              <div
+                key={type}
+                className={styles.resourceStack}
+                title={`${config.label}: ${count}`}
+                style={{
+                  width: `${48 + (visualCount - 1) * cardOffset}px`,
+                }}
+              >
+                {/* Render stacked cards */}
+                {Array.from({ length: visualCount }).map((_, i) => (
+                  <div
+                    key={i}
+                    className={styles.stackedCard}
+                    style={{
+                      left: `${i * cardOffset}px`,
+                      zIndex: i,
+                    } as React.CSSProperties}
+                  >
+                    <img
+                      src={config.image}
+                      alt={config.label}
+                      className={styles.cardImage}
+                    />
+                  </div>
+                ))}
+                {/* Count badge */}
+                <div className={styles.stackCount}>{count}</div>
+              </div>
+            );
+          })}
+      </div>
+
       {/* Purchase buttons section */}
       <div className={styles.purchaseButtons}>
         {purchaseTypes.map((purchaseType) => {
@@ -283,48 +325,6 @@ export const PlayerHand: React.FC<PlayerHandProps> = ({
             </div>
           );
         })}
-      </div>
-
-      {/* Resource cards section - stacking card design with SVG images */}
-      <div className={styles.resourceStacks}>
-        {activeResources.map((type) => {
-            const config = RESOURCE_CONFIG[type];
-            const count = player.resources[type];
-            // Limit visual stack to 5 cards max for performance
-            const visualCount = Math.min(count, 5);
-            const cardOffset = 8; // pixels between stacked cards
-
-            return (
-              <div
-                key={type}
-                className={styles.resourceStack}
-                title={`${config.label}: ${count}`}
-                style={{
-                  width: `${48 + (visualCount - 1) * cardOffset}px`,
-                }}
-              >
-                {/* Render stacked cards */}
-                {Array.from({ length: visualCount }).map((_, i) => (
-                  <div
-                    key={i}
-                    className={styles.stackedCard}
-                    style={{
-                      left: `${i * cardOffset}px`,
-                      zIndex: i,
-                    } as React.CSSProperties}
-                  >
-                    <img
-                      src={config.image}
-                      alt={config.label}
-                      className={styles.cardImage}
-                    />
-                  </div>
-                ))}
-                {/* Count badge */}
-                <div className={styles.stackCount}>{count}</div>
-              </div>
-            );
-          })}
       </div>
 
       {/* Development cards section - compact inline with SVG images */}
