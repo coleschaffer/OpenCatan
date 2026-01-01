@@ -1686,12 +1686,12 @@
   min-width: 22px;
   height: 22px;
   padding: 0 5px;
-  background: var(--panel-bg);
-  border: 2px solid var(--panel-accent);
+  background: rgba(0, 0, 0, 0.75);
+  border: 1px solid rgba(255, 255, 255, 0.2);
   border-radius: 11px;
   font-size: 12px;
   font-weight: 700;
-  color: var(--panel-accent);
+  color: rgba(255, 255, 255, 0.9);
   display: flex;
   align-items: center;
   justify-content: center;
