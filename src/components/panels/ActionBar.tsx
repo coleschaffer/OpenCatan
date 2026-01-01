@@ -1,5 +1,4 @@
 import React from 'react';
-import { BuildingToolbar } from './BuildingToolbar';
 import styles from './ActionBar.module.css';
 
 /**
@@ -180,15 +179,9 @@ export const ActionBar: React.FC<ActionBarProps> = ({
           </button>
         )}
 
-        {/* Main phase actions - BuildingToolbar replaces Build and Dev Card buttons */}
+        {/* Main phase actions */}
         {showMainActions && (
           <>
-            {/* Building Toolbar - Road, Settlement, City, Dev Card icons */}
-            <BuildingToolbar
-              canBuild={canBuild}
-              canBuyDevCard={canBuyDevCard}
-            />
-
             {/* Trade button */}
             <button
               className={`${styles.actionButton} ${canTrade ? '' : styles.disabled}`}

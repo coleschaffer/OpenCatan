@@ -47,8 +47,6 @@ export type { BuildingType, BuildingCost } from './BuildMenu';
 export { BuildModeSelector, BUILDING_COSTS as BUILD_COSTS } from './BuildModeSelector';
 export type { BuildingType as BuildType, BuildingCost as BuildCost } from './BuildModeSelector';
 
-export { BuildingToolbar } from './BuildingToolbar';
-
 // ============================================================================
 // Log and Chat
 // ============================================================================
