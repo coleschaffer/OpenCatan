@@ -12,9 +12,17 @@
 }
 
 .phaseSection {
+  position: fixed;
+  top: 16px;
+  left: 16px;
   display: flex;
   align-items: center;
   gap: 12px;
+  background: #1e1e1e;
+  padding: 10px 16px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  z-index: 100;
 }
 
 .phaseLabel {
@@ -182,8 +190,9 @@
   }
 
   .phaseSection {
-    width: 100%;
-    justify-content: space-between;
+    top: 12px;
+    left: 12px;
+    padding: 8px 12px;
   }
 
   .actions {
