@@ -45,7 +45,7 @@ export const RoadPiece: React.FC<RoadPieceProps> = ({ color, position, rotation,
   // We keep it vertical and let the rotation align it to the edge
   // Road length should match edge length (hexSize)
   const roadLength = hexSize * 1.0;
-  const roadThickness = hexSize * 0.55;
+  const roadThickness = hexSize * 0.75;
 
   return (
     <g
