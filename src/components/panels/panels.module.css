@@ -392,6 +392,145 @@
   min-width: 0;
 }
 
+/* Purchase buttons section */
+.purchaseButtons {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 8px;
+  padding-right: 16px;
+  border-right: 1px solid var(--panel-border);
+}
+
+.purchaseButtonWrapper {
+  position: relative;
+}
+
+.purchaseButton {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  padding: 8px 10px;
+  background: var(--panel-bg-secondary);
+  border: 2px solid var(--panel-border);
+  border-radius: var(--panel-radius-sm);
+  cursor: pointer;
+  transition: var(--panel-transition);
+  min-width: 56px;
+}
+
+.purchaseButton:hover:not(:disabled) {
+  border-color: var(--panel-border-hover);
+  background: #2a2a2a;
+}
+
+.purchaseButton:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.purchaseButtonAffordable {
+  border-color: var(--panel-success);
+  box-shadow: 0 0 8px rgba(76, 175, 80, 0.3);
+}
+
+.purchaseButtonAffordable:hover:not(:disabled) {
+  border-color: var(--panel-success);
+  box-shadow: 0 0 12px rgba(76, 175, 80, 0.5);
+  transform: translateY(-2px);
+}
+
+.purchaseButtonImage {
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
+}
+
+.purchaseButtonLabel {
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--panel-text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+}
+
+.purchaseButtonAffordable .purchaseButtonLabel {
+  color: var(--panel-success);
+}
+
+/* Purchase cost tooltip */
+.purchaseCostTooltip {
+  position: absolute;
+  bottom: calc(100% + 8px);
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 10px 12px;
+  background: var(--panel-bg);
+  border: 1px solid var(--panel-border);
+  border-radius: var(--panel-radius-sm);
+  box-shadow: var(--panel-shadow);
+  z-index: 100;
+  white-space: nowrap;
+}
+
+.purchaseCostTooltip::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border: 6px solid transparent;
+  border-top-color: var(--panel-border);
+}
+
+.purchaseCostTitle {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--panel-text);
+  margin-bottom: 8px;
+  text-align: center;
+}
+
+.purchaseCostResources {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+}
+
+.purchaseCostItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 4px;
+  border-radius: 4px;
+  border: 2px solid transparent;
+  transition: var(--panel-transition);
+  opacity: 0.5;
+}
+
+.purchaseCostOwned {
+  opacity: 1;
+  border-color: var(--panel-success);
+  background: rgba(76, 175, 80, 0.1);
+  box-shadow: 0 0 6px rgba(76, 175, 80, 0.3);
+}
+
+.purchaseCostImage {
+  width: 32px;
+  height: 44px;
+  object-fit: contain;
+  border-radius: 3px;
+}
+
+.purchaseCostAmount {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--panel-text);
+}
+
 /* Resource stacks container */
 .resourceStacks {
   display: flex;

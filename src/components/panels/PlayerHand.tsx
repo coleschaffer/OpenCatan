@@ -1,11 +1,11 @@
 // @ts-nocheck
 // TODO: Fix TypeScript errors in this file
-import React, { useCallback, useMemo } from 'react';
+import React, { useCallback, useMemo, useState } from 'react';
 import { useAppSelector } from '@/hooks/useAppSelector';
 import { selectPlayerById, selectCanPlayDevCard } from '@/game/state/slices/playersSlice';
 import { selectLocalPlayerId } from '@/game/state/slices/lobbySlice';
 import { selectPhase, selectDevCardPlayedThisTurn } from '@/game/state/slices/gameSlice';
-import type { ResourceType, DevelopmentCard, DevelopmentCardType } from '@/types';
+import type { ResourceType, DevelopmentCard, DevelopmentCardType, PlayerColor } from '@/types';
 import styles from './panels.module.css';
 
 interface PlayerHandProps {
@@ -65,6 +65,48 @@ const DEV_CARD_CONFIG: Record<
     color: '#e65100',
     image: '/assets/cards/card_monopoly.svg',
     description: 'Take all of one resource type from all players',
+  },
+};
+
+/**
+ * Purchase item configuration with costs and building assets
+ */
+type PurchaseType = 'road' | 'settlement' | 'city' | 'devCard';
+
+interface PurchaseCost {
+  brick?: number;
+  lumber?: number;
+  ore?: number;
+  grain?: number;
+  wool?: number;
+}
+
+interface PurchaseConfig {
+  label: string;
+  costs: PurchaseCost;
+  getBuildingImage: (color: PlayerColor) => string;
+}
+
+const PURCHASE_CONFIG: Record<PurchaseType, PurchaseConfig> = {
+  road: {
+    label: 'Road',
+    costs: { brick: 1, lumber: 1 },
+    getBuildingImage: (color: PlayerColor) => `/assets/buildings/road_${color}.svg`,
+  },
+  settlement: {
+    label: 'Settlement',
+    costs: { brick: 1, lumber: 1, wool: 1, grain: 1 },
+    getBuildingImage: (color: PlayerColor) => `/assets/buildings/settlement_${color}.svg`,
+  },
+  city: {
+    label: 'City',
+    costs: { ore: 3, grain: 2 },
+    getBuildingImage: (color: PlayerColor) => `/assets/pieces/city_${color}.svg`,
+  },
+  devCard: {
+    label: 'Dev Card',
+    costs: { ore: 1, wool: 1, grain: 1 },
+    getBuildingImage: () => '/assets/cards/card_devcardback.svg',
   },
 };
 
@@ -150,6 +192,33 @@ export const PlayerHand: React.FC<PlayerHandProps> = ({
     return groups;
   }, [player]);
 
+  // Track which purchase button is being hovered for tooltip
+  const [hoveredPurchase, setHoveredPurchase] = useState<PurchaseType | null>(null);
+
+  /**
+   * Check if player can afford a purchase
+   */
+  const canAfford = useCallback(
+    (costs: PurchaseCost): boolean => {
+      if (!player) return false;
+      return Object.entries(costs).every(
+        ([resource, amount]) => player.resources[resource as ResourceType] >= (amount || 0)
+      );
+    },
+    [player]
+  );
+
+  /**
+   * Check if player has at least one of a resource
+   */
+  const hasResource = useCallback(
+    (resource: ResourceType): boolean => {
+      if (!player) return false;
+      return player.resources[resource] > 0;
+    },
+    [player]
+  );
+
   if (!player) {
     return null;
   }
@@ -157,8 +226,66 @@ export const PlayerHand: React.FC<PlayerHandProps> = ({
   // Get resources that have cards (count > 0)
   const activeResources = resourceTypes.filter(type => player.resources[type] > 0);
 
+  // Purchase types to display
+  const purchaseTypes: PurchaseType[] = ['road', 'settlement', 'city', 'devCard'];
+
   return (
     <div className={`${styles.playerHand} ${className || ''}`}>
+      {/* Purchase buttons section */}
+      <div className={styles.purchaseButtons}>
+        {purchaseTypes.map((purchaseType) => {
+          const config = PURCHASE_CONFIG[purchaseType];
+          const affordable = canAfford(config.costs);
+
+          return (
+            <div
+              key={purchaseType}
+              className={styles.purchaseButtonWrapper}
+              onMouseEnter={() => setHoveredPurchase(purchaseType)}
+              onMouseLeave={() => setHoveredPurchase(null)}
+            >
+              <button
+                className={`${styles.purchaseButton} ${affordable ? styles.purchaseButtonAffordable : ''}`}
+                disabled={!affordable}
+              >
+                <img
+                  src={config.getBuildingImage(player.color as PlayerColor)}
+                  alt={config.label}
+                  className={styles.purchaseButtonImage}
+                />
+                <span className={styles.purchaseButtonLabel}>{config.label}</span>
+              </button>
+
+              {/* Cost tooltip on hover */}
+              {hoveredPurchase === purchaseType && (
+                <div className={styles.purchaseCostTooltip}>
+                  <div className={styles.purchaseCostTitle}>{config.label} Cost:</div>
+                  <div className={styles.purchaseCostResources}>
+                    {Object.entries(config.costs).map(([resource, amount]) => {
+                      const resourceConfig = RESOURCE_CONFIG[resource as ResourceType];
+                      const owned = hasResource(resource as ResourceType);
+                      return (
+                        <div
+                          key={resource}
+                          className={`${styles.purchaseCostItem} ${owned ? styles.purchaseCostOwned : ''}`}
+                        >
+                          <img
+                            src={resourceConfig.image}
+                            alt={resourceConfig.label}
+                            className={styles.purchaseCostImage}
+                          />
+                          <span className={styles.purchaseCostAmount}>x{amount}</span>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
+              )}
+            </div>
+          );
+        })}
+      </div>
+
       {/* Resource cards section - stacking card design with SVG images */}
       <div className={styles.resourceStacks}>
         {totalResources === 0 ? (
