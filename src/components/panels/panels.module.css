@@ -1681,22 +1681,22 @@
 
 .bankCount {
   position: absolute;
-  bottom: -4px;
-  left: 50%;
-  transform: translateX(-50%);
-  min-width: 18px;
-  height: 18px;
-  padding: 0 4px;
+  top: -8px;
+  right: -8px;
+  min-width: 22px;
+  height: 22px;
+  padding: 0 5px;
   background: var(--panel-bg);
-  border: 1px solid var(--panel-border);
-  border-radius: 9px;
-  font-size: 10px;
-  font-weight: 600;
-  color: var(--panel-text);
+  border: 2px solid var(--panel-accent);
+  border-radius: 11px;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--panel-accent);
   display: flex;
   align-items: center;
   justify-content: center;
   z-index: 10;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 }
 
 .bankDevDeck {
