@@ -370,15 +370,13 @@
   color: #fff;
 }
 
-/* Compact card background using player color SVG */
+/* Compact card background using player color */
 .compactBg {
   position: absolute;
   inset: 0;
-  background-image: var(--player-bg);
-  background-size: cover;
-  background-position: center;
-  opacity: 0.15;
-  border-radius: 8px;
+  background: var(--player-color, #666);
+  opacity: 0.12;
+  border-radius: 6px;
   pointer-events: none;
 }
 
