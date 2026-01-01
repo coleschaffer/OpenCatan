@@ -253,7 +253,6 @@ export const PlayerHand: React.FC<PlayerHandProps> = ({
                   alt={config.label}
                   className={styles.purchaseButtonImage}
                 />
-                <span className={styles.purchaseButtonLabel}>{config.label}</span>
               </button>
 
               {/* Cost tooltip on hover */}
