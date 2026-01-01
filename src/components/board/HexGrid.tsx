@@ -152,6 +152,10 @@ export const HexGrid: React.FC<HexGridProps> = ({
   const [isDragging, setIsDragging] = useState(false);
   const [dragStart, setDragStart] = useState({ x: 0, y: 0 });
 
+  // Touch state for pinch-to-zoom
+  const [touches, setTouches] = useState<TouchList | null>(null);
+  const [lastPinchDistance, setLastPinchDistance] = useState<number | null>(null);
+
   // Calculate viewBox dimensions
   const bounds = calculateBounds(tiles, hexSize);
   const viewWidth = bounds.maxX - bounds.minX;
@@ -238,17 +242,21 @@ export const HexGrid: React.FC<HexGridProps> = ({
       const mouseX = e.clientX - rect.left;
       const mouseY = e.clientY - rect.top;
 
-      // Calculate the point under the mouse before zoom
-      const scaleDiff = newScale / transform.scale;
+      // Convert mouse position to world coordinates before zoom
+      const worldX = (mouseX - transform.x) / transform.scale;
+      const worldY = (mouseY - transform.y) / transform.scale;
 
-      // Adjust translation so the point under the mouse stays fixed
-      setTransform(prev => ({
-        x: mouseX - (mouseX - prev.x) * scaleDiff,
-        y: mouseY - (mouseY - prev.y) * scaleDiff,
+      // Calculate new translation to keep the world point under the mouse cursor
+      const newX = mouseX - worldX * newScale;
+      const newY = mouseY - worldY * newScale;
+
+      setTransform({
+        x: newX,
+        y: newY,
         scale: newScale,
-      }));
+      });
     }
-  }, [transform.scale]);
+  }, [transform]);
 
   // Reset view on double-click
   const handleDoubleClick = useCallback(() => {
@@ -258,6 +266,85 @@ export const HexGrid: React.FC<HexGridProps> = ({
   // Prevent default context menu
   const handleContextMenu = useCallback((e: React.MouseEvent) => {
     e.preventDefault();
+  }, []);
+
+  // Touch handlers for pinch-to-zoom
+  const handleTouchStart = useCallback((e: React.TouchEvent) => {
+    if (e.touches.length === 2) {
+      // Two fingers - prepare for pinch zoom
+      const touch1 = e.touches[0];
+      const touch2 = e.touches[1];
+      const distance = Math.hypot(
+        touch2.clientX - touch1.clientX,
+        touch2.clientY - touch1.clientY
+      );
+      setLastPinchDistance(distance);
+      setTouches(e.touches);
+    } else if (e.touches.length === 1) {
+      // Single touch - prepare for pan
+      setIsDragging(true);
+      setDragStart({
+        x: e.touches[0].clientX - transform.x,
+        y: e.touches[0].clientY - transform.y
+      });
+    }
+  }, [transform.x, transform.y]);
+
+  const handleTouchMove = useCallback((e: React.TouchEvent) => {
+    if (e.touches.length === 2 && lastPinchDistance !== null) {
+      // Pinch zoom
+      e.preventDefault();
+      const touch1 = e.touches[0];
+      const touch2 = e.touches[1];
+
+      const currentDistance = Math.hypot(
+        touch2.clientX - touch1.clientX,
+        touch2.clientY - touch1.clientY
+      );
+
+      const scale = currentDistance / lastPinchDistance;
+      const newScale = Math.min(Math.max(transform.scale * scale, 0.5), 3);
+
+      // Calculate pinch center
+      const centerX = (touch1.clientX + touch2.clientX) / 2;
+      const centerY = (touch1.clientY + touch2.clientY) / 2;
+
+      const rect = svgRef.current?.getBoundingClientRect();
+      if (rect) {
+        // Get center position relative to the SVG element
+        const relX = centerX - rect.left;
+        const relY = centerY - rect.top;
+
+        // Convert to world coordinates
+        const worldX = (relX - transform.x) / transform.scale;
+        const worldY = (relY - transform.y) / transform.scale;
+
+        // Calculate new translation
+        const newX = relX - worldX * newScale;
+        const newY = relY - worldY * newScale;
+
+        setTransform({
+          x: newX,
+          y: newY,
+          scale: newScale,
+        });
+      }
+
+      setLastPinchDistance(currentDistance);
+    } else if (e.touches.length === 1 && isDragging) {
+      // Pan with single touch
+      setTransform(prev => ({
+        ...prev,
+        x: e.touches[0].clientX - dragStart.x,
+        y: e.touches[0].clientY - dragStart.y,
+      }));
+    }
+  }, [transform, lastPinchDistance, isDragging, dragStart]);
+
+  const handleTouchEnd = useCallback(() => {
+    setIsDragging(false);
+    setLastPinchDistance(null);
+    setTouches(null);
   }, []);
 
   return (
@@ -274,6 +361,9 @@ export const HexGrid: React.FC<HexGridProps> = ({
         onWheel={handleWheel}
         onDoubleClick={handleDoubleClick}
         onContextMenu={handleContextMenu}
+        onTouchStart={handleTouchStart}
+        onTouchMove={handleTouchMove}
+        onTouchEnd={handleTouchEnd}
       >
         <defs>
           {/* Gradient definitions for terrain textures */}
