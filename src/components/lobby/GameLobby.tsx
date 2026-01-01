@@ -5,7 +5,6 @@ import { RoomCode } from './RoomCode';
 import { PlayerList, type LobbyPlayerInfo } from './PlayerList';
 import { ColorPicker } from './ColorPicker';
 import { GameSettings, type LobbyGameSettings } from './GameSettings';
-import { ReadyButton } from './ReadyButton';
 import { StartGameButton } from './StartGameButton';
 import styles from './lobby.module.css';
 
@@ -120,15 +119,6 @@ export function GameLobby({
               onChange={onColorChange}
             />
           </div>
-
-          {/* Ready Section */}
-          <div className={styles.gameLobbyReadySection}>
-            <ReadyButton
-              isReady={currentPlayer?.isReady || false}
-              hasColorSelected={currentPlayer?.color !== null}
-              onToggleReady={onToggleReady}
-            />
-          </div>
         </div>
 
         {/* Right Panel: Settings */}
@@ -158,7 +148,10 @@ export function GameLobby({
           playerCount={players.length}
           minPlayers={minPlayers}
           allPlayersReady={allPlayersReady}
+          isReady={currentPlayer?.isReady || false}
+          hasColorSelected={currentPlayer?.color !== null}
           onStartGame={onStart}
+          onToggleReady={onToggleReady}
         />
       </div>
     </div>

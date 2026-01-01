@@ -817,56 +817,6 @@
 }
 
 /* =============================================================================
-   READY BUTTON
-   ============================================================================= */
-
-.readyButton {
-  width: 100%;
-  padding: 0.875rem;
-  font-size: 1rem;
-  font-weight: 600;
-  border: 2px solid transparent;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-}
-
-.readyButtonNotReady {
-  background: transparent;
-  border-color: #27ae60;
-  color: #27ae60;
-}
-
-.readyButtonNotReady:hover:not(:disabled) {
-  background: rgba(39, 174, 96, 0.1);
-}
-
-.readyButtonReady {
-  background: #27ae60;
-  color: #ffffff;
-}
-
-.readyButtonReady:hover:not(:disabled) {
-  background: #2ecc71;
-}
-
-.readyButton:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
-}
-
-.readyButtonDisabledReason {
-  font-size: 0.75rem;
-  color: rgba(255, 255, 255, 0.5);
-  margin-top: 0.5rem;
-  text-align: center;
-}
-
-/* =============================================================================
    START GAME BUTTON
    ============================================================================= */
 
@@ -895,6 +845,16 @@
   background: linear-gradient(135deg, #7f8c8d, #95a5a6);
   cursor: not-allowed;
   opacity: 0.7;
+}
+
+.startGameButtonReady {
+  background: #27ae60;
+}
+
+.startGameButtonReady:hover:not(:disabled) {
+  background: #2ecc71;
+  transform: none;
+  box-shadow: 0 2px 8px rgba(46, 204, 113, 0.3);
 }
 
 .startGameButtonContainer {
@@ -984,11 +944,6 @@
   display: block;
 }
 
-.gameLobbyReadySection {
-  margin-top: 1.5rem;
-  padding-top: 1rem;
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
-}
 
 .gameLobbyFooter {
   display: flex;
