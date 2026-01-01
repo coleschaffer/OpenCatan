@@ -110,24 +110,7 @@ export const AnimatedRobber: React.FC<AnimatedRobberProps> = ({ position, onClic
         <circle cx={-2.5} cy={-14} r={1.5} fill="#ff4444" />
         <circle cx={2.5} cy={-14} r={1.5} fill="#ff4444" />
 
-        {/* Glow effect - stronger during animation */}
-        <ellipse
-          cx={0}
-          cy={8}
-          rx={12}
-          ry={8}
-          fill="none"
-          stroke={isAnimating ? 'rgba(255, 100, 0, 0.6)' : 'rgba(255, 0, 0, 0.3)'}
-          strokeWidth={isAnimating ? 3 : 2}
-          className="robber-glow"
-        >
-          <animate
-            attributeName="opacity"
-            values={isAnimating ? '0.6;1;0.6' : '0.3;0.6;0.3'}
-            dur={isAnimating ? '0.3s' : '2s'}
-            repeatCount="indefinite"
-          />
-        </ellipse>
+        {/* Glow effect removed per user request */}
       </g>
     </g>
   );

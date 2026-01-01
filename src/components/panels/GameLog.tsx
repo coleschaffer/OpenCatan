@@ -128,14 +128,14 @@ const replaceTextWithIcons = (message: string, playerColor?: PlayerColor): React
 
   // Define replacements with their corresponding icon paths
   const replacements: Array<{pattern: RegExp, iconPath: string, alt: string}> = [
-    // Building replacements
+    // Building replacements - handle plural forms and articles
     { pattern: /\b(a )?settlement(s)?\b/gi, iconPath: `/assets/buildings/settlement_${color}.svg`, alt: 'settlement' },
     { pattern: /\b(a )?city\b/gi, iconPath: `/assets/buildings/city_${color}.svg`, alt: 'city' },
-    { pattern: /\b(a )?cities\b/gi, iconPath: `/assets/buildings/city_${color}.svg`, alt: 'cities' },
+    { pattern: /\bcities\b/gi, iconPath: `/assets/buildings/city_${color}.svg`, alt: 'cities' },
     { pattern: /\b(a )?road(s)?\b/gi, iconPath: `/assets/buildings/road_${color}.svg`, alt: 'road' },
 
     // Robber/Knight replacements
-    { pattern: /\brobber\b/gi, iconPath: '/assets/icons/icon_robber.svg', alt: 'robber' },
+    { pattern: /\b(the )?robber\b/gi, iconPath: '/assets/icons/icon_robber.svg', alt: 'robber' },
     { pattern: /\bknight(s)?\b/gi, iconPath: `/assets/pieces/knight_level1_active_${color}.svg`, alt: 'knight' },
 
     // Trading replacements
@@ -146,41 +146,69 @@ const replaceTextWithIcons = (message: string, playerColor?: PlayerColor): React
     { pattern: /\bdev card(s)?\b/gi, iconPath: '/assets/icons/icon_buy_dev_card.svg', alt: 'dev card' },
   ];
 
-  // Split message into parts and replace with icons
-  let parts: Array<string | React.ReactElement> = [message];
+  // Collect all matches with their positions
+  interface Match {
+    start: number;
+    end: number;
+    iconPath: string;
+    originalText: string;
+  }
 
+  const allMatches: Match[] = [];
+
+  // Find all matches from all patterns
   replacements.forEach(({ pattern, iconPath, alt }) => {
-    const newParts: Array<string | React.ReactElement> = [];
-
-    parts.forEach((part) => {
-      if (typeof part === 'string') {
-        const segments = part.split(pattern);
-        const matches = part.match(pattern) || [];
-
-        segments.forEach((segment, index) => {
-          if (segment) newParts.push(segment);
-
-          if (index < segments.length - 1 && matches[index]) {
-            newParts.push(
-              <img
-                key={`${alt}-${index}-${Date.now()}`}
-                src={iconPath}
-                alt={alt}
-                className={styles.inlineIcon}
-                style={{ verticalAlign: 'middle' }}
-              />
-            );
-          }
+    const matches = [...message.matchAll(new RegExp(pattern.source, pattern.flags))];
+    matches.forEach(match => {
+      if (match.index !== undefined) {
+        allMatches.push({
+          start: match.index,
+          end: match.index + match[0].length,
+          iconPath,
+          originalText: match[0]
         });
-      } else {
-        newParts.push(part);
       }
     });
-
-    parts = newParts;
   });
 
-  return <>{parts}</>;
+  // Sort matches by start position
+  allMatches.sort((a, b) => a.start - b.start);
+
+  // Build result with text and icons
+  const result: React.ReactNode[] = [];
+  let currentIndex = 0;
+  let keyIndex = 0;
+
+  allMatches.forEach(match => {
+    // Add text before this match
+    if (match.start > currentIndex) {
+      result.push(message.substring(currentIndex, match.start));
+    }
+
+    // Add the icon
+    result.push(
+      <img
+        key={`icon-${keyIndex++}`}
+        src={match.iconPath}
+        alt={match.originalText}
+        className={styles.inlineIcon}
+      />
+    );
+
+    currentIndex = match.end;
+  });
+
+  // Add any remaining text
+  if (currentIndex < message.length) {
+    result.push(message.substring(currentIndex));
+  }
+
+  // If no replacements were made, return the original message
+  if (result.length === 0) {
+    return message;
+  }
+
+  return <>{result}</>;
 };
 
 /**
