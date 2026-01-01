@@ -133,6 +133,8 @@ export const ActionBar: React.FC<ActionBarProps> = ({
 
   /**
    * Check if we should show main action buttons
+   * Only show during main phase when it's the player's turn
+   * The BuildingToolbar should NOT be visible during roll phase or any other non-main phase
    */
   const showMainActions = phase === 'main' && isMyTurn;
 

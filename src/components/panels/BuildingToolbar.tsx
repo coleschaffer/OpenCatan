@@ -306,6 +306,13 @@ export const BuildingToolbar: React.FC<BuildingToolbarProps> = ({
   const cityStatus = getBuildingStatus('city');
   const devCardStatus = getBuildingStatus('devCard');
 
+  // Don't render the toolbar if it's not the player's turn during main phase
+  // This is a defensive check - the parent should also not render this component
+  // during roll phase or other non-main phases
+  if (!isMainPhase || !isMyTurn) {
+    return null;
+  }
+
   return (
     <div className={styles.buildingToolbar}>
       {/* Cancel button when in build mode */}
