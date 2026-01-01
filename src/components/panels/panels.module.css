@@ -388,6 +388,8 @@
   gap: 24px;
   padding: 8px 16px;
   background: transparent;
+  flex: 1;
+  min-width: 0;
 }
 
 /* Resource stacks container */

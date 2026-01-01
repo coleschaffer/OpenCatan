@@ -1,12 +1,14 @@
 .actionBar {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-end;
   gap: 16px;
   padding: 12px 20px;
   background: #1e1e1e;
   border-radius: 12px;
   box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.3);
+  margin-left: auto;
+  flex-shrink: 0;
 }
 
 .phaseSection {
