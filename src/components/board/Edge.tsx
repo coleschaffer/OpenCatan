@@ -1,6 +1,7 @@
 import React from 'react';
-import type { EdgeCoord, Road as RoadType, PlayerColor } from '../../types';
+import type { EdgeCoord, Road as RoadType, PlayerColor, HexTile } from '../../types';
 import { edgeToPixel, getEdgeRotation, edgeKey } from '../../utils/hex';
+import { getAdjacentHexes } from '../../utils/edge';
 import RoadPiece from './RoadPiece';
 
 interface EdgeProps {
@@ -11,6 +12,26 @@ interface EdgeProps {
   onClick?: (coord: EdgeCoord) => void;
   size?: number;
   playerColor?: PlayerColor; // For showing valid placement preview
+  allTiles?: HexTile[]; // To check if edge touches water
+}
+
+/**
+ * Helper function to check if an edge touches water
+ */
+function isEdgeTouchingWater(coord: EdgeCoord, tiles?: HexTile[]): boolean {
+  if (!tiles) return false;
+
+  const adjacentHexes = getAdjacentHexes(coord);
+
+  // Check if any adjacent hex is water
+  for (const hexCoord of adjacentHexes) {
+    const tile = tiles.find(t => t.coord.q === hexCoord.q && t.coord.r === hexCoord.r);
+    if (tile && tile.terrain === 'water') {
+      return true;
+    }
+  }
+
+  return false;
 }
 
 /**
@@ -25,6 +46,7 @@ export const Edge: React.FC<EdgeProps> = ({
   onClick,
   size = 50,
   playerColor,
+  allTiles,
 }) => {
   const position = edgeToPixel(coord, size);
   const rotation = getEdgeRotation(coord.direction);
@@ -39,6 +61,7 @@ export const Edge: React.FC<EdgeProps> = ({
   // Determine the visual state
   const showPlacementIndicator = isValid && !road;
   const showHighlight = isHighlighted && !road;
+  const isSeaEdge = isEdgeTouchingWater(coord, allTiles);
 
   // Road dimensions - vertical orientation to match RoadPiece
   const roadLength = size * 1.0;
@@ -107,15 +130,79 @@ export const Edge: React.FC<EdgeProps> = ({
       {/* Debug/development: thin line showing edge position - vertical then rotated */}
       {!road && !showPlacementIndicator && (
         <g transform={`translate(${position.x}, ${position.y}) rotate(${rotation})`}>
-          <line
-            x1={0}
-            y1={-roadLength / 2}
-            x2={0}
-            y2={roadLength / 2}
-            stroke="rgba(0, 0, 0, 0.1)"
-            strokeWidth={1}
-            className="edge-line"
-          />
+          {isSeaEdge ? (
+            // Sea edge styling - wave pattern with gradient
+            <g>
+              {/* Background blur effect */}
+              <line
+                x1={0}
+                y1={-roadLength / 2}
+                x2={0}
+                y2={roadLength / 2}
+                stroke="#1E6BA8"
+                strokeWidth={8}
+                className="edge-line sea-edge-blur"
+                opacity={0.2}
+                filter="url(#seaEdgeBlur)"
+              />
+              {/* Main wave line */}
+              <line
+                x1={0}
+                y1={-roadLength / 2}
+                x2={0}
+                y2={roadLength / 2}
+                stroke="#2E86AB"
+                strokeWidth={4}
+                strokeDasharray="6,3"
+                className="edge-line sea-edge"
+                opacity={0.8}
+              />
+              {/* Animated overlay */}
+              <line
+                x1={0}
+                y1={-roadLength / 2}
+                x2={0}
+                y2={roadLength / 2}
+                stroke="#A1C9F1"
+                strokeWidth={2}
+                strokeDasharray="6,3"
+                strokeDashoffset={0}
+                className="edge-line sea-edge-overlay"
+                opacity={0.6}
+              >
+                <animate
+                  attributeName="stroke-dashoffset"
+                  from="0"
+                  to="9"
+                  dur="2s"
+                  repeatCount="indefinite"
+                />
+              </line>
+              {/* Additional wave accent */}
+              <line
+                x1={0}
+                y1={-roadLength / 2}
+                x2={0}
+                y2={roadLength / 2}
+                stroke="#E8F4FD"
+                strokeWidth={1}
+                strokeDasharray="2,7"
+                className="edge-line sea-edge-accent"
+                opacity={0.8}
+              />
+            </g>
+          ) : (
+            // Regular edge
+            <line
+              x1={0}
+              y1={-roadLength / 2}
+              x2={0}
+              y2={roadLength / 2}
+              stroke="rgba(0, 0, 0, 0.1)"
+              strokeWidth={1}
+              className="edge-line"
+            />
+          )}
         </g>
       )}
     </g>

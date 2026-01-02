@@ -381,6 +381,11 @@ export const HexGrid: React.FC<HexGridProps> = ({
           </pattern>
 
           {/* Building shadow removed for cleaner look */}
+
+          {/* Sea edge blur filter */}
+          <filter id="seaEdgeBlur">
+            <feGaussianBlur in="SourceGraphic" stdDeviation="2" />
+          </filter>
         </defs>
 
         <g
@@ -419,6 +424,7 @@ export const HexGrid: React.FC<HexGridProps> = ({
                   onClick={onEdgeClick}
                   size={hexSize}
                   playerColor={currentPlayerColor}
+                  allTiles={tiles}
                 />
               );
             })}
