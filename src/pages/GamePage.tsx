@@ -97,8 +97,6 @@ import { GameBoard } from '@/components/board';
 import {
   GameHeader,
   PlayerPanelList,
-  PlayerHand,
-  ActionBar,
   Chat,
   BuildModeSelector,
   DiceDisplay,
@@ -725,30 +723,146 @@ export function GamePage() {
             />
           </div>
 
-          {/* Player hand + action bar */}
+          {/* Player hand + action bar - new horizontal layout */}
           <div className={styles.handArea}>
-            <ActionBar
-              phase={phase as any}
-              canBuild={canBuild}
-              canTrade={canTrade}
-              canBuyDevCard={canBuyDevCard}
-              canEndTurn={canEndTurn}
-              isMyTurn={isMyTurn}
-              turnTimeRemaining={turnTimeRemaining}
-              onAction={handleAction}
-            />
-            <PlayerHand
-              resources={myResources}
-              devCards={localPlayer?.developmentCards || []}
-              phase={phase}
-              canPlayDevCard={canPlayDevCard}
-              onPlayDevCard={(cardId) => {
-                dispatch(openModal({
-                  type: 'development-card',
-                  data: { cardId },
-                }));
-              }}
-            />
+            {/* Resource cards container */}
+            <div className={styles.resourceCardsContainer}>
+              {/* Resource cards display */}
+              {Object.entries(myResources).filter(([_, count]) => count > 0).map(([type, count]) => {
+                const resourceType = type as ResourceType;
+                return (
+                  <div key={type} className={styles.resourceStack}>
+                    <img
+                      src={`/assets/cards/card_${type}.svg`}
+                      alt={type}
+                      className={styles.resourceCardImage}
+                    />
+                    <span className={styles.resourceCount}>{count}</span>
+                  </div>
+                );
+              })}
+              {Object.values(myResources).every(count => count === 0) && (
+                <div className={styles.noResourcesPlaceholder}>
+                  No Resources
+                </div>
+              )}
+            </div>
+
+            {/* Trade button */}
+            <button
+              className={`${styles.iconButton} ${canTrade ? '' : styles.disabled}`}
+              onClick={() => canTrade && handleAction('trade')}
+              disabled={!canTrade}
+              title={canTrade ? 'Open trade menu' : 'Cannot trade right now'}
+            >
+              <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor">
+                <path d="M6.99 11L3 15l3.99 4v-3H14v-2H6.99v-3zM21 9l-3.99-4v3H10v2h7.01v3L21 9z" />
+              </svg>
+            </button>
+
+            {/* Dev Card button with count */}
+            <button
+              className={`${styles.iconButton} ${canBuyDevCard ? '' : styles.disabled}`}
+              onClick={() => canBuyDevCard && handleAction('buyDevCard')}
+              disabled={!canBuyDevCard}
+              title={`Buy Development Card${devDeckCount > 0 ? ` (${devDeckCount} left)` : ' (none left)'}`}
+            >
+              <img
+                src="/assets/cards/card_devcardback.svg"
+                alt="Dev Card"
+                className={styles.devCardIcon}
+              />
+              {(localPlayer?.developmentCards?.length || 0) > 0 && (
+                <span className={styles.iconCount}>{localPlayer?.developmentCards?.length}</span>
+              )}
+            </button>
+
+            {/* Road button with count */}
+            <button
+              className={`${styles.iconButton} ${canBuild && localPlayer?.roadsRemaining ? '' : styles.disabled}`}
+              onClick={() => canBuild && localPlayer?.roadsRemaining && handleAction('build')}
+              disabled={!canBuild || !localPlayer?.roadsRemaining}
+              title={`Build Road (${localPlayer?.roadsRemaining || 0} remaining)`}
+            >
+              <img
+                src={`/assets/buildings/road_${localPlayer?.color || 'red'}.svg`}
+                alt="Road"
+                className={styles.buildingIcon}
+              />
+              <span className={styles.iconCount}>{localPlayer?.roadsRemaining || 0}</span>
+            </button>
+
+            {/* Settlement button with count */}
+            <button
+              className={`${styles.iconButton} ${canBuild && localPlayer?.settlementsRemaining ? '' : styles.disabled}`}
+              onClick={() => canBuild && localPlayer?.settlementsRemaining && handleAction('build')}
+              disabled={!canBuild || !localPlayer?.settlementsRemaining}
+              title={`Build Settlement (${localPlayer?.settlementsRemaining || 0} remaining)`}
+            >
+              <img
+                src={`/assets/buildings/settlement_${localPlayer?.color || 'red'}.svg`}
+                alt="Settlement"
+                className={styles.buildingIcon}
+              />
+              <span className={styles.iconCount}>{localPlayer?.settlementsRemaining || 0}</span>
+            </button>
+
+            {/* City button with count */}
+            <button
+              className={`${styles.iconButton} ${canBuild && localPlayer?.citiesRemaining ? '' : styles.disabled}`}
+              onClick={() => canBuild && localPlayer?.citiesRemaining && handleAction('build')}
+              disabled={!canBuild || !localPlayer?.citiesRemaining}
+              title={`Build City (${localPlayer?.citiesRemaining || 0} remaining)`}
+            >
+              <img
+                src={`/assets/pieces/city_${localPlayer?.color || 'red'}.svg`}
+                alt="City"
+                className={styles.buildingIcon}
+              />
+              <span className={styles.iconCount}>{localPlayer?.citiesRemaining || 0}</span>
+            </button>
+
+            {/* Action button (End Turn/Roll Dice/Waiting) */}
+            <div className={styles.actionButtonContainer}>
+              {phase === 'roll' && isMyTurn ? (
+                <button
+                  className={`${styles.actionButton} ${styles.primary}`}
+                  onClick={() => handleAction('rollDice')}
+                >
+                  <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+                    <path d="M5 3h14a2 2 0 012 2v14a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2zm2.5 4a1.5 1.5 0 100 3 1.5 1.5 0 000-3zm9 0a1.5 1.5 0 100 3 1.5 1.5 0 000-3zm-4.5 4.5a1.5 1.5 0 100 3 1.5 1.5 0 000-3zm-4.5 4.5a1.5 1.5 0 100 3 1.5 1.5 0 000-3zm9 0a1.5 1.5 0 100 3 1.5 1.5 0 000-3z" />
+                  </svg>
+                  <span>Roll Dice</span>
+                </button>
+              ) : isMyTurn && canEndTurn ? (
+                <button
+                  className={`${styles.actionButton} ${styles.endTurn}`}
+                  onClick={() => handleAction('endTurn')}
+                >
+                  <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+                    <path d="M8 5v14l11-7z" />
+                  </svg>
+                  <span>End Turn</span>
+                </button>
+              ) : !isMyTurn ? (
+                <button
+                  className={`${styles.actionButton} ${styles.waiting}`}
+                  disabled
+                >
+                  <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+                    <path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-.5-13H11v6l5.2 3.2.8-1.3-4.5-2.7V7z" />
+                  </svg>
+                  <span>Waiting...</span>
+                </button>
+              ) : (
+                <button
+                  className={`${styles.actionButton} ${styles.disabled}`}
+                  disabled
+                >
+                  <span>Wait...</span>
+                </button>
+              )}
+            </div>
           </div>
         </footer>
 
