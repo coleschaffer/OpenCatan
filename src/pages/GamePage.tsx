@@ -716,8 +716,27 @@ export function GamePage() {
 
         {/* Bottom area */}
         <footer className={styles.bottomArea}>
+          {/* Players area - moved from sidebar */}
+          <div className={styles.playersArea}>
+            <PlayerPanelList
+              players={playerPanelData}
+              currentPlayerId={currentPlayerId}
+              localPlayerId={localPlayerId}
+            />
+          </div>
+
           {/* Player hand + action bar */}
           <div className={styles.handArea}>
+            <ActionBar
+              phase={phase as any}
+              canBuild={canBuild}
+              canTrade={canTrade}
+              canBuyDevCard={canBuyDevCard}
+              canEndTurn={canEndTurn}
+              isMyTurn={isMyTurn}
+              turnTimeRemaining={turnTimeRemaining}
+              onAction={handleAction}
+            />
             <PlayerHand
               resources={myResources}
               devCards={localPlayer?.developmentCards || []}
@@ -729,25 +748,6 @@ export function GamePage() {
                   data: { cardId },
                 }));
               }}
-            />
-            <ActionBar
-              phase={phase as any}
-              canBuild={canBuild}
-              canTrade={canTrade}
-              canBuyDevCard={canBuyDevCard}
-              canEndTurn={canEndTurn}
-              isMyTurn={isMyTurn}
-              turnTimeRemaining={turnTimeRemaining}
-              onAction={handleAction}
-            />
-          </div>
-
-          {/* Players area - moved from sidebar */}
-          <div className={styles.playersArea}>
-            <PlayerPanelList
-              players={playerPanelData}
-              currentPlayerId={currentPlayerId}
-              localPlayerId={localPlayerId}
             />
           </div>
         </footer>
