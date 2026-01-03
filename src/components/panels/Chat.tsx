@@ -62,7 +62,7 @@ export const Chat: React.FC<ChatProps> = ({
   // Support both onSendMessage and onSend prop names
   const handleSendMessage = onSendMessage || onSend || (() => {});
   const [inputValue, setInputValue] = useState('');
-  const [chatExpanded, setChatExpanded] = useState(true);
+  const [chatExpanded, setChatExpanded] = useState(false); // Start collapsed
   const messagesRef = useRef<HTMLDivElement>(null);
   const logRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -127,63 +127,84 @@ export const Chat: React.FC<ChatProps> = ({
       </div>
 
       {/* Chat Section - Now between GameLog and Bank */}
-      <div className={`${styles.chatSection} ${styles.chatSectionExpanded}`}>
-        <div className={styles.chatMessages} ref={messagesRef}>
-          {messages.length === 0 ? (
-            <div className={styles.chatEmpty}>
-              No messages yet. Say hi!
-            </div>
-          ) : (
-            messages.map((message) => {
-              const isMe = message.playerId === localPlayerId;
-              const playerColorHex = PLAYER_COLOR_HEX[message.playerColor];
-
-              return (
-                <div
-                  key={message.id}
-                  className={`${styles.chatMessage} ${isMe ? styles.chatMessageMe : ''}`}
-                >
-                  <span className={styles.chatTimestamp}>
-                    {formatTimestamp(message.timestamp)}
-                  </span>
-                  <div className={styles.chatContent}>
-                    <span
-                      className={styles.chatPlayerName}
-                      style={{ color: playerColorHex }}
-                    >
-                      {message.playerName}
-                      {isMe && <span className={styles.chatYouTag}> (You)</span>}:
-                    </span>
-                    <span className={styles.chatText}>{message.text}</span>
-                  </div>
-                </div>
-              );
-            })
-          )}
-        </div>
-
-        {/* Input area */}
-        <div className={styles.chatInputArea}>
-          <input
-            ref={inputRef}
-            type="text"
-            className={styles.chatInput}
-            placeholder={disabled ? 'Chat disabled' : 'Type a message...'}
-            value={inputValue}
-            onChange={(e) => setInputValue(e.target.value)}
-            onKeyDown={handleKeyDown}
-            disabled={disabled}
-            maxLength={200}
-          />
-          <button
-            className={styles.chatSendButton}
-            onClick={handleSend}
-            disabled={disabled || !inputValue.trim()}
-            aria-label="Send message"
+      <div className={`${styles.chatSection} ${chatExpanded ? styles.chatSectionExpanded : styles.chatSectionCollapsed}`}>
+        <div
+          className={styles.chatHeader}
+          onClick={() => setChatExpanded(!chatExpanded)}
+        >
+          <span>Chat</span>
+          <span className={styles.sectionCount}>{messages.length}</span>
+          <svg
+            className={`${styles.chatExpandIcon} ${chatExpanded ? styles.chatExpandIconRotated : ''}`}
+            viewBox="0 0 24 24"
+            width="16"
+            height="16"
+            fill="currentColor"
           >
-            ↑
-          </button>
+            <path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"/>
+          </svg>
         </div>
+
+        {chatExpanded && (
+          <>
+            <div className={styles.chatMessages} ref={messagesRef}>
+              {messages.length === 0 ? (
+                <div className={styles.chatEmpty}>
+                  No messages yet. Say hi!
+                </div>
+              ) : (
+                messages.map((message) => {
+                  const isMe = message.playerId === localPlayerId;
+                  const playerColorHex = PLAYER_COLOR_HEX[message.playerColor];
+
+                  return (
+                    <div
+                      key={message.id}
+                      className={`${styles.chatMessage} ${isMe ? styles.chatMessageMe : ''}`}
+                    >
+                      <span className={styles.chatTimestamp}>
+                        {formatTimestamp(message.timestamp)}
+                      </span>
+                      <div className={styles.chatContent}>
+                        <span
+                          className={styles.chatPlayerName}
+                          style={{ color: playerColorHex }}
+                        >
+                          {message.playerName}
+                          {isMe && <span className={styles.chatYouTag}> (You)</span>}:
+                        </span>
+                        <span className={styles.chatText}>{message.text}</span>
+                      </div>
+                    </div>
+                  );
+                })
+              )}
+            </div>
+
+            {/* Input area */}
+            <div className={styles.chatInputArea}>
+              <input
+                ref={inputRef}
+                type="text"
+                className={styles.chatInput}
+                placeholder={disabled ? 'Chat disabled' : 'Type a message...'}
+                value={inputValue}
+                onChange={(e) => setInputValue(e.target.value)}
+                onKeyDown={handleKeyDown}
+                disabled={disabled}
+                maxLength={200}
+              />
+              <button
+                className={styles.chatSendButton}
+                onClick={handleSend}
+                disabled={disabled || !inputValue.trim()}
+                aria-label="Send message"
+              >
+                ↑
+              </button>
+            </div>
+          </>
+        )}
       </div>
 
       {/* Bank Section - Now at the bottom */}

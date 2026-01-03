@@ -85,13 +85,6 @@ export function GameLobby({
 
   return (
     <div className={styles.gameLobbyContainer}>
-      <header className={styles.gameLobbyHeader}>
-        <h1 className={styles.gameLobbyTitle}>Game Lobby</h1>
-        <p className={styles.gameLobbySubtitle}>
-          Share the room code with friends to invite them
-        </p>
-      </header>
-
       <div className={styles.gameLobbyRoomCode}>
         <RoomCode code={roomCode} />
       </div>

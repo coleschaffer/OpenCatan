@@ -46,7 +46,7 @@
 .mainArea {
   grid-area: main;
   display: grid;
-  grid-template-columns: 1fr 420px;
+  grid-template-columns: 1fr 620px;
   gap: 0;
   min-height: 0;
   overflow: hidden;
@@ -110,7 +110,7 @@
 .bottomArea {
   grid-area: bottom;
   display: grid;
-  grid-template-columns: 1fr 420px;
+  grid-template-columns: 1fr 620px;
   gap: 0;
   height: 180px;
   min-height: 180px;
