@@ -153,7 +153,7 @@
 
 .resourceCardImage {
   width: 50px;
-  height: 70px;
+  height: 100px;
   object-fit: contain;
   border-radius: 4px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
