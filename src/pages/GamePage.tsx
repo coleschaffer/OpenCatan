@@ -821,7 +821,6 @@ export function GamePage() {
                   <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
                     <path d="M5 3h14a2 2 0 012 2v14a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2zm2.5 4a1.5 1.5 0 100 3 1.5 1.5 0 000-3zm9 0a1.5 1.5 0 100 3 1.5 1.5 0 000-3zm-4.5 4.5a1.5 1.5 0 100 3 1.5 1.5 0 000-3zm-4.5 4.5a1.5 1.5 0 100 3 1.5 1.5 0 000-3zm9 0a1.5 1.5 0 100 3 1.5 1.5 0 000-3z" />
                   </svg>
-                  <span>Roll Dice</span>
                 </button>
               ) : isMyTurn && canEndTurn ? (
                 <button
@@ -831,7 +830,6 @@ export function GamePage() {
                   <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
                     <path d="M8 5v14l11-7z" />
                   </svg>
-                  <span>End Turn</span>
                 </button>
               ) : !isMyTurn ? (
                 <button
@@ -841,14 +839,15 @@ export function GamePage() {
                   <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
                     <path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-.5-13H11v6l5.2 3.2.8-1.3-4.5-2.7V7z" />
                   </svg>
-                  <span>Waiting...</span>
                 </button>
               ) : (
                 <button
                   className={`${styles.actionButton} ${styles.disabled}`}
                   disabled
                 >
-                  <span>Wait...</span>
+                  <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+                    <path d="M6 2v6h.01L6 8.01 10 12l-4 4 .01.01H6V22h12v-5.99h-.01L18 16l-4-4 4-3.99-.01-.01H18V2H6z" />
+                  </svg>
                 </button>
               )}
             </div>
