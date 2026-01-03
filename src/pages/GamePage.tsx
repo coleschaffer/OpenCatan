@@ -103,7 +103,6 @@ import {
   TurnTimer,
 } from '@/components/panels';
 import {
-  SetupOverlay,
   RobberOverlay,
   TradeModal,
   DevCardModal,
@@ -147,7 +146,6 @@ export function GamePage() {
     turnTimeRemaining,
     lastRoll,
     // Overlay visibility
-    showSetupOverlay,
     showRobberOverlay,
     showRollButton,
     showDiscardModal,
@@ -869,26 +867,6 @@ export function GamePage() {
         {/* ============================================ */}
         {/* Overlays - rendered conditionally based on phase */}
         {/* ============================================ */}
-
-        {/* Setup overlay */}
-        {showSetupOverlay && setupPhaseState.currentPlayer && (
-          <SetupOverlay
-            players={players}
-            currentPlayer={setupPhaseState.currentPlayer}
-            isMyTurn={setupPhaseState.isMyTurn}
-            placementType={setupPhaseState.currentPlacementType}
-            setupRound={setupPhaseState.setupRound}
-            placementIndex={setupPhaseState.placementsMade}
-            totalPlacements={setupPhaseState.totalPlacements}
-            timeRemaining={setupPhaseState.timeRemaining}
-            validSettlements={setupPhaseState.validSettlements}
-            validRoads={setupPhaseState.validRoads}
-            onPlaceSettlement={setupPhaseState.placeSettlement}
-            onPlaceRoad={setupPhaseState.placeRoad}
-            isSecondSettlement={setupPhaseState.isSecondSettlement}
-            completedPlacements={setupPhaseState.completedPlacements}
-          />
-        )}
 
         {/* Robber overlay */}
         {showRobberOverlay && (
