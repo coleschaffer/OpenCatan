@@ -15,8 +15,7 @@
 .setupOverlayMinimal {
   position: absolute;
   top: 1rem;
-  left: 50%;
-  transform: translateX(-50%);
+  right: 1rem;
   display: flex;
   align-items: center;
   gap: 1rem;
