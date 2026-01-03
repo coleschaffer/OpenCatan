@@ -49,7 +49,6 @@ import {
   selectDevDeckCount,
   selectGameLongestRoad,
   selectGameLargestArmy,
-  selectChat,
   selectLog,
   selectPendingDiscard,
   selectGameSettings,
@@ -93,7 +92,6 @@ import { GameContainer, GameLoadingScreen, DisconnectedOverlay } from '@/compone
 import { GameBoard } from '@/components/board';
 import {
   PlayerPanelList,
-  Chat,
   BuildModeSelector,
   DiceDisplay,
   TurnTimer,

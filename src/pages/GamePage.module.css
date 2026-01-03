@@ -256,8 +256,9 @@
 
 .actionButton {
   display: flex;
+  flex-direction: column;
   align-items: center;
-  gap: 8px;
+  justify-content: center;
   padding: 12px;
   width: 60px;
   height: 100px;
@@ -310,6 +311,8 @@
 
 .actionButton svg {
   flex-shrink: 0;
+  width: 32px;
+  height: 32px;
 }
 
 /* Players area - now in bottom section, fits 4 players comfortably */
@@ -616,8 +619,14 @@
 
   .actionButton {
     width: 60px;
+    height: 100px;
     padding: 10px;
     font-size: 13px;
+  }
+
+  .actionButton svg {
+    width: 28px;
+    height: 28px;
   }
 
   .boardContainer {
