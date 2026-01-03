@@ -96,7 +96,17 @@ export function GameLobby({
         {/* Left Panel: Players */}
         <div className={styles.gameLobbyPanel}>
           <h2 className={styles.gameLobbyPanelTitle}>
-            Players ({players.length}/{settings.playerCount})
+            <span>Players ({players.length}/{settings.playerCount})</span>
+            {FEATURES.ENABLE_BOTS && isHost && players.length < settings.playerCount && (
+              <button
+                type="button"
+                className={styles.addBotButton}
+                onClick={onAddBot}
+                disabled={!onAddBot}
+              >
+                Add Bot
+              </button>
+            )}
           </h2>
           <PlayerList
             players={players}
