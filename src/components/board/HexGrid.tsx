@@ -476,6 +476,8 @@ export const HexGrid: React.FC<HexGridProps> = ({
                   y={port.y}
                   rotation={port.rotation}
                   size={hexSize * 0.6}
+                  vertices={port.vertices}
+                  hexSize={hexSize}
                 />
               ))}
             </g>
