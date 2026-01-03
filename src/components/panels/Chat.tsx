@@ -126,10 +126,7 @@ export const Chat: React.FC<ChatProps> = ({
         </div>
       </div>
 
-      {/* Bank Section - Between GameLog and Chat */}
-      <Bank compact hideCards={gameSettings?.hideBankCards} />
-
-      {/* Chat Section - Always expanded */}
+      {/* Chat Section - Now between GameLog and Bank */}
       <div className={`${styles.chatSection} ${styles.chatSectionExpanded}`}>
         <div className={styles.chatMessages} ref={messagesRef}>
           {messages.length === 0 ? (
@@ -188,6 +185,9 @@ export const Chat: React.FC<ChatProps> = ({
           </button>
         </div>
       </div>
+
+      {/* Bank Section - Now at the bottom */}
+      <Bank compact hideCards={gameSettings?.hideBankCards} />
     </div>
   );
 };
