@@ -236,19 +236,28 @@ export const HexGrid: React.FC<HexGridProps> = ({
     const newScale = Math.min(Math.max(transform.scale * scaleFactor, 0.5), 3);
 
     // Zoom toward cursor position
-    const rect = svgRef.current?.getBoundingClientRect();
-    if (rect) {
-      // Get mouse position relative to the SVG element
+    const svg = svgRef.current;
+    const rect = svg?.getBoundingClientRect();
+    if (rect && svg) {
+      // Get mouse position relative to the SVG element viewport
       const mouseX = e.clientX - rect.left;
       const mouseY = e.clientY - rect.top;
 
-      // Convert mouse position to world coordinates before zoom
-      const worldX = (mouseX - transform.x) / transform.scale;
-      const worldY = (mouseY - transform.y) / transform.scale;
+      // Convert viewport coordinates to SVG coordinates using viewBox
+      const viewportWidth = rect.width;
+      const viewportHeight = rect.height;
 
-      // Calculate new translation to keep the world point under the mouse cursor
-      const newX = mouseX - worldX * newScale;
-      const newY = mouseY - worldY * newScale;
+      // The SVG coordinate that corresponds to the mouse position
+      const svgX = bounds.minX + (mouseX / viewportWidth) * viewWidth;
+      const svgY = bounds.minY + (mouseY / viewportHeight) * viewHeight;
+
+      // Calculate the difference in scale
+      const scaleRatio = newScale / transform.scale;
+
+      // Calculate new translation to keep the point under cursor stationary
+      // The formula: newTranslate = currentTranslate + (1 - scaleRatio) * pointInSVG
+      const newX = transform.x + (1 - scaleRatio) * svgX;
+      const newY = transform.y + (1 - scaleRatio) * svgY;
 
       setTransform({
         x: newX,
@@ -256,7 +265,7 @@ export const HexGrid: React.FC<HexGridProps> = ({
         scale: newScale,
       });
     }
-  }, [transform]);
+  }, [transform, viewWidth, viewHeight, bounds]);
 
   // Reset view on double-click
   const handleDoubleClick = useCallback(() => {
@@ -311,17 +320,24 @@ export const HexGrid: React.FC<HexGridProps> = ({
 
       const rect = svgRef.current?.getBoundingClientRect();
       if (rect) {
-        // Get center position relative to the SVG element
+        // Get center position relative to the SVG element viewport
         const relX = centerX - rect.left;
         const relY = centerY - rect.top;
 
-        // Convert to world coordinates
-        const worldX = (relX - transform.x) / transform.scale;
-        const worldY = (relY - transform.y) / transform.scale;
+        // Convert viewport coordinates to SVG coordinates using viewBox
+        const viewportWidth = rect.width;
+        const viewportHeight = rect.height;
 
-        // Calculate new translation
-        const newX = relX - worldX * newScale;
-        const newY = relY - worldY * newScale;
+        // The SVG coordinate that corresponds to the pinch center
+        const svgX = bounds.minX + (relX / viewportWidth) * viewWidth;
+        const svgY = bounds.minY + (relY / viewportHeight) * viewHeight;
+
+        // Calculate the difference in scale
+        const scaleRatio = newScale / transform.scale;
+
+        // Calculate new translation to keep the pinch center stationary
+        const newX = transform.x + (1 - scaleRatio) * svgX;
+        const newY = transform.y + (1 - scaleRatio) * svgY;
 
         setTransform({
           x: newX,
@@ -339,7 +355,7 @@ export const HexGrid: React.FC<HexGridProps> = ({
         y: e.touches[0].clientY - dragStart.y,
       }));
     }
-  }, [transform, lastPinchDistance, isDragging, dragStart]);
+  }, [transform, lastPinchDistance, isDragging, dragStart, viewWidth, viewHeight, bounds]);
 
   const handleTouchEnd = useCallback(() => {
     setIsDragging(false);
