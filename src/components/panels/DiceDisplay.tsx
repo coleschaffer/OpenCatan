@@ -181,19 +181,17 @@ export const DiceDisplay: React.FC<DiceDisplayProps> = ({
     return null;
   }
 
-  const total = displayValues.die1 + displayValues.die2;
-  const is7 = total === 7;
 
   return (
     <div className={`${styles.diceDisplay} ${isAnimating ? styles.animating : ''}`}>
       <div className={styles.diceContainer}>
         {/* First die - only show face, no number */}
-        <div className={`${styles.die} ${is7 ? styles.dieRobber : ''}`}>
+        <div className={styles.die}>
           {renderDiceFace(displayValues.die1)}
         </div>
 
         {/* Second die - only show face, no number */}
-        <div className={`${styles.die} ${is7 ? styles.dieRobber : ''}`}>
+        <div className={styles.die}>
           {renderDiceFace(displayValues.die2)}
         </div>
 
@@ -211,11 +209,6 @@ export const DiceDisplay: React.FC<DiceDisplayProps> = ({
         )}
       </div>
 
-      {/* Total */}
-      <div className={`${styles.total} ${is7 ? styles.totalRobber : ''}`}>
-        <span className={styles.totalValue}>{total}</span>
-        {is7 && <span className={styles.robberLabel}>Robber!</span>}
-      </div>
     </div>
   );
 };
