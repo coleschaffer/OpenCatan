@@ -855,6 +855,15 @@ export function GamePage() {
               )}
             </div>
           </div>
+
+          {/* Players area - moved from sidebar */}
+          <div className={styles.playersArea}>
+            <PlayerPanelList
+              players={playerPanelData}
+              currentPlayerId={currentPlayerId}
+              localPlayerId={localPlayerId}
+            />
+          </div>
         </footer>
 
         {/* ============================================ */}

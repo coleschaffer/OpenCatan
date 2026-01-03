@@ -1629,11 +1629,12 @@
 }
 
 .bankIcon {
-  width: 56px;
-  height: 56px;
+  width: 48px;
+  height: 48px;
   flex-shrink: 0;
   align-self: center;
   margin-right: 12px;
+  margin-top: -4px;
 }
 
 .bankHeader {
