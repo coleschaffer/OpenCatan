@@ -5,8 +5,6 @@
  *
  * Layout structure:
  * ┌─────────────────────────────────────────────────────────────────┐
- * │                        GAME HEADER                              │
- * ├───────────────────────────────────────────┬─────────────────────┤
  * │                                           │                     │
  * │                                           │   PLAYER PANELS     │
  * │              GAME BOARD                   │   (right sidebar)   │
@@ -15,10 +13,9 @@
  * ├───────────────────────────────────────────┼─────────────────────┤
  * │         PLAYER HAND + ACTION BAR          │    CHAT / LOG       │
  * │              (bottom left)                │   (bottom right)    │
- * └───────────────────────────────────────────┴─────────────────────┘
+ * └───────────────────────────────────────────────────────────────────┘
  *
  * Integrates all game components:
- * - GameHeader (top)
  * - GameBoard (center)
  * - PlayerPanelList (right sidebar)
  * - PlayerHand + ActionBar (bottom left)
@@ -95,7 +92,6 @@ import {
 import { GameContainer, GameLoadingScreen, DisconnectedOverlay } from '@/components/game';
 import { GameBoard } from '@/components/board';
 import {
-  GameHeader,
   PlayerPanelList,
   Chat,
   BuildModeSelector,
@@ -618,18 +614,6 @@ export function GamePage() {
   return (
     <GameContainer>
       <div className={styles.gamePage}>
-        {/* Header row */}
-        <header className={styles.header}>
-          <GameHeader
-            onSettingsClick={handleSettingsClick}
-            volume={volume}
-            isMuted={!soundEnabled}
-            onVolumeChange={handleVolumeChange}
-            onMuteToggle={handleMuteToggle}
-            isFullscreen={isFullscreen}
-            onFullscreenToggle={handleFullscreenToggle}
-          />
-        </header>
 
         {/* Main content area */}
         <main className={styles.mainArea}>

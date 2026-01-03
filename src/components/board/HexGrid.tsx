@@ -391,7 +391,6 @@ export const HexGrid: React.FC<HexGridProps> = ({
         <g
           className={styles.boardContent}
           transform={`translate(${transform.x}, ${transform.y}) scale(${transform.scale})`}
-          style={{ transformOrigin: 'center' }}
         >
           {/* Layer 1: Hex tiles (background) */}
           <g className={styles.tilesLayer}>
