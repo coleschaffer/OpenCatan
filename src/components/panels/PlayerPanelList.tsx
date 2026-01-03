@@ -75,18 +75,16 @@ export const PlayerPanelList: React.FC<PlayerPanelListProps> = ({ className }) =
 
   return (
     <div className={`${styles.playerPanelListVertical} ${className || ''}`}>
-      {/* Other players - scrollable if more than 3 */}
-      <div className={styles.otherPlayersScroll}>
-        {otherPlayers.map((playerData) => (
-          <PlayerCard
-            key={playerData.id}
-            player={playerData}
-            isCurrentTurn={playerData.id === currentPlayerId}
-            isMe={false}
-            compact={true}
-          />
-        ))}
-      </div>
+      {/* Other players - directly rendered without wrapper */}
+      {otherPlayers.map((playerData) => (
+        <PlayerCard
+          key={playerData.id}
+          player={playerData}
+          isCurrentTurn={playerData.id === currentPlayerId}
+          isMe={false}
+          compact={true}
+        />
+      ))}
 
       {/* Local player (YOU) - at bottom, larger */}
       {localPlayer && (

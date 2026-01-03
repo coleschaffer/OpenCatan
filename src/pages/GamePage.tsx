@@ -714,15 +714,6 @@ export function GamePage() {
 
         {/* Bottom area */}
         <footer className={styles.bottomArea}>
-          {/* Players area - moved from sidebar */}
-          <div className={styles.playersArea}>
-            <PlayerPanelList
-              players={playerPanelData}
-              currentPlayerId={currentPlayerId}
-              localPlayerId={localPlayerId}
-            />
-          </div>
-
           {/* Player hand + action bar - new horizontal layout */}
           <div className={styles.handArea}>
             {/* Resource cards container */}
