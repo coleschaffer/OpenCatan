@@ -110,7 +110,7 @@
 .bottomArea {
   grid-area: bottom;
   display: grid;
-  grid-template-columns: 1fr 620px;
+  grid-template-columns: 1fr 480px;
   gap: 0;
   height: 180px;
   min-height: 180px;
@@ -327,6 +327,7 @@
   overflow-y: hidden;
   scrollbar-width: thin;
   scrollbar-color: rgba(255, 215, 0, 0.3) transparent;
+  max-width: 480px; /* Prevent overlap with hand area */
 }
 
 /* Chat/Log area - legacy, keeping for reference */

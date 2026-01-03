@@ -28,7 +28,6 @@ import { useAppSelector, useAppDispatch } from '@/hooks';
 import { useGamePhase, useGameBoard, useRoomCode, useGameNavigation, useSetupPhase, useGameSounds, useTradeRates } from '@/hooks';
 import { usePartyConnection } from '@/network/hooks';
 import { useGameActions } from '@/network/hooks/useGameActions';
-import { useChat } from '@/network/hooks/useChat';
 import { hostManager } from '@/network/hostManager';
 import { partyClient } from '@/network/partyClient';
 import { useRobberPhase } from '@/hooks/useRobberPhase';
@@ -197,8 +196,6 @@ export function GamePage() {
     cancelTrade,
   } = useGameActions();
 
-  // Chat hook
-  const { sendMessage: sendChatMessage } = useChat();
 
   // Setup phase hook
   const setupPhaseState = useSetupPhase(localPlayerId || undefined);
@@ -223,7 +220,6 @@ export function GamePage() {
   const devDeckCount = useAppSelector(selectDevDeckCount);
   const longestRoad = useAppSelector(selectGameLongestRoad);
   const largestArmy = useAppSelector(selectGameLargestArmy);
-  const chatMessages = useAppSelector(selectChat);
   const gameLog = useAppSelector(selectLog);
   const pendingDiscardPlayers = useAppSelector(selectPendingDiscard);
   const settings = useAppSelector(selectGameSettings);
@@ -520,9 +516,6 @@ export function GamePage() {
     dispatch(closeModal());
   }, [dispatch]);
 
-  const handleSendChat = useCallback((text: string) => {
-    sendChatMessage(text);
-  }, [sendChatMessage]);
 
   // Trade handlers
   const handleAcceptTrade = useCallback((offerId: string) => {
@@ -665,30 +658,9 @@ export function GamePage() {
             />
           </div>
 
-          {/* Right sidebar - Chat/Log */}
+          {/* Right sidebar - Empty for now */}
           <aside className={styles.sidebar}>
-            <Chat
-              messages={chatMessages.map(m => ({
-                id: m.id,
-                playerId: m.playerId,
-                playerName: players.find(p => p.id === m.playerId)?.name || 'Unknown',
-                playerColor: players.find(p => p.id === m.playerId)?.color || 'white',
-                text: m.message || m.text || '',
-                timestamp: m.timestamp,
-              }))}
-              logEntries={gameLog.map(entry => ({
-                id: entry.id,
-                timestamp: entry.timestamp,
-                eventType: entry.type || 'turn_start',
-                message: entry.message,
-                playerId: entry.playerId || '',
-                playerName: players.find(p => p.id === entry.playerId)?.name || 'System',
-                playerColor: players.find(p => p.id === entry.playerId)?.color || 'white',
-                visibility: 'public' as const,
-              }))}
-              onSend={handleSendChat}
-              myPlayerId={localPlayerId || ''}
-            />
+            {/* Chat removed - sidebar space reserved for future features */}
           </aside>
         </main>
 

@@ -4,10 +4,12 @@
  * Displays port icons around the edge of the board showing:
  * - 3:1 generic ports (any resource)
  * - 2:1 specialized ports (specific resource)
+ * - Pier/dock connections to adjacent vertices
  */
 
 import React from 'react';
-import type { PortType, ResourceType } from '../../types';
+import type { PortType, ResourceType, VertexCoord } from '../../types';
+import { vertexToPixel } from '../../utils/hexMath';
 
 interface PortIconProps {
   /** Port type - generic or specific resource */
@@ -22,6 +24,10 @@ interface PortIconProps {
   rotation?: number;
   /** Size of the port icon */
   size?: number;
+  /** The two vertices this port connects to */
+  vertices?: [VertexCoord, VertexCoord];
+  /** Hex size for vertex positioning */
+  hexSize?: number;
 }
 
 /**
