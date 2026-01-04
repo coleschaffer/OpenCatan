@@ -9,7 +9,7 @@
 
 import React from 'react';
 import type { PortType, ResourceType, VertexCoord } from '../../types';
-import { vertexToPixel } from '../../utils/hexMath';
+import { vertexToPixel } from '../../utils/hex';
 
 interface PortIconProps {
   /** Port type - generic or specific resource */
