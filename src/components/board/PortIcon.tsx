@@ -91,15 +91,16 @@ export const PortIcon: React.FC<PortIconProps> = ({
             const px = x + (vertex1Pos.x - x) * t;
             const py = y + (vertex1Pos.y - y) * t;
             const angle = Math.atan2(vertex1Pos.y - y, vertex1Pos.x - x) * (180 / Math.PI);
+            const plankLength = 8;
             return (
               <line
                 key={`plank1-${i}`}
-                x1={px}
+                x1={px - plankLength / 2}
                 y1={py}
-                x2={px}
+                x2={px + plankLength / 2}
                 y2={py}
                 stroke="#654321"
-                strokeWidth={6}
+                strokeWidth={3}
                 strokeLinecap="round"
                 transform={`rotate(${angle + 90}, ${px}, ${py})`}
                 opacity={0.6}
@@ -126,15 +127,16 @@ export const PortIcon: React.FC<PortIconProps> = ({
             const px = x + (vertex2Pos.x - x) * t;
             const py = y + (vertex2Pos.y - y) * t;
             const angle = Math.atan2(vertex2Pos.y - y, vertex2Pos.x - x) * (180 / Math.PI);
+            const plankLength = 8;
             return (
               <line
                 key={`plank2-${i}`}
-                x1={px}
+                x1={px - plankLength / 2}
                 y1={py}
-                x2={px}
+                x2={px + plankLength / 2}
                 y2={py}
                 stroke="#654321"
-                strokeWidth={6}
+                strokeWidth={3}
                 strokeLinecap="round"
                 transform={`rotate(${angle + 90}, ${px}, ${py})`}
                 opacity={0.6}

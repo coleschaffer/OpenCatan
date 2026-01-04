@@ -54,13 +54,13 @@ export type { BuildingType as BuildType, BuildingCost as BuildCost } from './Bui
 export { GameLog } from './GameLog';
 export type { LogEntry, LogEventType, LogVisibility } from './GameLog';
 
-export { ChatPanel } from './ChatPanel';
-export type { ChatMessage as ChatPanelMessage } from './ChatPanel';
+// export { ChatPanel } from './ChatPanel';
+// export type { ChatMessage as ChatPanelMessage } from './ChatPanel';
 
-export { Chat } from './Chat';
-export type { ChatMessage } from './Chat';
+// export { Chat } from './Chat';
+// export type { ChatMessage } from './Chat';
 
-export { ChatLogPanel } from './ChatLogPanel';
+// export { ChatLogPanel } from './ChatLogPanel';
 
 // ============================================================================
 // Timer and Display Components
