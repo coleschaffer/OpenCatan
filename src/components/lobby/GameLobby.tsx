@@ -356,7 +356,16 @@ export function GameLobby({
           Leave
         </button>
 
-        {isHost ? (
+        <button
+          type="button"
+          className={`${styles.gameLobbyReadyButton} ${currentPlayer?.isReady ? styles.ready : ''}`}
+          onClick={onToggleReady}
+          disabled={!currentPlayer?.color}
+        >
+          {currentPlayer?.isReady ? 'Ready!' : 'Ready Up'}
+        </button>
+
+        {isHost && (
           <button
             type="button"
             className={styles.gameLobbyStartButton}
@@ -364,15 +373,6 @@ export function GameLobby({
             disabled={!canStart}
           >
             Start Game
-          </button>
-        ) : (
-          <button
-            type="button"
-            className={`${styles.gameLobbyReadyButton} ${currentPlayer?.isReady ? styles.ready : ''}`}
-            onClick={onToggleReady}
-            disabled={!currentPlayer?.color}
-          >
-            {currentPlayer?.isReady ? 'Ready!' : 'Ready Up'}
           </button>
         )}
       </div>
