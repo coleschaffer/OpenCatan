@@ -1,0 +1,20 @@
+{
+  "id": "el-54d9623b",
+  "element": {
+    "tag": "button",
+    "id": null,
+    "classes": [
+      "GamePage-module__actionButton___eez-B",
+      "GamePage-module__disabled___BL0PK"
+    ],
+    "selector": "#root > div.app > div.GamePage-module__gamePage___lU4k0:nth-child(2) > footer.GamePage-module__bottomArea___O9yjc > div.GamePage-module__handArea___dmOi-:nth-child(1) > div.GamePage-module__actionButtonContainer___NNgWK:nth-child(2) > button.GamePage-module__actionButton___eez-B.GamePage-module__disabled___BL0PK"
+  },
+  "changes": [
+    {
+      "taskId": "change-1767521812356-7me2u8jwg",
+      "feedback": "I dont want as much spacing on the left side of this as there currently is",
+      "timestamp": "2026-01-04T10:17:28.991Z",
+      "success": true
+    }
+  ]
+}

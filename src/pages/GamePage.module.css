@@ -126,10 +126,10 @@
   display: flex;
   flex-direction: row;
   align-items: center;
-  gap: 1rem;
+  gap: 0.5rem;
   padding: 0.75rem 1rem;
   overflow: hidden;
-  justify-content: space-between;
+  justify-content: flex-start;
 }
 
 /* Resource cards container with fixed shape */
@@ -252,7 +252,7 @@
 
 /* Action button container */
 .actionButtonContainer {
-  margin-left: 1rem;
+  margin-left: 0.5rem;
   flex-shrink: 0;
 }
 
