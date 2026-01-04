@@ -12,7 +12,8 @@
     "test:run": "vitest run",
     "test:coverage": "vitest run --coverage",
     "party:dev": "npx partykit dev",
-    "party:deploy": "npx partykit deploy"
+    "party:deploy": "npx partykit deploy",
+    "deploy": "npm run party:deploy && npm run build"
   },
   "dependencies": {
     "@reduxjs/toolkit": "^2.5.0",
