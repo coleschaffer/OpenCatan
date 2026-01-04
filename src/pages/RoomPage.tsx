@@ -8,15 +8,19 @@
  * - If code is invalid format: shows 404
  */
 
-import { useEffect, useState, useCallback } from 'react';
+import { useEffect, useState, useCallback, useRef } from 'react';
 import { useParams } from 'react-router-dom';
 import { useAppSelector, useAppDispatch, useGameNavigation } from '@/hooks';
 import { usePartyConnection } from '@/network/hooks';
+import { partyClient } from '@/network/partyClient';
 import {
   selectGameStarted,
   selectConnectionStatus,
   selectLocalPlayerId,
   selectLobbyPlayers,
+  resetLobby,
+  resetGame,
+  resetPlayers,
 } from '@/game/state';
 import { GamePage } from './GamePage';
 import { LobbyPage } from './LobbyPage';
@@ -74,6 +78,29 @@ export function RoomPage() {
   // Validate room code format
   const normalizedCode = code?.toUpperCase() || '';
   const isValidFormat = VALID_ROOM_CODE.test(normalizedCode);
+
+  // Track previous room code to detect room changes
+  const prevRoomCodeRef = useRef<string | null>(null);
+
+  // Reset state when room code changes (entering a new room)
+  useEffect(() => {
+    if (normalizedCode && normalizedCode !== prevRoomCodeRef.current) {
+      // Disconnect from any existing connection
+      if (partyClient.isConnected) {
+        partyClient.disconnect();
+      }
+
+      // Reset all game state when entering a new room
+      dispatch(resetLobby());
+      dispatch(resetGame());
+      dispatch(resetPlayers());
+      setRoomState('validating');
+      setHasAttemptedJoin(false);
+      setErrorMessage(null);
+
+      prevRoomCodeRef.current = normalizedCode;
+    }
+  }, [normalizedCode, dispatch]);
 
   // Determine room state based on connection and game state
   useEffect(() => {
