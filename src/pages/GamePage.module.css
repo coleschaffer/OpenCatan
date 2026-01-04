@@ -97,6 +97,8 @@
 .sidebar {
   display: flex;
   flex-direction: column;
+  gap: 20px;
+  padding: 20px;
   border-left: 1px solid rgba(255, 215, 0, 0.2);
   background: rgba(26, 26, 46, 0.5);
   overflow-y: auto;

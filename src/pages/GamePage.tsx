@@ -94,6 +94,8 @@ import {
   BuildModeSelector,
   DiceDisplay,
   TurnTimer,
+  GameLog,
+  Bank,
 } from '@/components/panels';
 import {
   RobberOverlay,
@@ -658,9 +660,10 @@ export function GamePage() {
             />
           </div>
 
-          {/* Right sidebar - Empty for now */}
+          {/* Right sidebar - Game Log and Bank */}
           <aside className={styles.sidebar}>
-            {/* Chat removed - sidebar space reserved for future features */}
+            <Bank />
+            <GameLog />
           </aside>
         </main>
 
