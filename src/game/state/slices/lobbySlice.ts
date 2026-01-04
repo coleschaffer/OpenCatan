@@ -347,7 +347,7 @@ export const {
 
 // Selectors
 export const selectRoomCode = (state: RootState) => state.lobby.roomCode;
-export const selectLobbyPlayers = (state: RootState) => state.lobby.players;
+export const selectLobbyPlayers = (state: RootState) => state.lobby.players || [];
 export const selectLocalPlayerId = (state: RootState) =>
   state.lobby.localPlayerId;
 export const selectIsHost = (state: RootState) => state.lobby.isHost;

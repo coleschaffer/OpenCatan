@@ -451,8 +451,8 @@ export const {
 } = playersSlice.actions;
 
 // Selectors
-export const selectPlayers = (state: RootState) => state.players.players;
-export const selectTurnOrder = (state: RootState) => state.players.turnOrder;
+export const selectPlayers = (state: RootState) => state.players?.players || [];
+export const selectTurnOrder = (state: RootState) => state.players?.turnOrder || [];
 
 /**
  * Get the current player based on game state
