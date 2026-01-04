@@ -914,7 +914,8 @@
   backdrop-filter: blur(10px);
 }
 
-.gameLobbyPanel:first-child {
+/* Left panel (Players) fixed width */
+.gameLobbyContent > div:first-child .gameLobbyPanel {
   width: 434px;
   min-width: 434px;
 }
@@ -979,11 +980,10 @@
   border-radius: 8px;
 }
 
-/* Room code at top of lobby */
+/* Room code at top of left panel */
 .gameLobbyRoomCode {
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
   width: auto;
-  align-self: flex-start;
 }
 
 /* Slider Settings Styles */

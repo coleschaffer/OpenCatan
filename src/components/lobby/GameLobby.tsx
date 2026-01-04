@@ -85,32 +85,35 @@ export function GameLobby({
 
   return (
     <div className={styles.gameLobbyContainer}>
-      <div className={styles.gameLobbyRoomCode}>
-        <RoomCode code={roomCode} />
-      </div>
-
       <div className={styles.gameLobbyContent}>
-        {/* Left Panel: Players */}
-        <div className={styles.gameLobbyPanel}>
-          <h2 className={styles.gameLobbyPanelTitle}>
-            Players ({players.length}/{settings.playerCount})
-          </h2>
-          <PlayerList
-            players={players}
-            currentPlayerId={currentPlayerId}
-            maxPlayers={settings.playerCount}
-            isHost={isHost}
-            onKick={isHost ? handleKick : undefined}
-          />
+        {/* Left side - Room Code and Players Panel grouped together */}
+        <div>
+          <div className={styles.gameLobbyRoomCode}>
+            <RoomCode code={roomCode} />
+          </div>
 
-          {/* Color Picker Section */}
-          <div className={styles.gameLobbyColorSection}>
-            <label className={styles.gameLobbyColorLabel}>Your Color</label>
-            <ColorPicker
-              selectedColor={currentPlayer?.color || null}
-              availableColors={availableColors}
-              onChange={onColorChange}
+          {/* Left Panel: Players */}
+          <div className={styles.gameLobbyPanel}>
+            <h2 className={styles.gameLobbyPanelTitle}>
+              Players ({players.length}/{settings.playerCount})
+            </h2>
+            <PlayerList
+              players={players}
+              currentPlayerId={currentPlayerId}
+              maxPlayers={settings.playerCount}
+              isHost={isHost}
+              onKick={isHost ? handleKick : undefined}
             />
+
+            {/* Color Picker Section */}
+            <div className={styles.gameLobbyColorSection}>
+              <label className={styles.gameLobbyColorLabel}>Your Color</label>
+              <ColorPicker
+                selectedColor={currentPlayer?.color || null}
+                availableColors={availableColors}
+                onChange={onColorChange}
+              />
+            </div>
           </div>
         </div>
 
