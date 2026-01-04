@@ -4,8 +4,7 @@
  */
 
 interface FeatureFlags {
-  /** Enable bot functionality in the lobby (for testing only) */
-  ENABLE_BOTS: boolean;
+  // Add feature flags here as needed
 }
 
 /**
@@ -13,7 +12,5 @@ interface FeatureFlags {
  * Toggle these to enable/disable features during development
  */
 export const FEATURES: FeatureFlags = {
-  // Enable bots in the lobby for testing purposes
-  // WARNING: This should NEVER be enabled in production
-  ENABLE_BOTS: process.env.NODE_ENV !== 'production',
+  // Add feature flag values here as needed
 };

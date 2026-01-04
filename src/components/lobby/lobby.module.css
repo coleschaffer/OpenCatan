@@ -455,6 +455,7 @@
   border-radius: 6px;
   cursor: pointer;
   transition: all 0.2s ease;
+  min-width: 130px; /* Fixed minimum width to prevent size changes */
 }
 
 .roomCodeCopyButton {
@@ -483,6 +484,12 @@
 
 .roomCodeShareButton:hover {
   background: rgba(255, 255, 255, 0.1);
+}
+
+.roomCodeShareButton.copied {
+  background: rgba(39, 174, 96, 0.2);
+  border-color: #27ae60;
+  color: #2ecc71;
 }
 
 /* =============================================================================
@@ -1078,28 +1085,4 @@
 .settingsCheckboxText {
   font-size: 0.9rem;
   color: rgba(255, 255, 255, 0.8);
-}
-
-/* Add Bot Button */
-.addBotButton {
-  padding: 0.375rem 0.75rem;
-  font-size: 0.875rem;
-  font-weight: 500;
-  background: rgba(52, 152, 219, 0.15);
-  border: 1px solid rgba(52, 152, 219, 0.5);
-  border-radius: 6px;
-  color: #3498db;
-  cursor: pointer;
-  transition: all 0.2s ease;
-}
-
-.addBotButton:hover:not(:disabled) {
-  background: rgba(52, 152, 219, 0.25);
-  border-color: #3498db;
-  transform: translateY(-1px);
-}
-
-.addBotButton:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
 }
