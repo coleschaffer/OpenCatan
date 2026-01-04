@@ -133,20 +133,6 @@ export function LobbyPage() {
     [isHost]
   );
 
-  // Handle adding a bot (host only)
-  const handleAddBot = useCallback(() => {
-    if (isHost && players.length < settings.playerCount) {
-      // Generate a unique bot ID and name
-      const botNumber = players.filter(p => p.name.startsWith('Bot ')).length + 1;
-      const botName = `Bot ${botNumber}`;
-
-      // For now, just log the action
-      // In a real implementation, this would send a message to the server
-      // to add an AI player to the game
-      console.log(`Adding bot: ${botName}`);
-      alert(`Bot functionality coming soon! Would add "${botName}" to the game.`);
-    }
-  }, [isHost, players, settings.playerCount]);
 
   // Don't render if no room code
   if (!urlCode) {
@@ -194,7 +180,6 @@ export function LobbyPage() {
       onColorChange={handleColorChange}
       onToggleReady={handleToggleReady}
       onKick={isHost ? handleKick : undefined}
-      onAddBot={isHost ? handleAddBot : undefined}
     />
   );
 }

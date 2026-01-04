@@ -6,7 +6,6 @@ import { PlayerList, type LobbyPlayerInfo } from './PlayerList';
 import { ColorPicker } from './ColorPicker';
 import { GameSettings, type LobbyGameSettings } from './GameSettings';
 import { StartGameButton } from './StartGameButton';
-import { FEATURES } from '@/config/features';
 import styles from './lobby.module.css';
 
 interface GameLobbyProps {
@@ -21,7 +20,6 @@ interface GameLobbyProps {
   onColorChange: (color: PlayerColor) => void;
   onToggleReady: () => void;
   onKick?: (playerId: string) => void;
-  onAddBot?: () => void;
 }
 
 /**
@@ -47,7 +45,6 @@ export function GameLobby({
   onColorChange,
   onToggleReady,
   onKick,
-  onAddBot,
 }: GameLobbyProps) {
   // Get current player
   const currentPlayer = useMemo(
@@ -96,17 +93,7 @@ export function GameLobby({
         {/* Left Panel: Players */}
         <div className={styles.gameLobbyPanel}>
           <h2 className={styles.gameLobbyPanelTitle}>
-            <span>Players ({players.length}/{settings.playerCount})</span>
-            {FEATURES.ENABLE_BOTS && isHost && players.length < settings.playerCount && (
-              <button
-                type="button"
-                className={styles.addBotButton}
-                onClick={onAddBot}
-                disabled={!onAddBot}
-              >
-                Add Bot
-              </button>
-            )}
+            Players ({players.length}/{settings.playerCount})
           </h2>
           <PlayerList
             players={players}
