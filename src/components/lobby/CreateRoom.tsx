@@ -1,6 +1,7 @@
 import { useState, useCallback } from 'react';
 import type { FormEvent } from 'react';
 import styles from './lobby.module.css';
+import { getPlayerName } from '../../network/session';
 
 interface CreateRoomProps {
   onCreateRoom: (playerName: string) => void;
@@ -21,7 +22,7 @@ export function CreateRoom({
   isLoading = false,
   error,
 }: CreateRoomProps) {
-  const [playerName, setPlayerName] = useState('');
+  const [playerName, setPlayerName] = useState(() => getPlayerName() || '');
 
   const handleSubmit = useCallback(
     (e: FormEvent) => {

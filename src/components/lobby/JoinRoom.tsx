@@ -1,6 +1,7 @@
 import { useState, useCallback, useEffect } from 'react';
 import type { FormEvent, ChangeEvent } from 'react';
 import styles from './lobby.module.css';
+import { getPlayerName } from '../../network/session';
 
 interface JoinRoomProps {
   onJoinRoom: (roomCode: string, playerName: string) => void;
@@ -50,7 +51,10 @@ export function JoinRoom({
   initialCode,
 }: JoinRoomProps) {
   const [roomCode, setRoomCode] = useState(initialCode?.toUpperCase() || '');
-  const [playerName, setPlayerName] = useState(generateRandomName());
+  const [playerName, setPlayerName] = useState(() => {
+    // Use stored player name if available, otherwise generate a random one
+    return getPlayerName() || generateRandomName();
+  });
   const [step, setStep] = useState<JoinStep>('enter-code');
   const [localError, setLocalError] = useState<string | null>(null);
 
