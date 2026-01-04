@@ -223,7 +223,7 @@ export const GameLog: React.FC<GameLogProps> = ({ entries, myPlayerId }) => {
   /**
    * Filter entries based on visibility rules
    */
-  const visibleEntries = entries.filter((entry) => {
+  const visibleEntries = (entries || []).filter((entry) => {
     const visibility = entry.visibility;
     if (visibility === 'public' || visibility === 'all') return true;
     if (visibility === 'self' && entry.playerId === myPlayerId) return true;

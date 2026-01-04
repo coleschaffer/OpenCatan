@@ -34,10 +34,16 @@ export const PlayerPanelList: React.FC<PlayerPanelListProps> = ({ className }) =
    * Sort: other players by turn order, local player at end
    */
   const { otherPlayers, localPlayer } = useMemo(() => {
+    // Safety check for undefined players
+    if (!players || !Array.isArray(players)) {
+      return { otherPlayers: [], localPlayer: undefined };
+    }
+
     // Sort players by turn order
+    const order = turnOrder || [];
     const orderedPlayers = [...players].sort((a, b) => {
-      const aIndex = turnOrder.indexOf(a.id);
-      const bIndex = turnOrder.indexOf(b.id);
+      const aIndex = order.indexOf(a.id);
+      const bIndex = order.indexOf(b.id);
       return aIndex - bIndex;
     });
 
