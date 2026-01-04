@@ -1,0 +1,20 @@
+{
+  "id": "el-3675d1d5",
+  "element": {
+    "tag": "button",
+    "id": null,
+    "classes": [
+      "lobby-module__roomCodeButton___0FchZ",
+      "lobby-module__roomCodeShareButton___rmXLL"
+    ],
+    "selector": "#root > div.app > div.lobby-module__gameLobbyContainer___zrrKp > div.lobby-module__gameLobbyRoomCode___X5tnU:nth-child(1) > div.lobby-module__roomCodeContainer___DiSU3 > div.lobby-module__roomCodeActions___5biz1 > button.lobby-module__roomCodeShareButton___rmXLL.lobby-module__roomCodeButton___0FchZ:nth-child(2)"
+  },
+  "changes": [
+    {
+      "taskId": "change-1767487499498-pdcqaod1f",
+      "feedback": "When I click this and it changes to \"Copied!\", the whole element's width shouldn't change. The elements width currently does.",
+      "timestamp": "2026-01-04T00:46:41.297Z",
+      "success": true
+    }
+  ]
+}
