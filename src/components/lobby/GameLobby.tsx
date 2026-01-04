@@ -58,6 +58,7 @@ export function GameLobby({
   onToggleReady,
   onKick,
 }: GameLobbyProps) {
+  const [copiedCode, setCopiedCode] = useState(false);
   const [copiedLink, setCopiedLink] = useState(false);
   const [chatMessage, setChatMessage] = useState('');
   const [chatMessages] = useState<{ author: string; text: string }[]>([]);
@@ -117,6 +118,13 @@ export function GameLobby({
 
   const handleCopyCode = useCallback(() => {
     navigator.clipboard.writeText(roomCode);
+    setCopiedCode(true);
+    setTimeout(() => setCopiedCode(false), 2000);
+  }, [roomCode]);
+
+  const handleCopyLink = useCallback(() => {
+    const link = `${window.location.origin}/${roomCode}`;
+    navigator.clipboard.writeText(link);
     setCopiedLink(true);
     setTimeout(() => setCopiedLink(false), 2000);
   }, [roomCode]);
@@ -145,10 +153,20 @@ export function GameLobby({
           <span className={styles.gameLobbyRoomLabel}>Room</span>
           <span className={styles.gameLobbyRoomCode}>{roomCode}</span>
           <button
-            className={`${styles.gameLobbyInviteCopyButton} ${copiedLink ? styles.copied : ''}`}
+            className={`${styles.gameLobbyInviteCopyButton} ${copiedCode ? styles.copied : ''}`}
             onClick={handleCopyCode}
+            title="Copy room code"
           >
-            {copiedLink ? 'Copied!' : 'Copy Code'}
+            <span className={styles.copyButtonIcon}>#</span>
+            {copiedCode ? 'Copied!' : 'Copy Code'}
+          </button>
+          <button
+            className={`${styles.gameLobbyInviteCopyButton} ${copiedLink ? styles.copied : ''}`}
+            onClick={handleCopyLink}
+            title="Copy invite link"
+          >
+            <span className={styles.copyButtonIcon}>🔗</span>
+            {copiedLink ? 'Copied!' : 'Copy Link'}
           </button>
         </div>
       </div>
@@ -168,13 +186,6 @@ export function GameLobby({
               isHost={isHost}
               onKick={isHost ? handleKick : undefined}
             />
-
-            {/* Add Bot Button */}
-            {(players?.length || 0) < advancedSettings.maxPlayers && isHost && (
-              <button className={styles.gameLobbyAddBotButton}>
-                + Add Bot
-              </button>
-            )}
 
             {/* Color Picker */}
             <div className={styles.gameLobbyColorSection}>
