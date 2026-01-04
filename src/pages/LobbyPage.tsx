@@ -146,7 +146,7 @@ export function LobbyPage() {
   }
 
   // Convert players to the format expected by GameLobby
-  const lobbyPlayers: LobbyPlayerInfo[] = players.map((p) => ({
+  const lobbyPlayers: LobbyPlayerInfo[] = (players || []).map((p) => ({
     id: p.id,
     name: p.name,
     color: p.color,

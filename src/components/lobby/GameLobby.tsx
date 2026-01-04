@@ -80,12 +80,13 @@ export function GameLobby({
 
   // Get current player
   const currentPlayer = useMemo(
-    () => players.find((p) => p.id === currentPlayerId),
+    () => players?.find((p) => p.id === currentPlayerId),
     [players, currentPlayerId]
   );
 
   // Calculate available colors (not taken by other players)
   const availableColors = useMemo(() => {
+    if (!players || !Array.isArray(players)) return PLAYER_COLORS;
     const takenColors = new Set(
       players
         .filter((p) => p.id !== currentPlayerId && p.color)
@@ -97,13 +98,13 @@ export function GameLobby({
   // Check if all players are ready (and have colors selected)
   const allPlayersReady = useMemo(
     () =>
-      players.length > 0 &&
+      players && players.length > 0 &&
       players.every((p) => p.isReady && p.color !== null),
     [players]
   );
 
   const minPlayers = 1;
-  const canStart = isHost && players.length >= minPlayers && allPlayersReady;
+  const canStart = isHost && players && players.length >= minPlayers && allPlayersReady;
 
   const handleKick = useCallback(
     (playerId: string) => {
@@ -158,7 +159,7 @@ export function GameLobby({
         <div className={styles.gameLobbyPlayersColumn}>
           <div className={`${styles.gameLobbyPanel} ${styles.gameLobbyPlayersPanel}`}>
             <h3 className={styles.gameLobbyPanelTitle}>
-              Players ({players.length}/{advancedSettings.maxPlayers})
+              Players ({players?.length || 0}/{advancedSettings.maxPlayers})
             </h3>
             <PlayerList
               players={players}
@@ -169,7 +170,7 @@ export function GameLobby({
             />
 
             {/* Add Bot Button */}
-            {players.length < advancedSettings.maxPlayers && isHost && (
+            {(players?.length || 0) < advancedSettings.maxPlayers && isHost && (
               <button className={styles.gameLobbyAddBotButton}>
                 + Add Bot
               </button>

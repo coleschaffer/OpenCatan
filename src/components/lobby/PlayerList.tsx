@@ -40,8 +40,9 @@ export function PlayerList({
   onKick,
 }: PlayerListProps) {
   // Create array of slots based on max players
+  const playerList = players || [];
   const slots = Array.from({ length: maxPlayers }, (_, index) => {
-    const player = players[index] || null;
+    const player = playerList[index] || null;
     return player;
   });
 
