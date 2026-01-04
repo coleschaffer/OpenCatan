@@ -89,7 +89,7 @@ export function RoomPage() {
     }
 
     // If connected and in lobby, show lobby
-    if (isConnected && !gameStarted && lobbyPlayers.length > 0) {
+    if (isConnected && !gameStarted && lobbyPlayers && lobbyPlayers.length > 0) {
       setRoomState('lobby');
       return;
     }
@@ -129,7 +129,7 @@ export function RoomPage() {
     isConnected,
     isConnecting,
     gameStarted,
-    lobbyPlayers.length,
+    lobbyPlayers,
     hasAttemptedJoin,
     normalizedCode,
     joinRoom,
