@@ -4,12 +4,14 @@
 
 /**
  * PartyKit host URL
- * In production, replace with your actual PartyKit deployment URL
+ * Uses environment variable in production, localhost in development
+ * Set VITE_PARTYKIT_HOST in Cloudflare Pages environment variables
  */
 export const PARTYKIT_HOST =
-  process.env.NODE_ENV === 'production'
-    ? 'open-catan.your-username.partykit.dev' // Replace with actual production URL
-    : 'localhost:1999';
+  import.meta.env.VITE_PARTYKIT_HOST || // Production URL from env var
+  (process.env.NODE_ENV === 'production'
+    ? 'open-catan.coleschaffer.partykit.dev' // Fallback production URL
+    : 'localhost:1999'); // Development
 
 /**
  * PartyKit party name for the game
