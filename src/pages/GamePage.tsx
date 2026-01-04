@@ -243,7 +243,7 @@ export function GamePage() {
   // Peers will receive the game state via GAME_STATE messages
   const [gameInitialized, setGameInitialized] = useState(false);
   useEffect(() => {
-    if (gameStarted && phase === 'lobby' && !gameInitialized && lobbyPlayers.length > 0) {
+    if (gameStarted && phase === 'lobby' && !gameInitialized && lobbyPlayers && lobbyPlayers.length > 0) {
       // Both host and peers need to initialize their local state
       // But only the host generates the board - peers will receive it via broadcast
       console.log(`Initializing game state from lobby data... (isHost: ${isHost})`);
@@ -442,11 +442,13 @@ export function GamePage() {
 
   // Other players for trading
   const otherPlayers = useMemo(() => {
+    if (!players || !Array.isArray(players)) return [];
     return players.filter(p => p.id !== localPlayerId && p.isConnected);
   }, [players, localPlayerId]);
 
   // Player data for panels
   const playerPanelData = useMemo(() => {
+    if (!players || !Array.isArray(players)) return [];
     return players.map(p => ({
       id: p.id,
       name: p.name,
@@ -991,7 +993,7 @@ export function GamePage() {
         )}
 
         {/* Incoming trade offers - only show offers not from the local player */}
-        {pendingIncomingOffers
+        {(pendingIncomingOffers || [])
           .filter(offer => offer.fromPlayerId !== localPlayerId)
           .map(offer => {
             const fromPlayer = players.find(p => p.id === offer.fromPlayerId);
