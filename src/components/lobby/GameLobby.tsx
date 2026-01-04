@@ -114,9 +114,8 @@ export function GameLobby({
     [isHost, onKick]
   );
 
-  const handleCopyLink = useCallback(() => {
-    const link = `${window.location.origin}/${roomCode}`;
-    navigator.clipboard.writeText(link);
+  const handleCopyCode = useCallback(() => {
+    navigator.clipboard.writeText(roomCode);
     setCopiedLink(true);
     setTimeout(() => setCopiedLink(false), 2000);
   }, [roomCode]);
@@ -137,8 +136,6 @@ export function GameLobby({
     }
   };
 
-  const inviteUrl = `${window.location.origin}/${roomCode}`;
-
   return (
     <div className={styles.gameLobbyContainer}>
       {/* Room ID Header */}
@@ -146,12 +143,11 @@ export function GameLobby({
         <div className={styles.gameLobbyRoomHeader}>
           <span className={styles.gameLobbyRoomLabel}>Room</span>
           <span className={styles.gameLobbyRoomCode}>{roomCode}</span>
-          <div className={styles.gameLobbyInviteLink}>{inviteUrl}</div>
           <button
             className={`${styles.gameLobbyInviteCopyButton} ${copiedLink ? styles.copied : ''}`}
-            onClick={handleCopyLink}
+            onClick={handleCopyCode}
           >
-            {copiedLink ? 'Copied!' : 'Copy'}
+            {copiedLink ? 'Copied!' : 'Copy Code'}
           </button>
         </div>
       </div>
