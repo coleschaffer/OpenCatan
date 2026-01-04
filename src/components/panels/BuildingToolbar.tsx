@@ -154,19 +154,22 @@ export const BuildingToolbar: React.FC<BuildingToolbarProps> = ({
     (type: BuildingType): boolean => {
       if (!player || !localPlayerId) return false;
 
+      const roadList = roads || [];
+      const buildingList = buildings || [];
+
       switch (type) {
         case 'road':
           // Check if player has any connected roads/buildings to build from
-          const playerRoads = roads.filter(r => r.playerId === localPlayerId);
-          const playerBuildings = buildings.filter(b => b.playerId === localPlayerId);
+          const playerRoads = roadList.filter(r => r.playerId === localPlayerId);
+          const playerBuildings = buildingList.filter(b => b.playerId === localPlayerId);
           return playerBuildings.length > 0 || playerRoads.length > 0;
         case 'settlement':
           // Check if player has roads to connect to
-          const myRoads = roads.filter(r => r.playerId === localPlayerId);
+          const myRoads = roadList.filter(r => r.playerId === localPlayerId);
           return myRoads.length > 0;
         case 'city':
           // Check if player has any settlements to upgrade
-          const settlements = buildings.filter(
+          const settlements = buildingList.filter(
             b => b.playerId === localPlayerId && b.type === 'settlement'
           );
           return settlements.length > 0;

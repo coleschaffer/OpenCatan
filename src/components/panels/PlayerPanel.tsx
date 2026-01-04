@@ -108,7 +108,7 @@ export const PlayerPanel: React.FC<PlayerPanelProps> = ({
       )}
 
       {/* Player count footer */}
-      {!isCollapsed && (
+      {!isCollapsed && players && (
         <div className={styles.footer}>
           <span className={styles.playerCountText}>
             {players.filter((p) => p.isConnected).length}/{players.length} online

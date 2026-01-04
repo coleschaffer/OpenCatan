@@ -88,8 +88,9 @@ export const DiscardWaiting: React.FC<DiscardWaitingProps> = ({
 
   // Calculate completion stats
   const completionStats = useMemo(() => {
-    const total = playersNeedingDiscard.length;
-    const completed = playersNeedingDiscard.filter((p) => p.hasDiscarded).length;
+    const players = playersNeedingDiscard || [];
+    const total = players.length;
+    const completed = players.filter((p) => p.hasDiscarded).length;
     const remaining = total - completed;
     return { total, completed, remaining };
   }, [playersNeedingDiscard]);

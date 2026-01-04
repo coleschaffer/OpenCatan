@@ -164,7 +164,7 @@ const PlayerTradeTab: React.FC<PlayerTradeTabProps> = ({
   }, [initialTargetPlayerId]);
 
   const connectedPlayers = useMemo(
-    () => players.filter(p => p.isConnected),
+    () => (players || []).filter(p => p.isConnected),
     [players]
   );
 
