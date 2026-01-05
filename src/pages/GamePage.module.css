@@ -114,9 +114,9 @@
   display: grid;
   grid-template-columns: 1fr 480px;
   gap: 0;
-  height: 200px;
-  min-height: 200px;
-  max-height: 200px;
+  height: 180px;
+  min-height: 180px;
+  max-height: 180px;
   border-top: 1px solid rgba(255, 215, 0, 0.2);
   background: rgba(26, 26, 46, 0.7);
 }
