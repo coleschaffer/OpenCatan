@@ -60,24 +60,26 @@ export function getEdgesAdjacentToVertex(vertex: VertexCoord): EdgeCoord[] {
   const { q, r } = vertex.hex;
 
   if (vertex.direction === 'N') {
-    // North vertex connects to:
-    // - NE edge of this hex
-    // - E edge of hex to upper-left (q-1, r)
-    // - SE edge of hex above (q, r-1) - which equals E edge of (q-1, r)
+    // North vertex N(q,r) is shared by hexes: (q,r), (q, r-1), (q+1, r-1)
+    // It connects to 3 edges:
+    // - NE edge of this hex: connects to S(q+1, r-1)
+    // - SE edge of hex above (q, r-1): connects to S(q, r-1)
+    // - E edge of hex above (q, r-1): connects to S(q+1, r-2)
     return [
       { hex: { q, r }, direction: 'NE' as const },
-      { hex: { q: q - 1, r }, direction: 'E' as const },
       { hex: { q, r: r - 1 }, direction: 'SE' as const },
+      { hex: { q, r: r - 1 }, direction: 'E' as const },
     ];
   } else {
-    // South vertex connects to:
-    // - SE edge of this hex
-    // - E edge of this hex
-    // - NE edge of hex below (q, r+1)
+    // South vertex S(q,r) is shared by hexes: (q,r), (q, r+1), (q-1, r+1)
+    // It connects to 3 edges:
+    // - SE edge of this hex: connects to N(q, r+1)
+    // - NE edge of hex below-left (q-1, r+1): connects to N(q-1, r+1)
+    // - E edge of hex below-left (q-1, r+1): connects to N(q-1, r+2)
     return [
       { hex: { q, r }, direction: 'SE' as const },
-      { hex: { q, r }, direction: 'E' as const },
-      { hex: { q, r: r + 1 }, direction: 'NE' as const },
+      { hex: { q: q - 1, r: r + 1 }, direction: 'NE' as const },
+      { hex: { q: q - 1, r: r + 1 }, direction: 'E' as const },
     ];
   }
 }
@@ -94,21 +96,24 @@ export function getVerticesOfEdge(edge: EdgeCoord): [VertexCoord, VertexCoord] {
   switch (edge.direction) {
     case 'NE':
       // NE edge connects N vertex of this hex to S vertex of (q+1, r-1)
+      // This is the upper-right edge: top vertex to upper-right vertex
       return [
         { hex: { q, r }, direction: 'N' as const },
         { hex: { q: q + 1, r: r - 1 }, direction: 'S' as const },
       ];
     case 'E':
-      // E edge connects S vertex of (q+1, r-1) to N vertex of (q+1, r)
+      // E edge connects upper-right vertex to lower-right vertex
+      // Upper-right = S(q+1, r-1), Lower-right = N(q, r+1)
       return [
         { hex: { q: q + 1, r: r - 1 }, direction: 'S' as const },
-        { hex: { q: q + 1, r }, direction: 'N' as const },
+        { hex: { q, r: r + 1 }, direction: 'N' as const },
       ];
     case 'SE':
-      // SE edge connects S vertex of this hex to N vertex of (q+1, r)
+      // SE edge connects lower-right vertex to bottom vertex
+      // Lower-right = N(q, r+1), Bottom = S(q, r)
       return [
+        { hex: { q, r: r + 1 }, direction: 'N' as const },
         { hex: { q, r }, direction: 'S' as const },
-        { hex: { q: q + 1, r }, direction: 'N' as const },
       ];
   }
 }
