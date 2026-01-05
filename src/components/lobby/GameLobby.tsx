@@ -38,7 +38,6 @@ const MAP_OPTIONS = [
 const RULE_OPTIONS = [
   { id: 'friendlyRobber', label: 'Friendly Robber' },
   { id: 'randomTurnOrder', label: 'Random Turn Order' },
-  { id: 'speedMode', label: 'Speed Mode' },
   { id: 'hiddenVPs', label: 'Hidden VPs' },
 ];
 
