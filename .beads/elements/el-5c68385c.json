@@ -1,0 +1,19 @@
+{
+  "id": "el-5c68385c",
+  "element": {
+    "tag": "div",
+    "id": null,
+    "classes": [
+      "lobby-module__gameLobbyRuleToggle___O1Duw"
+    ],
+    "selector": "#root > div.app > div.lobby-module__gameLobbyContainer___zrrKp > div.lobby-module__gameLobbyContent___0gbHT:nth-child(2) > div.lobby-module__gameLobbySettingsColumn___3DDnh:nth-child(2) > div.lobby-module__gameLobbyPanel___exR64:nth-child(3) > div.lobby-module__gameLobbyRulesGrid___1nmGM > div.lobby-module__gameLobbyRuleToggle___O1Duw:nth-child(3)"
+  },
+  "changes": [
+    {
+      "taskId": "change-1767576593837-v5jbasczi",
+      "feedback": "Remove Speed Mode.",
+      "timestamp": "2026-01-05T01:31:22.852Z",
+      "success": true
+    }
+  ]
+}
